@@ -2,14 +2,18 @@ package data;
 
 import java.util.ArrayList;
 
-import dataTransferObject.DTO_Figure;
-
 public class Storage_Figure implements IStorage_Figure{
 	
-	private ArrayList<DTO_Figure> figures = new ArrayList<DTO_Figure>();
+	private ArrayList<Figure> figures = new ArrayList<Figure>();
 
 	@Override
-	public DTO_Figure getFigure(int i) {
+	public Figure getFigure(int i) {
 		return this.figures.get(i);
+	}
+
+	@Override
+	public void initialize() {
+		figures.add(new Figure_I());
+		figures.add(new Figure_T());
 	}
 }
