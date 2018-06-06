@@ -1,5 +1,5 @@
 package c_db;
 
-public class Figure_O {
+public class Figure_O extends Figure{
 
 }
