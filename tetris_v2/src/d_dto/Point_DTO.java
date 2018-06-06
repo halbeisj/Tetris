@@ -6,7 +6,7 @@ import java.awt.Point;
 public class Point_DTO {
 	private Point point;
 	private Color color;
-	private int Status;
+	private int status;
 	
 	public Point getPoint(){
 		return point;
@@ -25,7 +25,7 @@ public class Point_DTO {
 	}
 	
 	public int getStatus(){
-		return Status;
+		return status;
 	}
 	
 	public void setStatus(int Status){
