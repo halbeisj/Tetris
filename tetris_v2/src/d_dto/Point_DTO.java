@@ -6,10 +6,14 @@ import java.awt.Point;
 /**
  * Diese Klasse wiederspiegelt einen Punkt auf dem Spielfeld
  * 
- * @author Julia Halbeisen, Dominik Heckendorn
+ * @author Julia Halbeisen
+ * @author Dominik Heckendorn
  * @version 1.0
  * */
 public class Point_DTO {
+	/**
+	 * Punkt auf dem ganzen Feld (NICHT IN DER FIGUR!)
+	 */
 	private Point point;
 	private Color color;
 	private int status;
