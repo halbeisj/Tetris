@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+/***/
 public class Game_View {
 	private KeyListener keyl;
 	private int_Game_Model model;
