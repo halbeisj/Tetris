@@ -33,12 +33,13 @@ public class Figure {
 		return this.pointl.x;
 	}
 
+	/***/
 	public int getPointR() {
 		return this.pointr.x;
 	}
 	
 	public Point getSource() {
-		
+		return this.source;
 	}
 
 	/**
