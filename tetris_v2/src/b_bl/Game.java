@@ -1,9 +1,16 @@
 package b_bl;
 
 import java.awt.Point;
+import java.util.Random;
 
 import c_db.Figure;
-
+import c_db.Figure_Z;
+import c_db.Figure_I;
+import c_db.Figure_J;
+import c_db.Figure_L;
+import c_db.Figure_O;
+import c_db.Figure_S;
+import c_db.Figure_T;
 import d_dto.Point_DTO;
 
 /**
@@ -29,6 +36,9 @@ public class Game {
 	private Point_DTO[][] field;
 	private Figure figure;
 	private Figure figure_next;
+	private int field_height = 15;
+	private int field_width = 7;
+	private Figure[] figure_templates = new Figure[7];
 
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
@@ -49,9 +59,9 @@ public class Game {
 
 	/**Mit dieser Methode, kann man die Figur nach rechts verschieben*/
 	public void right() {
-		if(this.figure.getSource().x + this.figure.getPointR() < 5) {
+		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width) {
 			for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
-				if(this.field[this.figure.getSource().x + this.figure.getPointR() + 1][this.figure.getSource().y + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().x + this.figure.getPointR()][i] != null){
+				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointR()] != null){
 					return;
 				}
 			}
@@ -64,19 +74,19 @@ public class Game {
 
 	/**Mit dieser Methode, kann man die Figur nach unten verschieben*/
 	public boolean down() {
-		if(this.figure.getSource().y == 0) {
+		if(this.figure.getSource().x == field_height) {
 			this.addFigure(this.figure);
 			return false;
 		}
 		
-		for(int i = 0; i < this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointD()].length; i++) {
-			if(this.field[this.figure.getSource().y + this.figure.getPointD()][i + 1].getStatus() == 0) {
+		for(int i = 0; i < this.figure.getFigure()[this.figure.getPointD()].length; i++) {
+			if(this.field[this.figure.getSource().x + this.figure.getPointD() + 1][this.figure.getSource().y + i].getStatus() == 0) {
 				this.addFigure(this.figure);
 				return false;
 			}
 		}
 		
-		this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y + 1));
+		this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
 		return true;
 		
 		
@@ -90,18 +100,43 @@ public class Game {
 	}
 
 	/***/
-	public void createNewFigure() {
-
+	private void createNewFigure() {
+		if(this.figure_next == null) {
+			this.figure_next = this.createRandomFigure();
+		}
+		this.figure = this.figure_next;
+		this.figure_next = this.createRandomFigure();
+	}
+	
+	private Figure createRandomFigure() {
+		Random r = new Random();
+		int figure_number = r.nextInt(7);
+		
+		switch (figure_number) {
+		case 0: return new Figure_I();
+		case 1: return new Figure_J();
+		case 2: return new Figure_L();
+		case 3: return new Figure_O();
+		case 4: return new Figure_S();
+		case 5: return new Figure_T();
+		case 6: return new Figure_Z();
+		default: return new Figure_I();
+		}
 	}
 
 	/**Hiermit kann man das Spiel neustarten*/
 	public void newGame() {
-
+		this.endGame();
+		this.createNewFigure();
 	}
 
 	/**Hiermit kann man das Spiel beenden*/
 	public void endGame() {
-
+		for(int i = 0; i < this.field_width; i++) {
+			for(int y = 0; y < this.field_height; y++) {
+				this.field[y][i] = null;
+			}
+		}
 	}
 	
 	/**Diese Methode kontrolliert ob es eine Kollision gibt, oder ob die Figur verschoben werden kann.
@@ -110,8 +145,10 @@ public class Game {
 	
 	private void addFigure(Figure figure) {
 		for(int i = 0; i < this.figure.getFigure().length; i++) {
-			for(int y = 0; i < this.figure.getFigure()[i].length; i++) {
-				this.field[this.figure.getSource().][]
+			for(int y = 0; y < this.figure.getFigure()[i].length; y++) {
+				if(this.figure.getFigure()[i][y] != null) {
+					this.field[this.figure.getSource().x + i][this.figure.getSource().y + y].setStatus(1);
+				}
 			}
 		}
 	}
