@@ -30,21 +30,21 @@ public class Game {
 	private Figure figure;
 	private Figure figure_next;
 
-	/***/
+	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
 		if(this.figure.getPointL().x > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {
 			this.figure.setPoint(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));
 		}
 	}
 
-	/***/
+	/**Mit dieser Methode, kann man die Figur nach rechts verschieben*/
 	public void right() {
 		if(this.figure.getPointR().x < 5 && this.field[this.figure.getPointR().x + 1][this.figure.getPointR().y].getStatus() != 1) {
 			this.figure.setPoint(new Point(this.figure.getPointL().x + 1, this.figure.getPointL().y));
 		}
 	}
 
-	/***/
+	/**Mit dieser Methode, kann man die Figur nach unten verschieben*/
 	public boolean down() {
 		for(Point_DTO point : this.figure.getFigure()[0]) {
 			if(point != null && field[point.getPoint().x][point.getPoint().y - 1].getStatus() == 1 || this.figure.getPoint().y == 0) {
@@ -60,16 +60,17 @@ public class Game {
 
 	}
 
-	/***/
+	/**Hiermit kann man das Spiel neustarten*/
 	public void newGame() {
 
 	}
 
-	/***/
+	/**Hiermit kann man das Spiel beenden*/
 	public void endGame() {
 
 	}
 	
+	/***/
 	private boolean checkCollision(Figure figure) {		
 		for(Point_DTO point : figure.getFigure()[0]) {
 			if(point != null && field[point.getPoint().x][point.getPoint().y - 1].getStatus() != 1) {

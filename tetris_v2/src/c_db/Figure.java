@@ -19,7 +19,8 @@ public class Figure {
 	public Point getPointL() {
 		return this.pointl;
 	}
-
+	
+	/***/
 	public Point getPointR() {
 		return this.pointr;
 	}
