@@ -13,11 +13,11 @@ public class Figure {
 	/**
 	 * Linksester Punkt in Abhängigkeit vom ursprünglichen Punkt
 	 * */
-	private Point pointl;
+	private int pointl;
 	/**
 	 * Rechtsester Punkt in Abhängigkeit vom ursprünglichen Punkt
 	 * */
-	private Point pointr;
+	private int pointr;
 	/**
 	 * Ursprünglicher Punkt auf dem ganzen Feld
 	 * */
@@ -30,12 +30,12 @@ public class Figure {
 
 	/***/
 	public int getPointL() {
-		return this.pointl.x;
+		return this.pointl;
 	}
 
 	/***/
 	public int getPointR() {
-		return this.pointr.x;
+		return this.pointr;
 	}
 	
 	public Point getSource() {
@@ -49,6 +49,14 @@ public class Figure {
 		this.source = point;
 		/*int movement;
 		movement =*/ 
+	}
+	
+	public Point_DTO[] getColumn(int index){
+	    Point_DTO[] column = new Point_DTO[figure[0].length]; 
+	    for(int i=0; i<column.length; i++){
+	       column[i] = figure[i][index];
+	    }
+	    return column;
 	}
 
 }

@@ -32,16 +32,34 @@ public class Game {
 
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
-		if(this.figure.getSource().x + this.figure.getPointL() > 0 && this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y].getStatus() != 1) {
+		if(this.figure.getSource().x + this.figure.getPointL() > 0) {
+			//Point_DTO[][] f= figure.getFigure();
+			
+			for(int i = 0; i < this.figure.getColumn(this.figure.getPointL()).length; i++) {
+				if(this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().x + this.figure.getPointL()][i] != null) {
+					return;
+				}
+			}
+			
 			this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));
 		}
+		
 		/*if(this.figure.getPointL() > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));}*/
+		/*if(this.figure.getSource().x + this.figure.getPointL() > 0 && this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));*/
 	}
 
 	/**Mit dieser Methode, kann man die Figur nach rechts verschieben*/
 	public void right() {
-		if(this.figure.getSource().x + this.figure.getPointR() < 5 && this.field[this.figure.getSource().x + this.figure.getPointR() + 1][])
+		if(this.figure.getSource().x + this.figure.getPointR() < 5) {
+			for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
+				if(this.field[this.figure.getSource().x + this.figure.getPointR() + 1][this.figure.getSource().y + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().x + this.figure.getPointR()][i] != null){
+					return;
+				}
+			}
+			this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
+		}
 		
+		/*if(this.figure.getSource().x + this.figure.getPointR() < 5 && this.field[this.figure.getSource().x + this.figure.getPointR() + 1][])*/
 		/*if(this.figure.getPointR().x < 5 && this.field[this.figure.getPointR().x + 1][this.figure.getPointR().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x + 1, this.figure.getPointL().y));}*/
 	}
 
@@ -84,5 +102,7 @@ public class Game {
 		
 		return false;
 	}
+	
+	
 
 }
