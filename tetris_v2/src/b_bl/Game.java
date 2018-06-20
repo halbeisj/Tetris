@@ -138,11 +138,6 @@ public class Game {
 			}
 		}
 	}
-	
-	/**Diese Methode kontrolliert ob es eine Kollision gibt, oder ob die Figur verschoben werden kann.
-	 * @param Figure
-	 * */
-	
 	private void addFigure(Figure figure) {
 		for(int i = 0; i < this.figure.getFigure().length; i++) {
 			for(int y = 0; y < this.figure.getFigure()[i].length; y++) {
