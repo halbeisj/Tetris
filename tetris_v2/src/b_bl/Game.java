@@ -32,17 +32,17 @@ public class Game {
 
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
-		if(this.figure.getSource().x + this.figure.getPointL() > 0) {
+		if(this.figure.getSource().y + this.figure.getPointL() > 0) {
 			//Point_DTO[][] f= figure.getFigure();
 			for(int i = 0; i < this.figure.getColumn(this.figure.getPointL()).length; i++) {
-				if(this.field[this.figure.getSource().y + this.figure.getPointL() - 1][this.figure.getSource().x + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointL()][i] != null) {
+				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointL() - 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointL()] != null) {
 					return;
 				}
 			}
-			
 			this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));
 		}
-		
+		else {return;}
+		/*if(this.field[this.figure.getSource().y + this.figure.getPointL() - 1][this.figure.getSource().x + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointL()][i] != null)*/
 		/*if(this.figure.getPointL() > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));}*/
 		/*if(this.figure.getSource().x + this.figure.getPointL() > 0 && this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));*/
 	}
