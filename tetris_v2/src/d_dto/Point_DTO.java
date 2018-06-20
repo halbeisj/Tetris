@@ -21,7 +21,7 @@ public class Point_DTO {
 	/**
 	 * Diese Methode gibt den Punkt zurück, für welchen die weiteren Einstellungen gelten.
 	 * 
-	 * @return Punkt, welcher konfiguriert wird
+	 * @return Point, welcher konfiguriert wird
 	 * */
 	public Point getPoint(){
 		return this.point;
@@ -30,7 +30,7 @@ public class Point_DTO {
 	/**
 	 * Mit dieser Methode kann konfiguriert werden, für welchen Punkt die Einstellungen gelten.
 	 * 
-	 * @param Punkt, für welchen die Einstellungen gelten
+	 * @param Point, für welchen die Einstellungen gelten
 	 * */
 	public void setPoint(Point point){
 		this.point = point;
@@ -39,7 +39,7 @@ public class Point_DTO {
 	/**
 	 * Diese Methode gibt die Farbe des Punktes zurück
 	 * 
-	 * @return Farbe des Punktes
+	 * @return Color des Punktes
 	 * */
 	public Color getColor(){
 		return this.color;
@@ -48,7 +48,7 @@ public class Point_DTO {
 	/**
 	 * Mit dieser Methode kann die Farbe des Punktes konfiguriert werden.
 	 * 
-	 * @param Farbe, welche konfiguriert werden soll
+	 * @param Color, welche konfiguriert werden soll
 	 * */
 	public void setColor(Color color){
 		this.color = color;

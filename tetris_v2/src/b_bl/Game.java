@@ -70,7 +70,9 @@ public class Game {
 
 	}
 	
-	/**Diese Methode kontrolliert ob es eine Kollision gibt, oder ob die Figur verschoben werden kann.*/
+	/**Diese Methode kontrolliert ob es eine Kollision gibt, oder ob die Figur verschoben werden kann.
+	 * @param Figure
+	 * */
 	private boolean checkCollision(Figure figure) {		
 		for(Point_DTO point : figure.getFigure()[0]) {
 			if(point != null && field[point.getPoint().x][point.getPoint().y - 1].getStatus() != 1) {
