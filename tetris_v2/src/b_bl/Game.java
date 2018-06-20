@@ -17,11 +17,11 @@ import d_dto.Point_DTO;
 
 /* Tetrisfeld
  * ###################
- * # 0|2 # 1|2 # 2|2 #
+ * # 0|0 # 0|1 # 0|2 #
  * ###################
- * # 0|1 # 1|1 # 2|1 #
+ * # 1|0 # 1|1 # 1|2 #
  * ###################
- * # 0|0 # 1|0 # 2|0 #
+ * # 2|0 # 2|1 # 2|2 #
  * ###################
  */
 
@@ -34,9 +34,8 @@ public class Game {
 	public void left() {
 		if(this.figure.getSource().x + this.figure.getPointL() > 0) {
 			//Point_DTO[][] f= figure.getFigure();
-			
 			for(int i = 0; i < this.figure.getColumn(this.figure.getPointL()).length; i++) {
-				if(this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().x + this.figure.getPointL()][i] != null) {
+				if(this.field[this.figure.getSource().y + this.figure.getPointL() - 1][this.figure.getSource().x + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointL()][i] != null) {
 					return;
 				}
 			}
@@ -65,13 +64,29 @@ public class Game {
 
 	/**Mit dieser Methode, kann man die Figur nach unten verschieben*/
 	public boolean down() {
-		for(Point_DTO point : this.figure.getFigure()[0]) {
+		if(this.figure.getSource().y == 0) {
+			this.addFigure(this.figure);
+			return false;
+		}
+		
+		for(int i = 0; i < this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointD()].length; i++) {
+			if(this.field[this.figure.getSource().y + this.figure.getPointD()][i + 1].getStatus() == 0) {
+				this.addFigure(this.figure);
+				return false;
+			}
+		}
+		
+		this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y + 1));
+		return true;
+		
+		
+		/*for(Point_DTO point : this.figure.getFigure()[0]) {
 			if(point != null && field[point.getPoint().x][point.getPoint().y - 1].getStatus() == 1 || this.figure.getPoint().y == 0) {
 				return false;
 			}
 		}
 		this.figure.setSource(new Point(this.figure.getPointL().x, this.figure.getPointL().y - 1));
-		return true;
+		return true;*/
 	}
 
 	/***/
@@ -92,15 +107,13 @@ public class Game {
 	/**Diese Methode kontrolliert ob es eine Kollision gibt, oder ob die Figur verschoben werden kann.
 	 * @param Figure
 	 * */
-	private boolean checkCollision(Figure figure) {		
-		for(Point_DTO point : figure.getFigure()[0]) {
-			if(point != null && field[point.getPoint().x][point.getPoint().y - 1].getStatus() != 1) {
-				return true;
-				//this.figure.setPoint(new Point(this.figure.getPoint().x, this.figure.getPoint().y - 1));
+	
+	private void addFigure(Figure figure) {
+		for(int i = 0; i < this.figure.getFigure().length; i++) {
+			for(int y = 0; i < this.figure.getFigure()[i].length; i++) {
+				this.field[this.figure.getSource().][]
 			}
 		}
-		
-		return false;
 	}
 	
 	

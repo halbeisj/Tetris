@@ -18,6 +18,12 @@ public class Point_DTO {
 	private Color color;
 	private int status;
 	
+	public Point_DTO(Point point, Color color, int status) {
+		this.point = point;
+		this.color = color;
+		this.status = status;
+	}
+	
 	/**
 	 * Diese Methode gibt den Punkt zurück, für welchen die weiteren Einstellungen gelten.
 	 * 

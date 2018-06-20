@@ -9,19 +9,23 @@ public class Figure {
 	/**
 	 * Punkte, welche die Figur darstellen in Abhängigkeit vom ursprünglichen Punkt
 	 * */
-	private Point_DTO[][] figure;
+	protected Point_DTO[][] figure;
 	/**
 	 * Linksester Punkt in Abhängigkeit vom ursprünglichen Punkt
 	 * */
-	private int pointl;
+	protected int pointl;
 	/**
 	 * Rechtsester Punkt in Abhängigkeit vom ursprünglichen Punkt
 	 * */
-	private int pointr;
+	protected int pointr;
+	/**
+	 * Unterster Punkt in Abhängigkeit vom ursprünglichen Punkt
+	 */
+	protected int pointd;
 	/**
 	 * Ursprünglicher Punkt auf dem ganzen Feld
 	 * */
-	private Point source;
+	protected Point source;
 
 	/***/
 	public Point_DTO[][] getFigure() {
@@ -36,6 +40,10 @@ public class Figure {
 	/***/
 	public int getPointR() {
 		return this.pointr;
+	}
+	
+	public int getPointD() {
+		return this.pointd;
 	}
 	
 	public Point getSource() {
