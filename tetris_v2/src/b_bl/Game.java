@@ -32,16 +32,17 @@ public class Game {
 
 	/***/
 	public void left() {
-		if(this.figure.getPointL().x > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {
-			this.figure.setSource(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));
+		if(this.figure.getSource().x + this.figure.getPointL() > 0 && this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y].getStatus() != 1) {
+			this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));
 		}
+		/*if(this.figure.getPointL() > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));}*/
 	}
 
 	/***/
 	public void right() {
-		if(this.figure.getPointR().x < 5 && this.field[this.figure.getPointR().x + 1][this.figure.getPointR().y].getStatus() != 1) {
-			this.figure.setSource(new Point(this.figure.getPointL().x + 1, this.figure.getPointL().y));
-		}
+		if(this.figure.getSource().x + this.figure.getPointR() < 5 && this.field[this.figure.getSource().x + this.figure.getPointR() + 1][])
+		
+		/*if(this.figure.getPointR().x < 5 && this.field[this.figure.getPointR().x + 1][this.figure.getPointR().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x + 1, this.figure.getPointL().y));}*/
 	}
 
 	/***/
