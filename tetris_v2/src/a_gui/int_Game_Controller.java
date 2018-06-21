@@ -8,5 +8,10 @@ package a_gui;
  * @version 1.0
  * */
 public interface int_Game_Controller {
-
+public void left();
+public void right();
+public void down();
+public void reloadField();
+public void newGame();
+public void endGame();
 }
