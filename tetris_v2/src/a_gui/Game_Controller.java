@@ -39,7 +39,7 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void reloadField(){
-		
+		this.game.get
 	}
 	
 	/***/
@@ -50,6 +50,7 @@ public class Game_Controller implements int_Game_Controller {
 	/***/
 	public void newGame(){
 		this.game.newGame();
+		this.model.
 	}
 	
 	/***/

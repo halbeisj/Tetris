@@ -1,5 +1,6 @@
 package b_bl;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
 
@@ -40,6 +41,12 @@ public class Game {
 	private int field_width = 7;
 	private Figure[] figure_templates = new Figure[7];
 
+	
+	public Game() {
+		this.field = new Point_DTO[this.field_height][this.field_width];
+		this.endGame();
+	}
+	
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
 		if(this.figure.getSource().y + this.figure.getPointL() > 0) {
@@ -123,7 +130,7 @@ public class Game {
 		default: return new Figure_I();
 		}
 	}
-
+	
 	/**Hiermit kann man das Spiel neustarten*/
 	public void newGame() {
 		this.endGame();
@@ -134,7 +141,7 @@ public class Game {
 	public void endGame() {
 		for(int i = 0; i < this.field_width; i++) {
 			for(int y = 0; y < this.field_height; y++) {
-				this.field[y][i] = null;
+				this.field[y][i] = new Point_DTO(new Point(y,i), Color.black, 0);
 			}
 		}
 	}
@@ -148,6 +155,8 @@ public class Game {
 		}
 	}
 	
-	
+	public Point_DTO[][] reloadField() {
+		return this.fie
+	}
 
 }
