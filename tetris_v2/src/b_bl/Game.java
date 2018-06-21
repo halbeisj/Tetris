@@ -37,8 +37,8 @@ public class Game {
 	private Point_DTO[][] field;
 	private Figure figure;
 	private Figure figure_next;
-	private int field_height = 15;
-	private int field_width = 7;
+	private int field_height = 14;
+	private int field_width = 9;
 	private Figure[] figure_templates = new Figure[7];
 
 	
@@ -156,7 +156,26 @@ public class Game {
 	}
 	
 	public Point_DTO[][] reloadField() {
-		return this.fie
+		
+		/*Point_DTO[][] retfield = new Point_DTO[this.field_height][this.field_width];
+		
+		for(int i = 0; i < this.field_width; i++) {
+			for(int y = 0; y < this.field_height; y++) {
+				retfield[y][i] = this.field[y][i];
+			}
+		}
+		
+		return retfield;*/
+		System.out.println("test2");
+		return this.field;
 	}
 
+	public int getWidth() {
+		return this.field_width;
+	}
+	
+	public int getHeight() {
+		return this.field_height;
+	}
+	
 }

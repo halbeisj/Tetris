@@ -8,5 +8,5 @@ package a_gui;
  * @version 1.0
  * */
 public interface int_Game_View {
-
+	public void activate();
 }

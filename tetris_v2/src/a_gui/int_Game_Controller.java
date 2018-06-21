@@ -14,4 +14,7 @@ public void down();
 public void reloadField();
 public void newGame();
 public void endGame();
+public void setName(String name);
+public int getWidth();
+public int getHeight();
 }
