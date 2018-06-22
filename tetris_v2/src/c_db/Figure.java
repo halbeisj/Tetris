@@ -60,8 +60,8 @@ public class Figure {
 	}
 	
 	public Point_DTO[] getColumn(int index){
-	    Point_DTO[] column = new Point_DTO[figure[0].length]; 
-	    for(int i=0; i<column.length; i++){
+	    Point_DTO[] column = new Point_DTO[this.figure[0].length]; 
+	    for(int i = 0; i < column.length; i++){
 	       column[i] = figure[i][index];
 	    }
 	    return column;

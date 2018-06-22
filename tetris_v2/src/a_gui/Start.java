@@ -8,11 +8,10 @@ package a_gui;
  * */
 public class Start {
 	
+	int_Game_Controller controller;
+	
 	/**Diese Methode ist für den Start des Spiels verantwortlich*/
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		int_Game_Controller controller = new Game_Controller();
 	}
-
-	private int_Game_Controller controller;
 }
