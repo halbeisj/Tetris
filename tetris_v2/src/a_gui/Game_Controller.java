@@ -26,17 +26,17 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void left(){
-		
+		this.game.left();
 	}
 	
 	/***/
 	public void right(){
-		
+		this.game.right();
 	}
 	
 	/***/
 	public void down(){
-		
+		this.game.down();
 	}
 	
 	/***/

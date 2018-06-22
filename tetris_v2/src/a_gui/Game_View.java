@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
@@ -11,10 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 /***/
-public class Game_View extends JFrame implements int_Game_View, ActionListener {
-	private KeyListener keyl;
+public class Game_View extends JFrame implements int_Game_View, ActionListener, KeyListener {
 	private int_Game_Model model;
 	private int_Game_Controller controller;
 	private JLabel nextFigure;
@@ -28,6 +29,9 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener {
 	private String s;
 	
 	public Game_View(int_Game_Controller controller, int_Game_Model model) {
+		this.setFocusable(true);
+		this.requestFocusInWindow();
+		this.addKeyListener(this);
 		this.model = model;
 		this.controller = controller;
 		this.panelHolder = new JPanel[this.controller.getHeight() + 4][this.controller.getWidth() + 8];
@@ -128,10 +132,29 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent ae) {
 		
 	}
+
+	@Override
+	public void keyPressed(KeyEvent ke) {}
+
+	@Override
+	public void keyReleased(KeyEvent ke) {
+		if(ke.getKeyCode() == KeyEvent.VK_DOWN) {
+			this.controller.down();
+		}
+		else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+			this.controller.right();
+		}
+		else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+			this.controller.left();
+		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent ke) {}
 	
 
 }
