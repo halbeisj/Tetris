@@ -22,6 +22,7 @@ public class Figure_S extends Figure{
 		this.pointl = 0;
 		this.pointr = 2;
 		this.pointd = 1;
+		
 	}
 	
 }

@@ -20,6 +20,7 @@ public class Figure_O extends Figure{
 		this.pointl = 0;
 		this.pointr = 1;
 		this.pointd = 1;
+		
 	}
 
 }

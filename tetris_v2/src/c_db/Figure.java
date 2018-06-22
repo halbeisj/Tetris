@@ -66,5 +66,6 @@ public class Figure {
 	    }
 	    return column;
 	}
+	
 
 }

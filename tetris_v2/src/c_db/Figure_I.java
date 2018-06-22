@@ -23,6 +23,7 @@ public class Figure_I extends Figure{
 	this.pointr = 0;
 	this.pointd = 3;
 
+
 	}
 
 }
