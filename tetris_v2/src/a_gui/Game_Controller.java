@@ -20,7 +20,7 @@ public class Game_Controller implements int_Game_Controller {
 		this.start_view = new Start_View(this);
 		this.game = new Game();
 		this.model = new Game_Model();
-		this.view = new Game_View(this);
+		this.view = new Game_View(this, this.model);
 		System.out.println(this.game.toString());
 	}
 	
@@ -62,7 +62,7 @@ public class Game_Controller implements int_Game_Controller {
 	}
 	
 	public void setName(String name) {
-		this.model.setName(name);
+		this.model.init(name);
 	}
 	
 	public int getWidth() {

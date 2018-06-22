@@ -37,7 +37,7 @@ public class Game {
 	private Point_DTO[][] field;
 	private Figure figure;
 	private Figure figure_next;
-	private int field_height = 14;
+	private int field_height = 30;
 	private int field_width = 9;
 	private Figure[] figure_templates = new Figure[7];
 

@@ -11,7 +11,7 @@ import d_dto.Point_DTO;
  * */
 public interface int_Game_Model {
 public void reloadField(Point_DTO[][] field);
-public void setName(String name);
+public void init(String name);
 public int getLevel();
 public int getTime();
 public String getName();

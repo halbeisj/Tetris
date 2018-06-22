@@ -46,8 +46,8 @@ public class Start_View extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == this.startGame) {
-			this.controller.newGame();
 			this.controller.setName(this.guiname.getText());
+			this.controller.newGame();
 			this.dispose();
 		}
 	}

@@ -36,7 +36,7 @@ public class Game_Model extends Observable implements int_Game_Model {
 	}
 	
 	/***/
-	public void setName(String name){
+	public void init(String name){
 		this.name = name;
 		this.lines = 0;
 		this.level = 0;
