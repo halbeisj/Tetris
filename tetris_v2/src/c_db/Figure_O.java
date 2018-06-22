@@ -14,7 +14,7 @@ public class Figure_O extends Figure{
 		this.figure = new Point_DTO[2][2];
 		this.figure[0][0] = new Point_DTO(null, Color.green, 2);
 		this.figure[0][1] = new Point_DTO(null, Color.green, 2);
-		this.figure[0][2] = new Point_DTO(null, Color.green, 2);
+		this.figure[1][1] = new Point_DTO(null, Color.green, 2);
 		this.figure[1][0] = new Point_DTO(null, Color.green, 2);
 		
 		this.pointl = 0;
