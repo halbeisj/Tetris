@@ -43,5 +43,25 @@ public class Game_Model extends Observable implements int_Game_Model {
 		System.out.println(this.name);
 	}
 	
+	public int getTime() {
+		return this.time;
+	}
+	
+	public int getLines() {
+		return this.lines;
+	}
+	
+	public int getLevel() {
+		return this.level;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public Point_DTO getPoint (int x, int y) {
+		return this.field[y][x];
+	}
+	
 
 }
