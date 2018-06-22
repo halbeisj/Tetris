@@ -1,8 +1,6 @@
 package c_db;
 
 import java.awt.Color;
-import java.awt.Point;
-
 import d_dto.Point_DTO;
 
 /**Hier wird die Figur Z erstellt, diese Klasse erbst von der Klasse Figure.
