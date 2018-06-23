@@ -26,7 +26,7 @@ public class Figure {
 	 * Ursprünglicher Punkt auf dem ganzen Feld
 	 * */
 	protected Point source;
-
+	
 	/***/
 	public Point_DTO[][] getFigure() {
 		return figure;

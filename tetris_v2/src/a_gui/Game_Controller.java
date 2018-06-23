@@ -26,7 +26,9 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void left(){
+		System.out.println("TEstController");
 		this.game.left();
+		this.model.reloadField(this.game.reloadField());
 	}
 	
 	/***/
@@ -51,8 +53,8 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void newGame(){
-		this.view.activate();
 		this.game.newGame();
+		this.view.activate();
 		this.reloadField();
 	}
 	

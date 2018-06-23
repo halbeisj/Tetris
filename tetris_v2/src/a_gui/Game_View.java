@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 /***/
-public class Game_View extends JFrame implements int_Game_View, ActionListener, KeyListener {
+public class Game_View extends JFrame implements int_Game_View, ActionListener, KeyListener, Observer {
 	private int_Game_Model model;
 	private int_Game_Controller controller;
 	private JLabel nextFigure;
@@ -126,7 +128,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	private void reloadModel(){
 		for(int x = 0; x < this.controller.getWidth(); x++) {
 			for (int y = 0; y < this.controller.getHeight(); y++) {
-				this.panelHolder[x][y].setBackground(this.model.getPoint(x, y).getColor());
+				this.panelHolder[y + 2][x + 3].setBackground(this.model.getPoint(x, y).getColor());
 			}
 		}
 	}
@@ -149,12 +151,19 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.controller.left();
+			this.reloadModel();
 		}
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent ke) {}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		this.reloadModel();
+		
+	}
 	
 
 }
