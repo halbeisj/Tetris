@@ -35,6 +35,7 @@ import d_dto.Point_DTO;
 
 public class Game {
 	private Point_DTO[][] field;
+	private Point_DTO[][] nextFigure;
 	private Figure figure;
 	private Figure figure_next;
 	private int field_height = 30;
@@ -44,6 +45,7 @@ public class Game {
 	
 	public Game() {
 		this.field = new Point_DTO[this.field_height][this.field_width];
+		this.nextFigure = new Point_DTO[4][3];
 		this.endGame();
 	}
 	
@@ -130,6 +132,12 @@ public class Game {
 		System.out.println(this.figure.getPointL());
 		System.out.println(this.figure.getSource());
 		this.reloadFigure(0);
+		
+		/*for(int y = 0; y < this.figure.getFigure().length; y++) {
+			for(int x = 0; x < this.figure.getFigure()[0].length; x++) {
+				this.nextFigure[x][y] = this.figure_next.getFigure()[x][y];
+			}
+		}*/
 	}
 	
 	private Figure createRandomFigure() {
@@ -185,6 +193,10 @@ public class Game {
 		return retfield;*/
 		System.out.println("test2");
 		return this.field;
+	}
+	
+	public Point_DTO[][] reloadNextFigure() {
+		return this.figure_next.getFigure();
 	}
 
 	public int getWidth() {

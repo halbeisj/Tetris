@@ -44,6 +44,7 @@ public class Game_Controller implements int_Game_Controller {
 	/***/
 	public void reloadField(){
 		this.model.reloadField(this.game.reloadField());
+		this.reloadNextFigure();
 	}
 	
 	/***/
@@ -73,5 +74,9 @@ public class Game_Controller implements int_Game_Controller {
 	
 	public int getHeight() {
 		return game.getHeight();
+	}
+	
+	private void reloadNextFigure() {
+		this.model.reloadNextFigure(this.game.reloadNextFigure());
 	}
 }

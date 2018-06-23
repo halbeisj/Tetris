@@ -8,6 +8,7 @@ import d_dto.Point_DTO;
 public class Game_Model extends Observable implements int_Game_Model {
 	
 	private Point_DTO[][] field;
+	private Point_DTO[][] nextFigure;
 	private int time;
 	private int lines;
 	private int level;
@@ -61,6 +62,15 @@ public class Game_Model extends Observable implements int_Game_Model {
 	
 	public Point_DTO getPoint (int x, int y) {
 		return this.field[y][x];
+	}
+
+	public void reloadNextFigure(Point_DTO[][] nextFigure) {
+		this.nextFigure = nextFigure;
+	}
+	
+	public Point_DTO getPointNextFigure (int x, int y) {
+		System.out.println(x + " ne " + y);
+		return this.nextFigure[x][y];
 	}
 	
 

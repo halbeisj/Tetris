@@ -17,4 +17,6 @@ public int getTime();
 public String getName();
 public int getLines();
 public Point_DTO getPoint(int x, int y);
+public void reloadNextFigure(Point_DTO[][] nextFigure);
+public Point_DTO getPointNextFigure(int x, int y);
 }
