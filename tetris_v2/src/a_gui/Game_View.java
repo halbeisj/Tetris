@@ -136,10 +136,10 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	}
 	
 	private void reloadNextFigure() {
-		for(int x = 0; x < 3; x++) {
-			for(int y = 0; y < 4; y++) {
+		for(int x = 0; x < this.model.getNextFigureSize().x; x++) {
+			for(int y = 0; y < this.model.getNextFigureSize().y; y++) {
 				if(this.model.getPointNextFigure(x, y) != null) {
-					this.panelHolder[y + 2][x + 13].setBackground(this.model.getPointNextFigure(x, y).getColor()); 
+					this.panelHolder[y + 7 - this.model.getNextFigureSize().y][x + 13].setBackground(this.model.getPointNextFigure(x, y).getColor()); 
 				}
 			}
 		}

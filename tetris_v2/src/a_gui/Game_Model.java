@@ -1,5 +1,6 @@
 package a_gui;
 
+import java.awt.Point;
 import java.util.Observable;
 
 import d_dto.Point_DTO;
@@ -70,7 +71,11 @@ public class Game_Model extends Observable implements int_Game_Model {
 	
 	public Point_DTO getPointNextFigure (int x, int y) {
 		System.out.println(x + " ne " + y);
-		return this.nextFigure[x][y];
+		return this.nextFigure[y][x];
+	}
+	
+	public Point getNextFigureSize() {
+		return new Point(this.nextFigure[0].length, this.nextFigure.length);
 	}
 	
 

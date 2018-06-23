@@ -1,5 +1,7 @@
 package a_gui;
 
+import java.awt.Point;
+
 import d_dto.Point_DTO;
 
 /**Dies ist das Interface des Game Models.
@@ -19,4 +21,5 @@ public int getLines();
 public Point_DTO getPoint(int x, int y);
 public void reloadNextFigure(Point_DTO[][] nextFigure);
 public Point_DTO getPointNextFigure(int x, int y);
+public Point getNextFigureSize();
 }
