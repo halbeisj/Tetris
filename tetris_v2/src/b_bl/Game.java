@@ -51,40 +51,50 @@ public class Game {
 	
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
-		System.out.println("GameTest");
-		System.out.println(this.figure.getSource().y + "/" + this.figure.getPointL());
-		System.out.println(this.figure.getSource().toString());
 		if(this.figure.getSource().y + this.figure.getPointL() > 0) {
-			System.out.println("Gametest2");
-			//Point_DTO[][] f= figure.getFigure();
 			for(int i = 0; i < this.figure.getColumn(this.figure.getPointL()).length; i++) {
 				if(this.field[this.figure.getSource().y + i][this.figure.getSource().x + this.figure.getPointL() - 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointL()] != null) {
 					return;
 				}
 			}
-			System.out.println("leftTest");
 			this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y - 1));
 			this.reloadFigure(1);
+		}
+		else {return;}
+	}
+
+	/**Mit dieser Methode, kann man die Figur nach rechts verschieben*/
+	public void right() {
+		System.out.println("GameTest");
+		System.out.println(this.figure.getSource().y + "/" + this.figure.getPointL());
+		System.out.println(this.figure.getSource().toString());
+		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width - 1) {
+			System.out.println("Gametest2");
+			//Point_DTO[][] f= figure.getFigure();
+			for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
+				if(this.field[this.figure.getSource().y + i][this.figure.getSource().x + this.figure.getPointR() + 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointR()] != null) {
+					return;
+				}
+			}
+			System.out.println("rightTest");
+			this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y + 1));
+			this.reloadFigure(-1);
 			System.out.println(this.figure.getSource().toString());
 		}
 		else {
 			System.out.println("ganz links");
 			return;}
-		/*if(this.field[this.figure.getSource().y + this.figure.getPointL() - 1][this.figure.getSource().x + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointL()][i] != null)*/
-		/*if(this.figure.getPointL() > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));}*/
-		/*if(this.figure.getSource().x + this.figure.getPointL() > 0 && this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));*/
-	}
-
-	/**Mit dieser Methode, kann man die Figur nach rechts verschieben*/
-	public void right() {
-		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width) {
+		
+		
+		
+		/*if(this.figure.getSource().y + this.figure.getPointR() < this.field_width) {
 			for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
 				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointR()] != null){
 					return;
 				}
 			}
 			this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
-		}
+		}*/
 		
 		/*if(this.figure.getSource().x + this.figure.getPointR() < 5 && this.field[this.figure.getSource().x + this.figure.getPointR() + 1][])*/
 		/*if(this.figure.getPointR().x < 5 && this.field[this.figure.getPointR().x + 1][this.figure.getPointR().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x + 1, this.figure.getPointL().y));}*/
@@ -213,7 +223,7 @@ public class Game {
 				if(this.figure.getFigure()[x][y] != null) {
 					System.out.println("GAmetest");
 					System.out.println(this.figure.getSource().x + " " + this.figure.getSource().y);
-					int tempx = this.figure.getSource().x - this.figure.getFigure()[0].length + x;
+					int tempx = this.figure.getSource().x - this.figure.getFigure()[0].length + direction * x;
 					int tempy = this.figure.getSource().y - this.figure.getFigure().length + y;
 					System.out.println(tempx + " " + tempy + " " + x + " " + y);
 					System.out.println(this.figure.getFigure().length);

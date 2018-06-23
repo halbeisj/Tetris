@@ -160,6 +160,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 			this.controller.right();
+			this.reloadModel();
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.controller.left();
