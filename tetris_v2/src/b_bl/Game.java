@@ -50,7 +50,9 @@ public class Game {
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
 	public void left() {
 		System.out.println("GameTest");
-		if(this.figure.getSource().x + this.figure.getPointL() > 0) {
+		System.out.println(this.figure.getSource().y + "/" + this.figure.getPointL());
+		System.out.println(this.figure.getSource().toString());
+		if(this.figure.getSource().y + this.figure.getPointL() > 0) {
 			System.out.println("Gametest2");
 			//Point_DTO[][] f= figure.getFigure();
 			for(int i = 0; i < this.figure.getColumn(this.figure.getPointL()).length; i++) {
@@ -59,10 +61,13 @@ public class Game {
 				}
 			}
 			System.out.println("leftTest");
-			this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));
-			this.reloadFigure();
+			this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y - 1));
+			this.reloadFigure(1);
+			System.out.println(this.figure.getSource().toString());
 		}
-		else {return;}
+		else {
+			System.out.println("ganz links");
+			return;}
 		/*if(this.field[this.figure.getSource().y + this.figure.getPointL() - 1][this.figure.getSource().x + i].getStatus() == 1 && this.figure.getFigure()[this.figure.getSource().y + this.figure.getPointL()][i] != null)*/
 		/*if(this.figure.getPointL() > 0 && this.field[this.figure.getPointL().x - 1][this.figure.getPointL().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x - 1, this.figure.getPointL().y));}*/
 		/*if(this.figure.getSource().x + this.figure.getPointL() > 0 && this.field[this.figure.getSource().x + this.figure.getPointL() - 1][this.figure.getSource().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getSource().x - 1, this.figure.getSource().y));*/
@@ -114,17 +119,17 @@ public class Game {
 	private void createNewFigure() {
 		if(this.figure_next == null) {
 			this.figure_next = this.createRandomFigure();
-			this.figure_next.setSource(new Point((int) (this.field_width / 2 + 0.5), 0));
+			this.figure_next.setSource(new Point((int) (this.field_width / 2 + 0.5), 5));
 			System.out.println("getestet");
 		}
 		this.figure = this.figure_next;
 		this.figure_next = this.createRandomFigure();
-		this.figure_next.setSource(new Point((int) (this.field_width / 2 + 0.5), 0));
-		this.reloadFigure();
+		this.figure_next.setSource(new Point((int) (this.field_width / 2 + 0.5), 5));
 		System.out.println(this.figure.toString());
 		System.out.println(this.figure_next.toString());
 		System.out.println(this.figure.getPointL());
 		System.out.println(this.figure.getSource());
+		this.reloadFigure(0);
 	}
 	
 	private Figure createRandomFigure() {
@@ -190,18 +195,28 @@ public class Game {
 		return this.field_height;
 	}
 	
-	private void reloadFigure() {
+	private void reloadFigure(int direction) {
 		for (int x = 0; x < this.figure.getFigure().length; x++) {
 			for (int y = 0; y < this.figure.getFigure()[0].length; y++) {
-					if(this.figure.getFigure()[x][y] != null) {
-						System.out.println("GAmetest");
-						System.out.println(this.figure.getSource().x + " " + this.figure.getSource().y);
-						int tempx = this.figure.getSource().x - this.figure.getFigure().length + x;
-						int tempy = this.figure.getSource().x - this.figure.getFigure()[0].length + y;
-						System.out.println(tempx + " " + tempy + " " + x + " " + y);
-						this.field[tempx][tempy] = this.figure.getFigure()[x][y];
+				if(this.figure.getFigure()[x][y] != null) {
+					System.out.println("GAmetest");
+					System.out.println(this.figure.getSource().x + " " + this.figure.getSource().y);
+					int tempx = this.figure.getSource().x - this.figure.getFigure()[0].length + x;
+					int tempy = this.figure.getSource().y - this.figure.getFigure().length + y;
+					System.out.println(tempx + " " + tempy + " " + x + " " + y);
+					System.out.println(this.figure.getFigure().length);
+					System.out.println(this.figure.getSource().y + "   " + this.figure.getSource().x);
+					System.out.println(x);
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = this.figure.getFigure()[x][y];
+					//this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + this.figure.getPointD()] = new Point_DTO(new Point(this.figure.getSource().x + x, this.figure.getSource().y + y + this.figure.getPointD()), Color.GREEN, 0);
+				}
+				else {
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
 				}
 			}
+		}
+		for(int x = 0; x < this.figure.getFigure().length; x++) {
+			this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
 		}
 	}
 	
