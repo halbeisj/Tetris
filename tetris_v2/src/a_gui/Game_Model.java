@@ -24,7 +24,6 @@ public class Game_Model extends Observable implements int_Game_Model {
 		}
 		
 		this.setChanged();
-		System.out.println("changed: " + this.hasChanged());
 		this.notifyObservers();
 	}
 	
@@ -43,7 +42,6 @@ public class Game_Model extends Observable implements int_Game_Model {
 		this.name = name;
 		this.lines = 0;
 		this.level = 0;
-		System.out.println(this.name);
 	}
 	
 	public int getTime() {
@@ -71,7 +69,6 @@ public class Game_Model extends Observable implements int_Game_Model {
 	}
 	
 	public Point_DTO getPointNextFigure (int x, int y) {
-		System.out.println(x + " ne " + y);
 		return this.nextFigure[y][x];
 	}
 	

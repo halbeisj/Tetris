@@ -16,18 +16,15 @@ public class Game_Controller implements int_Game_Controller {
 	private Start_View start_view;
 	
 	public Game_Controller() {
-		System.out.print("true1");
 		this.start_view = new Start_View(this);
 		this.game = new Game();
 		this.model = new Game_Model();
 		this.view = new Game_View(this, this.model);
 		this.model.addObserver(this.view);
-		System.out.println(this.game.toString());
 	}
 	
 	/***/
 	public void left(){
-		System.out.println("TEstController");
 		this.game.left();
 		this.reloadField();
 	}
@@ -35,29 +32,26 @@ public class Game_Controller implements int_Game_Controller {
 	/***/
 	public void right(){
 		this.game.right();
+		this.reloadField();
 	}
 	
 	/***/
 	public void down(){
 		this.game.down();
+		this.reloadField();
 	}
 	
 	/***/
 	public void reloadField(){
-		this.model.reloadField(this.game.reloadField());
 		this.model.reloadNextFigure(this.game.reloadNextFigure());
-	}
-	
-	/***/
-	public void reloadNext(){
-		
+		this.model.reloadField(this.game.reloadField());
 	}
 	
 	/***/
 	public void newGame(){
 		this.game.newGame();
-		this.view.activate();
 		this.reloadField();
+		this.view.activate();
 	}
 	
 	/***/

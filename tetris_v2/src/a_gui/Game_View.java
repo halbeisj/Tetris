@@ -76,7 +76,6 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		}
 		
 		for(int i = 0; i < this.panelHolder[0].length; i++) {
-			System.out.println(Integer.toString(i));
 			this.panelHolder[0][i].setBackground(Color.gray);
 			this.panelHolder[0][i].setBorder(null);
 			this.panelHolder[1][i].setBackground(Color.gray);
@@ -118,6 +117,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	public void activate() {
 		this.setVisible(true);
 		this.panelHolder[6][1].add(new JLabel(this.model.getName()));
+		this.reloadModel();
 	}
 	
 	public void deactivate() {
@@ -127,18 +127,26 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	private void reloadModel(){
 		for(int x = 0; x < this.controller.getWidth(); x++) {
 			for (int y = 0; y < this.controller.getHeight(); y++) {
-				System.out.println(x + " " + y);
 				this.panelHolder[y + 2][x + 3].setBackground(this.model.getPoint(x, y).getColor());
+				if(this.model.getPoint(x, y).getStatus() == 1) {
+					this.panelHolder[y + 2][x + 3].setBackground(Color.red);
+				}
 			}
 		}
 		this.reloadNextFigure();
 	}
 	
 	private void reloadNextFigure() {
+		for(int x = 0; x < 3; x++) {
+			for(int y = 0; y < 4; y ++) {
+				this.panelHolder[y + 3][this.controller.getWidth() + x + 4].setBackground(Color.darkGray);
+			}
+		}
 		for(int x = 0; x < this.model.getNextFigureSize().x; x++) {
 			for(int y = 0; y < this.model.getNextFigureSize().y; y++) {
+				
 				if(this.model.getPointNextFigure(x, y) != null) {
-					this.panelHolder[y + 7 - this.model.getNextFigureSize().y][x + 13].setBackground(this.model.getPointNextFigure(x, y).getColor()); 
+					this.panelHolder[y + 7 - this.model.getNextFigureSize().y][x + this.controller.getWidth() + 4].setBackground(this.model.getPointNextFigure(x, y).getColor()); 
 				}
 			}
 		}
@@ -159,11 +167,9 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 			this.controller.right();
-			//this.reloadModel();
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.controller.left();
-			//this.reloadModel();
 		}
 		
 	}

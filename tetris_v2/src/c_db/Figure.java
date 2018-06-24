@@ -62,9 +62,6 @@ public class Figure {
 	public Point_DTO[] getColumn(int index){
 	    Point_DTO[] column = new Point_DTO[this.figure.length]; 
 	    for(int i = 0; i < column.length; i++){
-	    	System.out.println("Figure:" + index + " " + i);
-	    	System.out.println("Länge" + this.figure[0].length);
-	    	System.out.println(i);
 	    	column[i] = this.figure[i][index];
 	    }
 	    return column;
