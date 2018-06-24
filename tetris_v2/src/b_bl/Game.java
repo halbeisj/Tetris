@@ -141,7 +141,6 @@ public class Game {
 		System.out.println(this.figure_next.toString());
 		System.out.println(this.figure.getPointL());
 		System.out.println(this.figure.getSource());
-		this.reloadFigure(0);
 		
 		/*for(int y = 0; y < this.figure.getFigure().length; y++) {
 			for(int x = 0; x < this.figure.getFigure()[0].length; x++) {
@@ -238,7 +237,13 @@ public class Game {
 			}
 		}
 		for(int x = 0; x < this.figure.getFigure().length; x++) {
-			this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+			if(direction == 1) {
+				this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+			}
+			else if (direction == -1){
+				this.field[this.figure.getSource().x + x][this.figure.getSource().y + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+			}
+			
 		}
 	}
 	

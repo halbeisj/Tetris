@@ -1,6 +1,7 @@
 package a_gui;
 
 import java.awt.Point;
+import java.util.Observer;
 
 import d_dto.Point_DTO;
 
@@ -22,4 +23,5 @@ public Point_DTO getPoint(int x, int y);
 public void reloadNextFigure(Point_DTO[][] nextFigure);
 public Point_DTO getPointNextFigure(int x, int y);
 public Point getNextFigureSize();
+public void addObserver(Observer o);
 }

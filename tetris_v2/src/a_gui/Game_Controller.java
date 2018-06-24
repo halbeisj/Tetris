@@ -21,6 +21,7 @@ public class Game_Controller implements int_Game_Controller {
 		this.game = new Game();
 		this.model = new Game_Model();
 		this.view = new Game_View(this, this.model);
+		this.model.addObserver(this.view);
 		System.out.println(this.game.toString());
 	}
 	
@@ -28,7 +29,7 @@ public class Game_Controller implements int_Game_Controller {
 	public void left(){
 		System.out.println("TEstController");
 		this.game.left();
-		this.model.reloadField(this.game.reloadField());
+		this.reloadField();
 	}
 	
 	/***/
@@ -44,7 +45,7 @@ public class Game_Controller implements int_Game_Controller {
 	/***/
 	public void reloadField(){
 		this.model.reloadField(this.game.reloadField());
-		this.reloadNextFigure();
+		this.model.reloadNextFigure(this.game.reloadNextFigure());
 	}
 	
 	/***/
@@ -76,7 +77,7 @@ public class Game_Controller implements int_Game_Controller {
 		return game.getHeight();
 	}
 	
-	private void reloadNextFigure() {
+	/*private void reloadNextFigure() {
 		this.model.reloadNextFigure(this.game.reloadNextFigure());
-	}
+	}*/
 }

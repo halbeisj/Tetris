@@ -113,7 +113,6 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		
 		this.panelHolder[12][this.controller.getWidth() + 4].add(this.newGame);
 		this.panelHolder[14][this.controller.getWidth() + 4].add(this.endGame);
-		
 	}
 	
 	public void activate() {
@@ -160,11 +159,11 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 			this.controller.right();
-			this.reloadModel();
+			//this.reloadModel();
 		}
 		else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.controller.left();
-			this.reloadModel();
+			//this.reloadModel();
 		}
 		
 	}
@@ -175,6 +174,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		this.reloadModel();
+		System.out.println("MODEL GOT UPDATED");
 		
 	}
 	

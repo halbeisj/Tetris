@@ -24,6 +24,7 @@ public class Game_Model extends Observable implements int_Game_Model {
 		}
 		
 		this.setChanged();
+		System.out.println("changed: " + this.hasChanged());
 		this.notifyObservers();
 	}
 	
