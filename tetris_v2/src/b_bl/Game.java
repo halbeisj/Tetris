@@ -37,7 +37,7 @@ public class Game {
 	private Point_DTO[][] field;
 	private Figure figure;
 	private Figure figure_next;
-	private int field_height = 25;
+	private int field_height = 11;
 	private int field_width = 11;
 	
 	
@@ -73,13 +73,17 @@ public class Game {
 	public void right() {
 		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width - 1) {
 			//Point_DTO[][] f= figure.getFigure();
-			for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
-				System.out.println("i: " + i);
-				System.out.println("x: " + this.figure.getSource().x);
-				System.out.println("y: " + this.figure.getSource().y);
-				System.out.println("R: " + this.figure.getPointR());
+			/*for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
 				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointR()] != null) {
 					return;
+				}
+			}*/
+			for(int x = 0; x < this.figure.getFigure().length; x++) {
+				for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
+					if(this.figure.getFigure()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + 1].getStatus() == 1) {
+						System.out.println("DILLDAPP");
+						return;
+					}
 				}
 			}
 			this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y + 1));
@@ -103,12 +107,11 @@ public class Game {
 	}
 
 	/**Mit dieser Methode, kann man die Figur nach unten verschieben*/
-	public boolean down() {
+	public int down() {
 		if(this.figure.getSource().x == this.field_height - this.figure.getPointD() - 1) {
 			System.out.println(this.figure.getSource().x);
 			System.out.println("down: false");
-			this.addFigure();
-			return false;
+			return this.addFigure();
 		}
 		else {
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
@@ -120,8 +123,7 @@ public class Game {
 					System.out.println("left:" + this.figure.getSource().x + "/" + x);
 					if(this.figure.getFigure()[x][y] != null && this.field[this.figure.getSource().x + x + 1][this.figure.getSource().y + y].getStatus() == 1) {
 						System.out.println(x + "down" + y);
-						this.addFigure();
-						return false;
+						return this.addFigure();
 					}
 				}
 			}
@@ -138,7 +140,7 @@ public class Game {
 		
 		this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
 		this.reloadFigure(0);
-		return true;
+		return 0;
 		
 		
 		/*for(Point_DTO point : this.figure.getFigure()[0]) {
@@ -201,7 +203,7 @@ public class Game {
 		this.figure = null;
 		this.figure_next = null;
 	}
-	private void addFigure() {
+	private int addFigure() {
 		for(int x = 0; x < this.figure.getFigure().length; x++) {
 			for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
 				System.out.println(x + " " + y);
@@ -212,7 +214,9 @@ public class Game {
 				}
 			}
 		}
+		int temp = this.checkFullRow();
 		this.createNewFigure();
+		return temp;
 	}
 	
 	public Point_DTO[][] reloadField() {
@@ -259,26 +263,69 @@ public class Game {
 		}
 		if(direction == 1) {
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
-				this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() != 1) {
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+				}
 			}
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
 				for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
-					if(this.figure.getFigure()[x][y] == null && y != 0) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + 1] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
+					if(this.figure.getFigure()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
+						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
 					}
 				}
 			}
 		}
 		else if (direction == -1){
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
-				this.field[this.figure.getSource().x + x][this.figure.getSource().y + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1].getStatus() != 1) {
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+				}	
+			}
+			for(int x = 0; x < this.figure.getFigure().length; x++) {
+				for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
+					if(this.figure.getFigure()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
+						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
+					}
+				}
 			}
 		}
 		else if (direction == 0) {
 			for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
-				this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y] = new Point_DTO(new Point(this.figure.getSource().x - 1, this.figure.getSource().y + y), Color.darkGray, 0);
+				if(this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y].getStatus() != 1) {
+					this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y] = new Point_DTO(new Point(this.figure.getSource().x - 1, this.figure.getSource().y + y), Color.darkGray, 0);
+				}
+			}
+			for(int x = 0; x < this.figure.getFigure().length; x++) {
+				for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
+					if(this.figure.getFigure()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
+						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
+					}
+				}
 			}
 		}	
+	}
+	
+	private int checkFullRow() {
+		boolean full;
+		int rows = 0;
+		for(int y = 0; y < this.field_height; y++) {
+			full = true;
+			for(int x = 0; x < this.field_width; x++) {
+				if(this.field[y][x].getStatus() == 0) {
+					full = false;
+					break;
+				}
+			}
+			if(full) {
+				rows++;
+				for(int x = 0; x < this.field_width; x++) {
+					for(int y2 = 0; y2 < y; y2++) {
+						this.field[y - y2][x] = this.field[y - y2 - 1][x];
+					}
+				}
+			}
+		}
+		return rows;
 	}
 	
 }

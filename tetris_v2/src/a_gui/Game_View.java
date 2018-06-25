@@ -14,21 +14,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 /***/
 public class Game_View extends JFrame implements int_Game_View, ActionListener, KeyListener, Observer {
 	private int_Game_Model model;
 	private int_Game_Controller controller;
-	private JLabel nextFigure;
+	//private JLabel nextFigure;
 	private JLabel time;
-	private JLabel lines;
-	private JLabel level;
+	private JLabel lines = new JLabel("0");
+	private JLabel level = new JLabel("0");
 	private JButton newGame;
 	private JButton endGame;
-	private JLabel name;
+	//private JLabel name;
 	private JPanel[][] panelHolder;
-	private String s;
+	//private String s;
 	
 	public Game_View(int_Game_Controller controller, int_Game_Model model) {
 		this.setFocusable(true);
@@ -106,9 +105,9 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		this.panelHolder[8][this.controller.getWidth() + 4].add(new JLabel("Time:"));
 		this.panelHolder[8][this.controller.getWidth() + 5].add(new JLabel("Time"));
 		this.panelHolder[9][this.controller.getWidth() + 4].add(new JLabel("Lines:"));
-		this.panelHolder[9][this.controller.getWidth() + 5].add(new JLabel("Lines"));
+		this.panelHolder[9][this.controller.getWidth() + 5].add(this.lines);
 		this.panelHolder[10][this.controller.getWidth() + 4].add(new JLabel("Level:"));
-		this.panelHolder[10][this.controller.getWidth() + 5].add(new JLabel("Level"));
+		this.panelHolder[10][this.controller.getWidth() + 5].add(this.level);
 		
 		this.panelHolder[12][this.controller.getWidth() + 4].add(this.newGame);
 		this.panelHolder[14][this.controller.getWidth() + 4].add(this.endGame);
@@ -116,6 +115,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	
 	public void activate() {
 		this.setVisible(true);
+		this.panelHolder[6][1].removeAll();
 		this.panelHolder[6][1].add(new JLabel(this.model.getName()));
 		this.reloadModel();
 	}
@@ -129,7 +129,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 			for (int y = 0; y < this.controller.getHeight(); y++) {
 				this.panelHolder[y + 2][x + 3].setBackground(this.model.getPoint(x, y).getColor());
 				if(this.model.getPoint(x, y).getStatus() == 1) {
-					this.panelHolder[y + 2][x + 3].setBackground(Color.red);
+					//this.panelHolder[y + 2][x + 3].setBackground(Color.red);
 				}
 			}
 		}
@@ -154,6 +154,15 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource() == this.endGame) {
+			this.controller.endGame();
+			this.dispose();
+		}
+		else if(ae.getSource() == this.newGame) {
+			this.controller.newGame();
+			this.setFocusable(true);
+			this.requestFocusInWindow();
+		}
 		
 	}
 
@@ -180,6 +189,8 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		this.reloadModel();
+		this.lines.setText(this.model.getLines());
+		this.level.setText(this.model.getLevel());
 		System.out.println("MODEL GOT UPDATED");
 		
 	}

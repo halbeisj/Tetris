@@ -36,8 +36,7 @@ public class Start_View extends JFrame implements ActionListener{
 		this.add(startGame, BorderLayout.SOUTH);
 		this.add(this.text, BorderLayout.NORTH);
 		this.add(this.guiname, BorderLayout.CENTER);
-		
-		this.setSize(100, 100);
+	
 		this.setBounds(100, 100, 700, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);

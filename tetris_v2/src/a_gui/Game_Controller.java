@@ -14,6 +14,8 @@ public class Game_Controller implements int_Game_Controller {
 	private Game game;
 	private int_Game_View view;
 	private Start_View start_view;
+	private End_View end_view;
+	private int inc;
 	
 	public Game_Controller() {
 		this.start_view = new Start_View(this);
@@ -37,14 +39,15 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void down(){
-		this.game.down();
+		this.inc = this.game.down();
 		this.reloadField();
 	}
 	
 	/***/
 	public void reloadField(){
 		this.model.reloadNextFigure(this.game.reloadNextFigure());
-		this.model.reloadField(this.game.reloadField());
+		this.model.reloadField(this.game.reloadField(), this.inc);
+		this.inc = 0;
 	}
 	
 	/***/
@@ -56,7 +59,8 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void endGame(){
-		
+		//this.game.endGame();
+		this.end_view = new End_View(this);
 	}
 	
 	public void setName(String name) {

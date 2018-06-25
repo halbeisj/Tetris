@@ -13,12 +13,12 @@ import d_dto.Point_DTO;
  * @version 1.0
  * */
 public interface int_Game_Model {
-public void reloadField(Point_DTO[][] field);
+public void reloadField(Point_DTO[][] field, int inc);
 public void init(String name);
-public int getLevel();
+public String getLevel();
 public int getTime();
 public String getName();
-public int getLines();
+public String getLines();
 public Point_DTO getPoint(int x, int y);
 public void reloadNextFigure(Point_DTO[][] nextFigure);
 public Point_DTO getPointNextFigure(int x, int y);

@@ -16,31 +16,32 @@ public class Game_Model extends Observable implements int_Game_Model {
 	private String name;
 	
 	/***/
-	public void reloadField(Point_DTO[][] field){
+	public void reloadField(Point_DTO[][] field, int inc){
 		this.field = field;
 		
-		if(this.lines % 10 == 0) {
-			this.incLevel();
-		}
+		this.incLine(inc);
 		
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	/***/
-	public void incLine(){
-		
+	private void incLine(int inc){
+		this.lines = this.lines + inc;
+		if(inc != 0 && this.lines % 10 == 0) {
+			this.incLevel();
+		}
 	}
 	
 	/***/
-	public void incLevel(){
+	private void incLevel(){
 		this.level++;
 	}
 	
 	/***/
 	public void init(String name){
 		this.name = name;
-		this.lines = 0;
+		this.lines = 9;
 		this.level = 0;
 	}
 	
@@ -48,12 +49,12 @@ public class Game_Model extends Observable implements int_Game_Model {
 		return this.time;
 	}
 	
-	public int getLines() {
-		return this.lines;
+	public String getLines() {
+		return Integer.toString(this.lines);
 	}
 	
-	public int getLevel() {
-		return this.level;
+	public String getLevel() {
+		return Integer.toString(this.level);
 	}
 	
 	public String getName() {
