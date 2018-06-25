@@ -1,5 +1,6 @@
 package a_gui;
 
+import java.awt.Point;
 import java.util.Observable;
 
 import d_dto.Point_DTO;
@@ -8,6 +9,7 @@ import d_dto.Point_DTO;
 public class Game_Model extends Observable implements int_Game_Model {
 	
 	private Point_DTO[][] field;
+	private Point_DTO[][] nextFigure;
 	private int time;
 	private int lines;
 	private int level;
@@ -36,11 +38,10 @@ public class Game_Model extends Observable implements int_Game_Model {
 	}
 	
 	/***/
-	public void setName(String name){
+	public void init(String name){
 		this.name = name;
 		this.lines = 0;
 		this.level = 0;
-		System.out.println(this.name);
 	}
 	
 	public int getTime() {
@@ -61,6 +62,18 @@ public class Game_Model extends Observable implements int_Game_Model {
 	
 	public Point_DTO getPoint (int x, int y) {
 		return this.field[y][x];
+	}
+
+	public void reloadNextFigure(Point_DTO[][] nextFigure) {
+		this.nextFigure = nextFigure;
+	}
+	
+	public Point_DTO getPointNextFigure (int x, int y) {
+		return this.nextFigure[y][x];
+	}
+	
+	public Point getNextFigureSize() {
+		return new Point(this.nextFigure[0].length, this.nextFigure.length);
 	}
 	
 

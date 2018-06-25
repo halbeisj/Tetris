@@ -16,44 +16,42 @@ public class Game_Controller implements int_Game_Controller {
 	private Start_View start_view;
 	
 	public Game_Controller() {
-		System.out.print("true1");
 		this.start_view = new Start_View(this);
 		this.game = new Game();
 		this.model = new Game_Model();
-		this.view = new Game_View(this);
-		System.out.println(this.game.toString());
+		this.view = new Game_View(this, this.model);
+		this.model.addObserver(this.view);
 	}
 	
 	/***/
 	public void left(){
-		
+		this.game.left();
+		this.reloadField();
 	}
 	
 	/***/
 	public void right(){
-		
+		this.game.right();
+		this.reloadField();
 	}
 	
 	/***/
 	public void down(){
-		
+		this.game.down();
+		this.reloadField();
 	}
 	
 	/***/
 	public void reloadField(){
+		this.model.reloadNextFigure(this.game.reloadNextFigure());
 		this.model.reloadField(this.game.reloadField());
 	}
 	
 	/***/
-	public void reloadNext(){
-		
-	}
-	
-	/***/
 	public void newGame(){
-		this.view.activate();
 		this.game.newGame();
 		this.reloadField();
+		this.view.activate();
 	}
 	
 	/***/
@@ -62,7 +60,7 @@ public class Game_Controller implements int_Game_Controller {
 	}
 	
 	public void setName(String name) {
-		this.model.setName(name);
+		this.model.init(name);
 	}
 	
 	public int getWidth() {
@@ -72,4 +70,8 @@ public class Game_Controller implements int_Game_Controller {
 	public int getHeight() {
 		return game.getHeight();
 	}
+	
+	/*private void reloadNextFigure() {
+		this.model.reloadNextFigure(this.game.reloadNextFigure());
+	}*/
 }

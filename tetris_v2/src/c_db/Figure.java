@@ -26,7 +26,7 @@ public class Figure {
 	 * Ursprünglicher Punkt auf dem ganzen Feld
 	 * */
 	protected Point source;
-
+	
 	/***/
 	public Point_DTO[][] getFigure() {
 		return figure;
@@ -60,9 +60,9 @@ public class Figure {
 	}
 	
 	public Point_DTO[] getColumn(int index){
-	    Point_DTO[] column = new Point_DTO[this.figure[0].length]; 
+	    Point_DTO[] column = new Point_DTO[this.figure.length]; 
 	    for(int i = 0; i < column.length; i++){
-	       column[i] = figure[i][index];
+	    	column[i] = this.figure[i][index];
 	    }
 	    return column;
 	}
