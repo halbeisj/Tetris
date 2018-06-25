@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import d_dto.Point_DTO;
 
-/**Hier wird die Figur T erstellt, diese Klasse erbst von der Klasse Figure.
+/**Hier wird die Figur T erstellt, diese Klasse erbt von der Klasse Figure.
  * @author Julia Halbeisen
  * @author Dominik Heckendorn
  * @version 1.0
