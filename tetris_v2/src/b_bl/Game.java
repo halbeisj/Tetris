@@ -60,8 +60,6 @@ public class Game extends Observable {
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
 				for (int y = 0; y < this.figure.getFigure()[0].length; y++) {
 					if(this.figure.getFigure()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y - 1].getStatus() == 1) {
-						System.out.println("left: " + x + "/" + y);
-						System.out.println("DILLDAP");
 						return;
 					}
 				}
@@ -84,7 +82,6 @@ public class Game extends Observable {
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
 				for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
 					if(this.figure.getFigure()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + 1].getStatus() == 1) {
-						System.out.println("DILLDAPP");
 						return;
 					}
 				}
@@ -112,20 +109,12 @@ public class Game extends Observable {
 	/**Mit dieser Methode, kann man die Figur nach unten verschieben*/
 	public int down() {
 		if(this.figure.getSource().x == this.field_height - this.figure.getPointD() - 1) {
-			System.out.println(this.figure.getSource().x);
-			System.out.println("down: false");
 			return this.addFigure();
 		}
 		else {
 			for(int x = 0; x < this.figure.getFigure().length; x++) {
 				for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
-					System.out.println(x + " % " + y);
-					System.out.println(this.figure.getSource().y + y + "/" + this.figure.getSource().x + x + 1);
-					System.out.println(this.figure.getSource().x);
-					System.out.println("right:" + this.figure.getSource().y + "/" + y);
-					System.out.println("left:" + this.figure.getSource().x + "/" + x);
 					if(this.figure.getFigure()[x][y] != null && this.field[this.figure.getSource().x + x + 1][this.figure.getSource().y + y].getStatus() == 1) {
-						System.out.println(x + "down" + y);
 						return this.addFigure();
 					}
 				}
@@ -173,7 +162,6 @@ public class Game extends Observable {
 		}
 		this.figure_next = this.createRandomFigure();
 		this.figure_next.setSource(new Point(0, (int) (this.field_width / 2 + 0.5)));
-		System.out.println(this.figure.toString());
 		this.reloadFigure(2);
 		
 		/*for(int y = 0; y < this.figure.getFigure().length; y++) {
@@ -201,10 +189,13 @@ public class Game extends Observable {
 	
 	/**Hiermit kann man das Spiel neustarten*/
 	public void newGame() {
-		System.out.println(this.timeThread);
 		this.endGame();
-		this.timeThread.start();
+		if(!this.timeThread.isAlive()) {
+			this.timeThread.start();
+			System.out.println(this.timeThread);
+		}
 		this.createNewFigure();
+		this.timeInt = 0;
 	}
 
 	/**Hiermit kann man das Spiel beenden*/
@@ -220,10 +211,7 @@ public class Game extends Observable {
 	private int addFigure() {
 		for(int x = 0; x < this.figure.getFigure().length; x++) {
 			for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
-				System.out.println(x + " " + y);
 				if(this.figure.getFigure()[x][y] != null) {
-					System.out.println("left: " + this.figure.getSource().x + " " + x);
-					System.out.println("right: " + this.figure.getSource().y + " " + y);
 					this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].setStatus(1);
 				}
 			}
@@ -263,7 +251,6 @@ public class Game extends Observable {
 	private void reloadFigure(int direction) {
 		for (int x = 0; x < this.figure.getFigure().length; x++) {
 			for (int y = 0; y < this.figure.getFigure()[0].length; y++) {
-				System.out.println("Testen");
 				if(this.figure.getFigure()[x][y] != null) {
 					//int tempx = this.figure.getSource().x - this.figure.getFigure()[0].length + direction * x;
 					//int tempy = this.figure.getSource().y - this.figure.getFigure().length + y;

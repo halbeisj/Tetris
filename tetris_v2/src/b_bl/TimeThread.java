@@ -1,9 +1,6 @@
 package b_bl;
 
-import java.util.Observable;
-
-public class TimeThread extends Observable implements Runnable{
-private int time = 0;
+public class TimeThread implements Runnable {
 private Game game;
 
 	public TimeThread(Game game) {
@@ -11,19 +8,14 @@ private Game game;
 	}
 
 	public void run() {
-		this.time = 0;
+		System.out.println("Thread started");
 		while(true) {
+			System.out.println("alive");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			this.game.incTime();
 		}
 	}
-	/*public int getTime() {
-		return this.time;
-	}*/
-
 }

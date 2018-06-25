@@ -193,8 +193,6 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 		this.lines.setText(this.model.getLines());
 		this.level.setText(this.model.getLevel());
 		this.time.setText(this.model.getTime());
-		System.out.println("MODEL GOT UPDATED");
-
 	}
 
 }

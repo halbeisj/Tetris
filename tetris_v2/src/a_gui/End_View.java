@@ -50,7 +50,7 @@ public class End_View extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == this.exit) {
-			this.dispose();
+			System.exit(0);
 		}
 		else if(ae.getSource() == this.repeatGame) {
 			this.dispose();

@@ -81,14 +81,11 @@ public class Game_Controller implements int_Game_Controller, Observer {
 
 	public void update(Observable o, Object arg) {
 		if((int) arg == 1) {
-			System.out.println("GAME IST FERTIG");
 			this.view.deactivate();
 			this.endGame();
 		}
 		else if((int) arg == 2) {
-			System.out.println(Integer.toString(this.game.getTime()));
 			this.model.setTime(this.game.getTime());
 		}
 	}
-
 }
