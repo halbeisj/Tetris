@@ -2,6 +2,7 @@ package b_bl;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.Observable;
 import java.util.Random;
 
 import c_db.Figure;
@@ -33,17 +34,19 @@ import d_dto.Point_DTO;
  * ###################
  */
 
-public class Game {
+public class Game extends Observable {
 	private Point_DTO[][] field;
 	private Figure figure;
 	private Figure figure_next;
 	private int field_height = 11;
 	private int field_width = 11;
-	
+	private int timeInt = 0;
+	private Thread timeThread;
 	
 	public Game() {
+		this.timeThread = new Thread(new TimeThread(this));
 		this.field = new Point_DTO[this.field_height][this.field_width];
-		this.endGame();
+		this.endGame();		
 	}
 	
 	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
@@ -159,6 +162,15 @@ public class Game {
 			this.figure_next.setSource(new Point(0, (int) (this.field_width / 2 + 0.5)));
 		}
 		this.figure = this.figure_next;
+		for(int x = 0; x < this.figure.getFigure().length; x++) {
+			for(int y = 0; y < this.figure.getFigure()[0].length; y++) {
+				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y].getStatus() == 1 && this.figure.getFigure()[x][y] != null) {
+					this.setChanged();
+					this.notifyObservers(1);
+					return;
+				}
+			}
+		}
 		this.figure_next = this.createRandomFigure();
 		this.figure_next.setSource(new Point(0, (int) (this.field_width / 2 + 0.5)));
 		System.out.println(this.figure.toString());
@@ -189,7 +201,9 @@ public class Game {
 	
 	/**Hiermit kann man das Spiel neustarten*/
 	public void newGame() {
+		System.out.println(this.timeThread);
 		this.endGame();
+		this.timeThread.start();
 		this.createNewFigure();
 	}
 
@@ -328,4 +342,13 @@ public class Game {
 		return rows;
 	}
 	
+	public void incTime() {
+		this.timeInt++;
+		this.setChanged();
+		this.notifyObservers(2);
+	}
+	
+	public int getTime() {
+		return this.timeInt;
+	}
 }

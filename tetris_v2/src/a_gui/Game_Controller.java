@@ -1,6 +1,10 @@
 package a_gui;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import b_bl.Game;
+import b_bl.TimeThread;
 /**
  * Dies ist der Controller der Game Klasse.
  * Über Ihn wird auf die Game Klasse zugegriffen.
@@ -9,7 +13,7 @@ import b_bl.Game;
  * @author Dominik Heckendorn
  * @version 1.0
  * */
-public class Game_Controller implements int_Game_Controller {
+public class Game_Controller implements int_Game_Controller, Observer {
 	private int_Game_Model model;
 	private Game game;
 	private int_Game_View view;
@@ -23,6 +27,7 @@ public class Game_Controller implements int_Game_Controller {
 		this.model = new Game_Model();
 		this.view = new Game_View(this, this.model);
 		this.model.addObserver(this.view);
+		this.game.addObserver(this);
 	}
 	
 	/***/
@@ -59,7 +64,6 @@ public class Game_Controller implements int_Game_Controller {
 	
 	/***/
 	public void endGame(){
-		//this.game.endGame();
 		this.end_view = new End_View(this);
 	}
 	
@@ -74,8 +78,17 @@ public class Game_Controller implements int_Game_Controller {
 	public int getHeight() {
 		return game.getHeight();
 	}
-	
-	/*private void reloadNextFigure() {
-		this.model.reloadNextFigure(this.game.reloadNextFigure());
-	}*/
+
+	public void update(Observable o, Object arg) {
+		if((int) arg == 1) {
+			System.out.println("GAME IST FERTIG");
+			this.view.deactivate();
+			this.endGame();
+		}
+		else if((int) arg == 2) {
+			System.out.println(Integer.toString(this.game.getTime()));
+			this.model.setTime(this.game.getTime());
+		}
+	}
+
 }

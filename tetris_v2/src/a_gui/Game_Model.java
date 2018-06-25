@@ -45,8 +45,8 @@ public class Game_Model extends Observable implements int_Game_Model {
 		this.level = 0;
 	}
 	
-	public int getTime() {
-		return this.time;
+	public String getTime() {
+		return Integer.toString(this.time);
 	}
 	
 	public String getLines() {
@@ -75,6 +75,12 @@ public class Game_Model extends Observable implements int_Game_Model {
 	
 	public Point getNextFigureSize() {
 		return new Point(this.nextFigure[0].length, this.nextFigure.length);
+	}
+	
+	public void setTime(int time) {
+		this.time = time;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 

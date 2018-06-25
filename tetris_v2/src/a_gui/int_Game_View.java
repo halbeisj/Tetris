@@ -11,4 +11,5 @@ import java.util.Observer;
  * */
 public interface int_Game_View extends Observer {
 	public void activate();
+	public void deactivate();
 }
