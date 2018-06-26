@@ -28,7 +28,7 @@ public class Figure {
 	protected Point source;
 	
 	/***/
-	public Point_DTO[][] getFigure() {
+	public Point_DTO[][] getField() {
 		return figure;
 	}
 
