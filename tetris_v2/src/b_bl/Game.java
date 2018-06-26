@@ -17,12 +17,14 @@ import d_dto.Point_DTO;
 
 /**
  * Diese Klasse ist für das Spiel und den Spielstand verantwortlich. 
- * Hier werden das aktuelle Feld, die momentan fallende Figur und die nächste Figur gespeichert. 
+ * Hier werden das aktuelle Feld, die momentan fallende Figur und die nächste Figur gespeichert.
+ * Es wird der Thread gestartet, welcher all Sekunde die anzahl verstrichene Sekunden in der Klasse Game erhöht.
+ * Das Spielfeld an sich wird hier konfiguriert (Breite, Höhe)
  * 
  * @author Julia Halbeisen
  * @author Dominik Heckendorn
  * @version 1.0
- * */
+ */
 
 /* Tetrisfeld
  * ###################
@@ -35,28 +37,72 @@ import d_dto.Point_DTO;
  */
 
 public class Game extends Observable {
+	
+	/**
+	 * Feld in welchem die Punkte und deren Status abgespeichert werden
+	 * 
+	 * @see Point_DTO
+	 */
 	private Point_DTO[][] field;
+	
+	/**
+	 * Aktuelle Figur
+	 * 
+	 * @see Figure
+	 */
 	private Figure figure;
+	
+	/**
+	 * Nächste Figur
+	 * 
+	 * @see Figure
+	 */
 	private Figure figure_next;
+	
+	/**
+	 * Höhe des Spielfeldes
+	 */
 	private int field_height = 11;
+	
+	/**
+	 * Breite des Spielfeldes
+	 */
 	private int field_width = 11;
+	
+	/**
+	 * Verstrichene Zeit seit Beginn der Runde
+	 */
 	private int timeInt = 0;
+	
+	/**
+	 * Thread, der all Sekunde die Anzahl verstrichenen Sekunden seit Beginn der Runde erhöht
+	 */
 	private Thread timeThread;
 	
+	/**
+	 * Konstruktor, welcher den Thread erstellt
+	 * Feld wird erstellt
+	 * Spiel wird beendet (Punkte im Feld werden neu erstellt)
+	 */
 	public Game() {
 		this.timeThread = new Thread(new TimeThread(this));
 		this.field = new Point_DTO[this.field_height][this.field_width];
 		this.endGame();		
 	}
 	
-	/**Mit dieser Methode, kann man die Figur nach links verschieben*/
+	/**
+	 * Mit dieser Methode, kann man die Figur nach links verschieben
+	 * Wenn Figur links am Rand -> return;
+	 * Wenn ein Feld links von Figur besetzt -> return;
+	 * Sonst -> Figur wird nach links verschoben
+	 * 
+	 * @return null
+	 * 
+	 * @see Figure
+	 * @see Point_DTO
+	 */
 	public void left() {
-		if(this.figure.getSource().y + this.figure.getPointL() > 0) {
-			/*for(int i = 0; i < this.figure.getColumn(this.figure.getPointL()).length; i++) {
-				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointL() - 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointL()] != null) {
-					return;
-				}
-			}*/
+		if(this.figure.getSource().y > 0) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for (int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y - 1].getStatus() == 1) {
@@ -70,15 +116,19 @@ public class Game extends Observable {
 		else {return;}
 	}
 
-	/**Mit dieser Methode, kann man die Figur nach rechts verschieben*/
+	/**
+	 * Mit dieser Methode, kann man die Figur nach rechts verschieben
+	 * Wenn Figur rechts am Rand -> return;
+	 * Wenn ein Feld rechts von Figur besetzt -> return;
+	 * Sonst -> Figur wird nach rechts verschoben
+	 * 
+	 * @return null
+	 * 
+	 * @see Figure
+	 * @see Point_DTO
+	 */
 	public void right() {
 		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width - 1) {
-			//Point_DTO[][] f= figure.getFigure();
-			/*for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
-				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointR()] != null) {
-					return;
-				}
-			}*/
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + 1].getStatus() == 1) {
@@ -90,23 +140,19 @@ public class Game extends Observable {
 			this.reloadFigure(-1);
 		}
 		else {return;}
-		
-		
-		
-		/*if(this.figure.getSource().y + this.figure.getPointR() < this.field_width) {
-			for(int i = 0; i < this.figure.getColumn(this.figure.getPointR()).length; i++) {
-				if(this.field[this.figure.getSource().x + i][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() == 1 && this.figure.getFigure()[i][this.figure.getPointR()] != null){
-					return;
-				}
-			}
-			this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
-		}*/
-		
-		/*if(this.figure.getSource().x + this.figure.getPointR() < 5 && this.field[this.figure.getSource().x + this.figure.getPointR() + 1][])*/
-		/*if(this.figure.getPointR().x < 5 && this.field[this.figure.getPointR().x + 1][this.figure.getPointR().y].getStatus() != 1) {this.figure.setSource(new Point(this.figure.getPointL().x + 1, this.figure.getPointL().y));}*/
 	}
 
-	/**Mit dieser Methode, kann man die Figur nach unten verschieben*/
+	/**
+	 * Mit dieser Methode, kann man die Figur nach unten verschieben
+	 * Wenn Figur unten am Rand -> Figur wird zum Spielfeld geadded
+	 * Wenn ein Feld rechts von Figur besetzt -> Figur wird zum Spielfeld geadded
+	 * Sonst -> Figur wird nach unten verschoben
+	 * 
+	 * @return Anzahl Linien, die beim adden gelöscht wurden 
+	 * 
+	 * @see Figure
+	 * @see Point_DTO
+	 */
 	public int down() {
 		if(this.figure.getSource().x == this.field_height - this.figure.getPointD() - 1) {
 			return this.addFigure();
@@ -119,32 +165,21 @@ public class Game extends Observable {
 					}
 				}
 			}
-			
-			
-			
-			/*for(int i = 0; i < this.figure.getFigure()[this.figure.getPointD()].length; i++) {
-				if(this.field[this.figure.getSource().x + this.figure.getPointD() + 1][this.figure.getSource().y + i].getStatus() == 0) {
-					this.addFigure(this.figure);
-					return false;
-				}
-			}*/
 		}
 		
 		this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
 		this.reloadFigure(0);
 		return 0;
-		
-		
-		/*for(Point_DTO point : this.figure.getFigure()[0]) {
-			if(point != null && field[point.getPoint().x][point.getPoint().y - 1].getStatus() == 1 || this.figure.getPoint().y == 0) {
-				return false;
-			}
-		}
-		this.figure.setSource(new Point(this.figure.getPointL().x, this.figure.getPointL().y - 1));
-		return true;*/
 	}
 
-	/***/
+	/**
+	 * Wenn keine Figur existiert (zu Beginn) -> neue nächste Figur wird erstellt
+	 * aktuelle Figur wird auf nächste Figur gesetzt
+	 * nächste Figur wird zufällig neu erstellt
+	 * Wenn Figur in einem besetzten Feld erstellt werden -> Observers werden mit 1 benachrichtigt
+	 * 
+	 * @see int_Game_Controller
+	 */
 	private void createNewFigure() {
 		if(this.figure_next == null) {
 			this.figure_next = this.createRandomFigure();
@@ -163,14 +198,13 @@ public class Game extends Observable {
 		this.figure_next = this.createRandomFigure();
 		this.figure_next.setSource(new Point(0, (int) (this.field_width / 2 + 0.5)));
 		this.reloadFigure(2);
-		
-		/*for(int y = 0; y < this.figure.getFigure().length; y++) {
-			for(int x = 0; x < this.figure.getFigure()[0].length; x++) {
-				this.nextFigure[x][y] = this.figure_next.getFigure()[x][y];
-			}
-		}*/
 	}
 	
+	/**
+	 * Es wird ein zufälliger Figurentyp zurückgegeben
+	 * 
+	 * @return ein zufälliger Figurentyp
+	 */
 	private Figure createRandomFigure() {
 		Random r = new Random();
 		int figure_number = r.nextInt(7);
@@ -187,18 +221,29 @@ public class Game extends Observable {
 		}
 	}
 	
-	/**Hiermit kann man das Spiel neustarten*/
+	/**
+	 * Startet das Spiel neu
+	 * Spielfeld wird geleert; Aktuelle Figur wird geleert; Nächste Figur wird geleert
+	 * Wenn TimeThread nicht am Leben ist -> Thread wird gestartet
+	 * Neue Figur wird erstellt
+	 * Verstrichene Zeit seit Beginn der Runde wird auf 0 gesetzt
+	 * 
+	 * @see TimeThread
+	 */
 	public void newGame() {
 		this.endGame();
 		if(!this.timeThread.isAlive()) {
 			this.timeThread.start();
-			System.out.println(this.timeThread);
 		}
 		this.createNewFigure();
 		this.timeInt = 0;
 	}
 
-	/**Hiermit kann man das Spiel beenden*/
+	/**
+	 * Spielfeld wird geleert
+	 * Aktuelle Figur wird geleert
+	 * Nächste Figur wird geleert
+	 */
 	public void endGame() {
 		for(int i = 0; i < this.field_width; i++) {
 			for(int y = 0; y < this.field_height; y++) {
@@ -208,6 +253,16 @@ public class Game extends Observable {
 		this.figure = null;
 		this.figure_next = null;
 	}
+	
+	/**
+	 * Aktuelle Figur wird dem Spielfeld hinzugefügt
+	 * Felder an Position werden als besetzt markiert
+	 * 
+	 * @return Anzahl Linien, die beim Hinzufügen entfernt wurden
+	 * 
+	 * @see Point_DTO
+	 * @see Figure
+	 */
 	private int addFigure() {
 		for(int x = 0; x < this.figure.getField().length; x++) {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
@@ -221,57 +276,54 @@ public class Game extends Observable {
 		return temp;
 	}
 	
+	/**
+	 * Aktuelles Feld wird zurückgegeben
+	 * 
+	 * @return Aktuelles Feld
+	 */
 	public Point_DTO[][] reloadField() {
-		
-		/*Point_DTO[][] retfield = new Point_DTO[this.field_height][this.field_width];
-		
-		for(int i = 0; i < this.field_width; i++) {
-			for(int y = 0; y < this.field_height; y++) {
-				retfield[y][i] = this.field[y][i];
-			}
-		}
-		
-		return retfield;*/
-		//this.field[this.figure.getSource().x][this.figure.getSource().y].setColor(Color.cyan);
 		return this.field;
 	}
 	
+	/**
+	 * Nächste Figur wird zurückgegeben
+	 * 
+	 * @return Nächste Figur
+	 */
 	public Point_DTO[][] reloadNextFigure() {
 		return this.figure_next.getField();
 	}
-	
-	public Point_DTO[][] getField() {
-		return this.field;
-	}
-	
-	public Figure getFigure() {
-		return this.figure;
-	}
-	
-	public Figure getNextFigure() {
-		return this.figure_next;
-	}
 
+	/**
+	 * Gibt die Breite des Spielfeldes zurück
+	 * 
+	 * @return Breite des Spielfeldes
+	 */
 	public int getWidth() {
 		return this.field_width;
 	}
 	
+	
+	/**
+	 * Gibt die Höhe des Spiel
+	 * @return
+	 */
 	public int getHeight() {
 		return this.field_height;
 	}
 	
+	/**
+	 * Lädt die Figur auf dem Feld neu, wenn sie verschoben wurde
+	 * Sorgt dafür, dass keine Punkte, die auf besetzt waren neu mit dem Wert frei erstellt werden
+	 * 
+	 * @param direction Richtung in welche die Figur verschoben wurde (1 = links, 0 = unten, -1 = rechts)
+	 */
 	private void reloadFigure(int direction) {
 		for (int x = 0; x < this.figure.getField().length; x++) {
 			for (int y = 0; y < this.figure.getField()[0].length; y++) {
 				if(this.figure.getField()[x][y] != null) {
-					//int tempx = this.figure.getSource().x - this.figure.getFigure()[0].length + direction * x;
-					//int tempy = this.figure.getSource().y - this.figure.getFigure().length + y;
 					this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = this.figure.getField()[x][y];
-					//this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + this.figure.getPointD()] = new Point_DTO(new Point(this.figure.getSource().x + x, this.figure.getSource().y + y + this.figure.getPointD()), Color.GREEN, 0);
 				}
-				/*else if (this.figure.getFigure()[x][y] == null && y != direction && y != 0){
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y + 1 + direction] = new Point_DTO(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
-				}*/
 			}
 		}
 		if(direction == 1) {
@@ -318,6 +370,12 @@ public class Game extends Observable {
 		}	
 	}
 	
+	/**
+	 * Prüft, ob Linien voll sind
+	 * Wenn ja -> Linien werden entfernt und Feld von oberhalb wird nach unten verschoben
+	 * 
+	 * @return Anzahl volle Linien, die entfernt wurden
+	 */
 	private int checkFullRow() {
 		boolean full;
 		int rows = 0;
@@ -341,12 +399,21 @@ public class Game extends Observable {
 		return rows;
 	}
 	
+	/**
+	 * Zeit wird erhöht
+	 * Observers werden benachrichtigt
+	 */
 	public void incTime() {
 		this.timeInt++;
 		this.setChanged();
 		this.notifyObservers(2);
 	}
 	
+	/**
+	 * Zeit, die seit Beginn der Runde verstrichen ist, wird zurückgegeben
+	 * 
+	 * @return Zeit
+	 */
 	public int getTime() {
 		return this.timeInt;
 	}

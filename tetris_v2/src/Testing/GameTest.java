@@ -16,7 +16,7 @@ public class GameTest {
 	public void EmptyField() {
 		int counter = 0;
 		
-		Point_DTO[][] field = game.getField();
+		Point_DTO[][] field = game.reloadField();
 		
 		for (int i = 0; i < field.length; i++)
 		{
@@ -37,7 +37,7 @@ public class GameTest {
 	 */
 	@Test
 	public void FieldSize() {
-		Point_DTO[][] field = game.getField();
+		Point_DTO[][] field = game.reloadField();
 
 		assertEquals(field.length, game.getHeight());
 		

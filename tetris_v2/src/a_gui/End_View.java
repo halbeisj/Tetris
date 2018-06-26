@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**Diese Klasse wird aufgerufen, wenn man das Spiel beendet oder verloren hat. 
- * Die Klasse bestitzt einen exit Button und einen Button um das Spiel nochmals neuzustarten.
+ * Die Klasse besitzt einen exit Button und einen Button um das Spiel nochmals neuzustarten.
  * 
  * @author Julia Halbeisen
  * @author Dominik Heckendorn
@@ -22,7 +22,11 @@ public class End_View extends JFrame implements ActionListener {
 	private JPanel south;
 	private Game_Controller controller;
 
-	
+	/**
+	 * Variablen werden konfiguriert, Fenster wird aufgerufen
+	 * 
+	 * @param controller Controller, welcher dieses Objekt erstellt hat
+	 */
 	public End_View(Game_Controller controller) {
 		this.controller = controller;
 		
@@ -47,7 +51,10 @@ public class End_View extends JFrame implements ActionListener {
 	}
 
 
-	@Override
+	/**
+	 * Wenn Exit-Knopf gedrückt wird -> Spiel wird beendet
+	 * Wenn Repeat-Knopf gedrückt wird -> Fenser wird ausgeblendet, Game wird neugestartet
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == this.exit) {
 			System.exit(0);
@@ -57,6 +64,4 @@ public class End_View extends JFrame implements ActionListener {
 			this.controller.newGame();
 		}
 	}
-	
-	
 }
