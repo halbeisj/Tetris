@@ -4,12 +4,15 @@ import java.awt.Color;
 
 import d_dto.Point_DTO;
 
-/**Hier wird die Figur T erstellt, diese Klasse erbt von der Klasse Figure.
+/**
+ * Repräsentiert eine Figur, welche ein "L" darstellt.
+ * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
-public class Figure_T extends Figure{
+ */
+public class Figure_T extends Figure {
+	/**
+	 * Initialisiert eine neue Instanz der {@link Figure_T} Klasse.
+	 */
 	public Figure_T() {
 		this.figure = new Point_DTO[2][3];
 		this.figure[0][0] = new Point_DTO(null, Color.yellow, 2);
@@ -21,8 +24,5 @@ public class Figure_T extends Figure{
 
 		this.pointr = 2;
 		this.pointd = 1;
-		
-		
 	}
-
 }

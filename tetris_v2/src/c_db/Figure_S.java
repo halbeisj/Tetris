@@ -4,12 +4,15 @@ import java.awt.Color;
 
 import d_dto.Point_DTO;
 
-/**Hier wird die Figur S erstellt, diese Klasse erbt von der Klasse Figure.
+/**
+ * Repräsentiert eine Figur, welche ein "S" darstellt.
+ * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
-public class Figure_S extends Figure{
+ */
+public class Figure_S extends Figure {
+	/**
+	 * Initialisiert eine neue Instanz der {@link Figure_S} Klasse.
+	 */
 	public Figure_S() {
 		this.figure = new Point_DTO[2][3];
 		this.figure[0][0] = null;
@@ -21,7 +24,5 @@ public class Figure_S extends Figure{
 
 		this.pointr = 2;
 		this.pointd = 1;
-		
 	}
-	
 }

@@ -16,60 +16,53 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * In dem Fenster, das diese Klasse darstellt, wird der Spielverlauf angezeigt
+ * Repräsentiert ein {@link JFrame}, in dem ein Spiel dargestellt werden kann. 
  * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
+ */
 public class Game_View extends JFrame implements int_Game_View, ActionListener, KeyListener, Observer {
 	/**
-	 * Model aus welchem die Daten geladen werden sollen
+	 * Die Spielstatistiken.
 	 */
 	private int_Game_Model model;
 	
 	/**
-	 * Controller an welchem die Befehle weitergegeben werden sollen
+	 * Der Controller des Spiels.
 	 */
 	private int_Game_Controller controller;
 	
 	/**
-	 * JLabel, in welchem die Zeit angezeigt wird
+	 * JLabel, in welchem die Zeit angezeigt wird.
 	 */
 	private JLabel time = new JLabel("0");
 	
 	/**
-	 * JLabel in welchem die Anzahl beseitigter Linien angezeigt wird
+	 * JLabel in welchem die Anzahl beseitigter Linien angezeigt wird.
 	 */
 	private JLabel lines = new JLabel("0");
 	
 	/**
-	 * JLabel in welchem die Anzahl bestandener Level angezeigt wird
+	 * JLabel in welchem die Anzahl bestandener Level angezeigt wird.
 	 */
 	private JLabel level = new JLabel("0");
 	
 	/**
-	 * Knopf welcher ein neues Spiel startet
+	 * Knopf welcher ein neues Spiel startet.
 	 */
 	private JButton newGame;
 	
 	/**
-	 * Knopf welcher das Spiel beendet (es wird die End_View aufgerufen)
-	 * 
-	 * @see End_View
+	 * Knopf welcher das Spiel beendet (es wird die End_View aufgerufen).
 	 */
 	private JButton endGame;
 	
 	/**
-	 * Ganzes Frame, dem schlussendlich die verschiedenen JLabels hinzugefügt werden (erleichtert Handhabung der Hinzufügung von Content über das GridLayout)
+	 * Ganzes Frame, dem schlussendlich die verschiedenen JLabels hinzugefügt werden.
 	 */
 	private JPanel[][] panelHolder;
 
 	/**
-	 * Konstrukter, welcher alle Variabeln konfiguriert und die verschiedenen JLabel und JPanels konfiguriert
-	 * 
-	 * @param controller Controller, an welchen die Befehle weitergegeben werden sollen
-	 * @param model Model aus welchem die Daten geladen werden sollen
+	 * Initialisiert eine neue Instanz der {@link Game_View} Klasse.
 	 */
 	public Game_View(int_Game_Controller controller, int_Game_Model model) {
 		this.setFocusable(true);
@@ -166,10 +159,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	}
 
 	/**
-	 * Methode, welche das Fenster sichtbar macht und den Namen konfiguriert
-	 * Das Model wird zum ersten Mal neu geladen und der Name wird gesetzt
-	 * 
-	 * @see int_Game_Model
+	 * Initialisiert die Spiel-Ansicht.
 	 */
 	public void activate() {
 		this.setVisible(true);
@@ -179,14 +169,14 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	}
 
 	/**
-	 * Methode, welche das Fenster unsichtbar macht und zerstört
+	 * Löscht das aktuelle Objekt.
 	 */
 	public void deactivate() {
 		this.dispose();
 	}
 
 	/**
-	 * Methode, welche das Model neu in die View lädt
+	 * Aktualisiert die View anhand des {@link #model}s.
 	 */
 	private void reloadModel() {
 		for (int x = 0; x < this.controller.getWidth(); x++) {
@@ -198,10 +188,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	}
 
 	/**
-	 * Methode, welche die nächste Figur vom Model in die View lädt
-	 * 
-	 * @see int_Game_Model
-	 * @see Point_DTO
+	 * Aktualisiert die nächste Figur anhand des {@link #model}s.
 	 */
 	private void reloadNextFigure() {
 		for (int x = 0; x < 3; x++) {
@@ -221,11 +208,7 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	}
 
 	/**
-	 * Prüft ob Knöpfe gedrückt wurden
-	 * endGame -> Spiel wird beendet
-	 * newGame -> Spiel wird neu gestartet
-	 * 
-	 * @see int_Game_Controller
+	 * Handelt die Events der Buttons.
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == this.endGame) {
@@ -240,16 +223,14 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 	}
 
 	/**
-	 * Prüft ob Knöpfe gedrückt wurden
-	 * Pfeil nach unten -> Figur wird nach unten verschoben
-	 * Pfeil nach rechts -> Figur wird nach rechts verschoben
-	 * Pfeil nach links -> Figur wird nach links verschoben
-	 * 
-	 * @see int_Game_Controller
+	 * Handelt die Evends beim Drücken einer Taste.
 	 */
 	public void keyPressed(KeyEvent ke) {
 	}
 
+	/**
+	 * Handelt die Evends beim Loslassen einer Taste.
+	 */
 	public void keyReleased(KeyEvent ke) {
 		if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
 			this.controller.down();
@@ -261,14 +242,16 @@ public class Game_View extends JFrame implements int_Game_View, ActionListener, 
 
 	}
 
+	/**
+	 * Handelt die Evends beim Tippen einer Taste.
+	 */
 	public void keyTyped(KeyEvent ke) {
 	}
 
 	/**
-	 * Wird ausgeführt, wenn ein überwachte Klasse notifyObservers aufruft
-	 * Model wird neu in die View geladen
+	 * Aktualisiert die View anhand des {@link #model}s.
 	 * 
-	 * @see int_Game_Model
+	 * @todo {@link #update(Observable, Object)} {@link #reloadModel()} und {@link #reloadNextFigure()} zusammenführen.
 	 */
 	public void update(Observable arg0, Object arg1) {
 		this.reloadModel();

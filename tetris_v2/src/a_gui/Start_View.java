@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- * Diese Klasse dient dazu einen  beliebigen Spielernamen einzugeben und das Spiel mit einem Button zu starten.
+ * Repräsentiert ein Formular, welches beim Spielstart angezeigt wird.
  * 
  * @author Julia Halbeisen
  * @author Dominik Heckendorn
@@ -17,31 +17,30 @@ import javax.swing.JTextField;
  * */
 public class Start_View extends JFrame implements ActionListener{
 	/**
-	 * Knopf mit welchem das Spiel gestartet wird
+	 * Knopf zum Starten des Spiels.
 	 */
 	private JButton startGame;
 	
 	/**
-	 * Text, welcher oberhalb des Textfeldes angezeigt wird
+	 * Text, welcher oberhalb des Textfeldes angezeigt wird.
 	 */
 	private JLabel text;
 	
 	/**
-	 * Textfeld, in welchem der Name eingegeben wird
+	 * Textfeld, in welchem der Name eingegeben wird.
 	 */
 	private JTextField guiname;
 	
 	/**
-	 * Controller, an welchen die Befehle und Daten weitergegeben werden
+	 * Controller, an welchen die Befehle und Daten weitergegeben werden.
 	 */
 	private int_Game_Controller controller;
 	
 	/**
-	 * Konstruktor, welcher die Variablen konfiguriert
-	 * Added den ActionListener
-	 * Macht das Fenster sichtbar
+	 * Initialisiert eine neue Instanz der {@link Start_View} Klasse.
 	 * 
-	 * @param controller Controller, an welchen die Befehle und Daten weitergegeben werden
+	 * @param controller
+	 * Controller, an welchen die Befehle und Daten weitergegeben werden.
 	 */
 	public Start_View(int_Game_Controller controller) {
 		this.startGame = new JButton("Spiel starten");
@@ -62,12 +61,10 @@ public class Start_View extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * Wenn ein Knopf gedrückt wird, wird diese Methode aufgerufen
-	 * startGame -> Game wird gestartet
+	 * Handelt die Events, welche beim Drücken eines Knopfs ausgeführt werden.
 	 * 
-	 * @param ae ActionEvent, mit welchem die Methode aufgerufen wird
-	 * 
-	 * @see int_Game_Controller
+	 * @param ae
+	 * Die Event-Informationen.
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == this.startGame) {

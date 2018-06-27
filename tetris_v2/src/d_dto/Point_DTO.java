@@ -4,20 +4,43 @@ import java.awt.Color;
 import java.awt.Point;
 
 /**
- * Diese Klasse wiederspiegelt einen Punkt auf dem Spielfeld
+ * Repräsentiert eine einzelnes Feld auf dem Spielfeld.
  * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
  * */
 public class Point_DTO {
 	/**
 	 * Punkt auf dem ganzen Feld (NICHT IN DER FIGUR!)
+	 * 
+	 * @todo Löschen.
 	 */
 	private Point point;
+	
+	/**
+	 * Die Farbe des Feldes.
+	 */
 	private Color color;
+	
+	/**
+	 * Der Status des Feldes.
+	 * 
+	 * @todo Zu Enum umwandeln.
+	 */
 	private int status;
 	
+	/**
+	 * Initialisiert ein neues Objekt der {@link Point_DTO} Klasse.
+	 * 
+	 * @param point
+	 * @todo Löschen.
+	 * 
+	 * @param color
+	 * Die Farbe des Feldes.
+	 * 
+	 * @param status
+	 * Der Status des Feldes.
+	 * @todo Zu Enum umwandeln.
+	 */
 	public Point_DTO(Point point, Color color, int status) {
 		this.point = point;
 		this.color = color;
@@ -28,6 +51,8 @@ public class Point_DTO {
 	 * Diese Methode gibt den Punkt zurück, für welchen die weiteren Einstellungen gelten.
 	 * 
 	 * @return Point, welcher konfiguriert wird
+	 * 
+	 * @todo Löschen.
 	 * */
 	public Point getPoint(){
 		return this.point;
@@ -37,43 +62,39 @@ public class Point_DTO {
 	 * Mit dieser Methode kann konfiguriert werden, für welchen Punkt die Einstellungen gelten.
 	 * 
 	 * @param Point, für welchen die Einstellungen gelten
+	 * 
+	 * @todo Löschen.
 	 * */
 	public void setPoint(Point point){
 		this.point = point;
 	}
 	
 	/**
-	 * Diese Methode gibt die Farbe des Punktes zurück
-	 * 
-	 * @return Color des Punktes
-	 * */
+	 * Gibt die Farbe des Feldes zurück.
+	 */
 	public Color getColor(){
 		return this.color;
 	}
 	
 	/**
-	 * Mit dieser Methode kann die Farbe des Punktes konfiguriert werden.
-	 * 
-	 * @param Color, welche konfiguriert werden soll
-	 * */
+	 * Setzt die Farbe des Feldes.
+	 */
 	public void setColor(Color color){
 		this.color = color;
 	}
 	
 	/**
-	 * Diese Methode gibt den Status (frei(0), besetzt(1), temp(2)) des Punktes zurück
-	 * 
-	 * @return Status des Punktes
-	 * */
+	 * Gibt den Status des Feldes zurück.
+	 * @todo Zu Enum umwandeln.
+	 */
 	public int getStatus(){
 		return this.status;
 	}
 	
 	/**
-	 * Diese Methode setzt den Status (frei(0), besetzt(1), temp(2)) des Punktes
-	 * 
-	 * @param Status, welcher konfiguriert werden soll
-	 * */
+	 * Setzt den Status des Feldes.
+	 * @todo Zu Enum umwandeln.
+	 */
 	public void setStatus(int status){
 		this.status = status;
 	}

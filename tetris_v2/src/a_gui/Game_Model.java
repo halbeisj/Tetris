@@ -6,15 +6,10 @@ import java.util.Observable;
 import d_dto.Point_DTO;
 
 /**
- * Dies ist das Model, welches alle Daten zur Darstellung vom Controller erhält und für die View bereitstellt.
- * 
- * @see Game_Controller
- * @see Game_View
+ * Repräsentiert die Statistiken eines Spiels.
  * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
+ */
 public class Game_Model extends Observable implements int_Game_Model {
 	/**
 	 * Spielfeld, welches die verschiedenen Farben speichert

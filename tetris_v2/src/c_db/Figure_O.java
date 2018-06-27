@@ -4,12 +4,15 @@ import java.awt.Color;
 
 import d_dto.Point_DTO;
 
-/**Hier wird die Figur O erstellt, diese Klasse erbt von der Klasse Figure.
+/**
+ * Repräsentiert eine Figur, welche ein Quadrat darstellt.
+ * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
-public class Figure_O extends Figure{
+ */
+public class Figure_O extends Figure {
+	/**
+	 * Initialisiert eine neue Instanz der {@link Figure_O} Klasse.
+	 */
 	public Figure_O() {
 		this.figure = new Point_DTO[2][2];
 		this.figure[0][0] = new Point_DTO(null, Color.green, 2);
@@ -19,7 +22,5 @@ public class Figure_O extends Figure{
 
 		this.pointr = 1;
 		this.pointd = 1;
-		
 	}
-
 }

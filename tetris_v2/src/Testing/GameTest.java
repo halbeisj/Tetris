@@ -6,7 +6,16 @@ import org.junit.Test;
 import b_bl.*;
 import d_dto.Point_DTO;
 
+/**
+ * Stellt Tests für das Programm zur Verfügung.
+ * 
+ * @author Julia Halbeisen
+ */
 public class GameTest {
+	
+	/**
+	 * Die Test-Instanz des Spiels.
+	 */
 	private Game game = new Game();
 
 	/**

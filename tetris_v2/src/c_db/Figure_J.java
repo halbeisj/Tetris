@@ -4,25 +4,26 @@ import java.awt.Color;
 
 import d_dto.Point_DTO;
 
-/**Hier wird die Figur J erstellt, diese Klasse erbt von der Klasse Figure.
+/**
+ * Repräsentiert eine Figur, welche eine spiegelferkerte Version von
+ * {@link Figure_L} darstellt.
+ * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
-public class Figure_J extends Figure{
+ */
+public class Figure_J extends Figure {
+	/**
+	 * Initialisiert eine neue Instanz der {@link Figure_J} Klasse.
+	 */
 	public Figure_J() {
-	this.figure = new Point_DTO[3][2];
-	this.figure[0][1] = new Point_DTO(null, Color.pink, 2);
-	this.figure[1][1] = new Point_DTO(null, Color.pink, 2);
-	this.figure[2][1] = new Point_DTO(null, Color.pink, 2);
-	this.figure[2][0] = new Point_DTO(null, Color.pink, 2);
-	this.figure[0][0] = null;
-	this.figure[1][0] = null;
+		this.figure = new Point_DTO[3][2];
+		this.figure[0][1] = new Point_DTO(null, Color.pink, 2);
+		this.figure[1][1] = new Point_DTO(null, Color.pink, 2);
+		this.figure[2][1] = new Point_DTO(null, Color.pink, 2);
+		this.figure[2][0] = new Point_DTO(null, Color.pink, 2);
+		this.figure[0][0] = null;
+		this.figure[1][0] = null;
 
-	this.pointr = 1;
-	this.pointd = 2;
-
-	
+		this.pointr = 2;
+		this.pointd = 3;
 	}
-
 }

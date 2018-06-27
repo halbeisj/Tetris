@@ -10,43 +10,40 @@ import b_bl.TimeThread;
  * Über Ihn wird auf die Game Klasse zugegriffen.
  * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
+ */
 public class Game_Controller implements int_Game_Controller, Observer {
 	/**
-	 * Model in welches die Daten geladen werden sollen
+	 * Ein Objekt, welches Statistiken über das Spiel beinhaltet
 	 */
 	private int_Game_Model model;
 	/**
-	 * Game an welches die Befehle weitergegeben werden sollen
-	 * Game aus welchem die Daten geladen werden sollen
+	 * Das Game, aus welchem die Daten geladen und an das die Befehle weitergegeben werden.
 	 */
 	private Game game;
+	
 	/**
-	 * View (stellt das Game dar), welche gemanaged werden soll
+	 * Ein Objekt um das Spiel darzustellen.
 	 */
+	
 	private int_Game_View view;
+	
 	/**
-	 * View (stellt den Einstieg in das Game dar), welche gemanaged werden soll
+	 * Die View, welche vor dem Spielstart angezeigt wird. 
 	 */
 	private Start_View start_view;
+	
 	/**
-	 * View (stellt das Ende des Games dar), welche gemanaged werden soll
+	 * View, welche nach Beendigung des Spiels anzeigt.
 	 */
 	private End_View end_view;
+	
 	/**
-	 * Anzahl Lines, welche im Model erhöht werden sollen
+	 * @todo Feld löschen.
 	 */
 	private int inc;
 	
 	/**
-	 * Variablen werden gesetzt
-	 * Weitere Objekte in der GUI-Schicht werden erstellt
-	 * Observers werden konfiguriert (view überwacht model) (controller überwacht game)
-	 * 
-	 * @see int_Game_View
-	 * @see int_Game_Model
+	 * Initialisiert eine neue Instanz der {@link Game_Controller} Klasse.
 	 */
 	public Game_Controller() {
 		this.start_view = new Start_View(this);
@@ -58,9 +55,7 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	}
 	
 	/**
-	 * Verschiebt Figur in Game nach links
-	 * 
-	 * @see Game
+	 * Verschiebt Figur in Game nach links.
 	 */
 	public void left(){
 		this.game.left();
@@ -68,9 +63,7 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	}
 	
 	/**
-	 * Verschiebt Figur in Game nach rechts
-	 * 
-	 * @see Game
+	 * Verschiebt Figur in Game nach rechts.
 	 */
 	public void right(){
 		this.game.right();
@@ -78,9 +71,7 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	}
 	
 	/**
-	 * Verschiebt Figur in Game nach unten
-	 * 
-	 * @see Game
+	 * Verschiebt Figur in Game nach unten.
 	 */
 	public void down(){
 		this.inc = this.game.down();
@@ -88,10 +79,7 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	}
 	
 	/**
-	 * Lädt das Feld neu aus dem Game in das Model
-	 * 
-	 * @see Game
-	 * @see int_Game_Model
+	 * Lädt das Feld neu aus dem Game in das Model.
 	 */
 	private void reloadField(){
 		this.model.reloadNextFigure(this.game.reloadNextFigure());
@@ -100,12 +88,7 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	}
 	
 	/**
-	 * Startet ein neues Spiel in der Klasse Game
-	 * Lädt das Feld neu
-	 * Aktiviert das Fenster Game_View
-	 * 
-	 * @see Game
-	 * @see int_Game_View
+	 * Startet ein neues Spiel.
 	 */
 	public void newGame(){
 		this.game.newGame();
@@ -114,40 +97,29 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	}
 	
 	/**
-	 * Startet die End_View mit diesem Controller als Mitgabeparameter
+	 * Beendet das Spiel.
 	 */
 	public void endGame(){
 		this.end_view = new End_View(this);
 	}
-	
+
+
 	/**
-	 * Setzt den Namen im Game_Model.
-	 * 
-	 * @param name Name der gesetzt werden soll
-	 * 
-	 * @see int_Game_Model
+	 * @todo Methode löschen.
 	 */
 	public void setName(String name) {
 		this.model.init(name);
 	}
 	
 	/**
-	 * Gibt die Breite des Spielfeldes zurück, welche im Game konfiguriert ist.
-	 * 
-	 * @return Breite des Spielfeldes
-	 * 
-	 * @see Game
+	 * @todo Methode löschen.
 	 */
 	public int getWidth() {
 		return game.getWidth();
 	}
 	
 	/**
-	 * Gibt die Höhe des Spielfeldes zurück, welche im Game konfigureiert ist.
-	 * 
-	 * @return Höhe des Spielfeldes
-	 * 
-	 * @see Game
+	 * @todo Methode löschen.
 	 */
 	public int getHeight() {
 		return game.getHeight();
@@ -160,9 +132,7 @@ public class Game_Controller implements int_Game_Controller, Observer {
 	 * @param o Objekt, welches überwacht wird
 	 * @param arg Zahl, welche mitgegeben wird
 	 * 
-	 * @see Game
-	 * @see End_View
-	 * @see int_Game_Model
+     * @todo Argument als Enum handeln.
 	 */
 	public void update(Observable o, Object arg) {
 		if((int) arg == 1) {

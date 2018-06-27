@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.Observable;
 import java.util.Random;
 
+import a_gui.Game_Model;
 import c_db.Figure;
 import c_db.Figure_Z;
 import c_db.Figure_I;
@@ -16,73 +17,61 @@ import c_db.Figure_T;
 import d_dto.Point_DTO;
 
 /**
- * Diese Klasse ist für das Spiel und den Spielstand verantwortlich. 
- * Hier werden das aktuelle Feld, die momentan fallende Figur und die nächste Figur gespeichert.
- * Es wird der Thread gestartet, welcher all Sekunde die anzahl verstrichene Sekunden in der Klasse Game erhöht.
- * Das Spielfeld an sich wird hier konfiguriert (Breite, Höhe)
+ * Repräsentiert ein Tetris-Spiel.
  * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
  */
-
-/* Tetrisfeld
- * ###################
- * # 0|0 # 0|1 # 0|2 #
- * ###################
- * # 1|0 # 1|1 # 1|2 #
- * ###################
- * # 2|0 # 2|1 # 2|2 #
- * ###################
- */
-
 public class Game extends Observable {
 	
 	/**
-	 * Feld in welchem die Punkte und deren Status abgespeichert werden
+	 * Die Auflistung aller Felder.
 	 * 
-	 * @see Point_DTO
+	 * @todo Variable umbenennen.
 	 */
 	private Point_DTO[][] field;
 	
 	/**
-	 * Aktuelle Figur
-	 * 
-	 * @see Figure
+	 * Die Aktuelle Figur.
 	 */
 	private Figure figure;
 	
 	/**
-	 * Nächste Figur
+	 * Die nächste Figur.
 	 * 
-	 * @see Figure
+	 * @todo: Variable umbenennen.
 	 */
 	private Figure figure_next;
 	
 	/**
-	 * Höhe des Spielfeldes
+	 * Die höhe des Spielfeldes.
+	 * 
+	 * @todo Löschen.
 	 */
 	private int field_height = 11;
 	
 	/**
 	 * Breite des Spielfeldes
+	 * 
+	 * @todo Löschen.
 	 */
 	private int field_width = 11;
 	
 	/**
 	 * Verstrichene Zeit seit Beginn der Runde
+	 * 
+	 * @todo Löschen.
 	 */
 	private int timeInt = 0;
 	
 	/**
 	 * Thread, der all Sekunde die Anzahl verstrichenen Sekunden seit Beginn der Runde erhöht
+	 * 
+	 * @todo Löschen und zu {@link Game_Model} verschieben.
 	 */
 	private Thread timeThread;
 	
 	/**
-	 * Konstruktor, welcher den Thread erstellt
-	 * Feld wird erstellt
-	 * Spiel wird beendet (Punkte im Feld werden neu erstellt)
+	 * Initialisiert eine neue Instanz der {@link Game} Klasse.
 	 */
 	public Game() {
 		this.timeThread = new Thread(new TimeThread(this));
@@ -91,15 +80,9 @@ public class Game extends Observable {
 	}
 	
 	/**
-	 * Mit dieser Methode, kann man die Figur nach links verschieben
-	 * Wenn Figur links am Rand -> return;
-	 * Wenn ein Feld links von Figur besetzt -> return;
-	 * Sonst -> Figur wird nach links verschoben
+	 * Bewegt die aktuelle Figur nach links.
 	 * 
-	 * @return null
-	 * 
-	 * @see Figure
-	 * @see Point_DTO
+	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public void left() {
 		if(this.figure.getSource().y > 0) {
@@ -117,15 +100,9 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Mit dieser Methode, kann man die Figur nach rechts verschieben
-	 * Wenn Figur rechts am Rand -> return;
-	 * Wenn ein Feld rechts von Figur besetzt -> return;
-	 * Sonst -> Figur wird nach rechts verschoben
+	 * Bewegt die aktuelle Figur nach rechts.
 	 * 
-	 * @return null
-	 * 
-	 * @see Figure
-	 * @see Point_DTO
+	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public void right() {
 		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width - 1) {
@@ -143,15 +120,9 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Mit dieser Methode, kann man die Figur nach unten verschieben
-	 * Wenn Figur unten am Rand -> Figur wird zum Spielfeld geadded
-	 * Wenn ein Feld rechts von Figur besetzt -> Figur wird zum Spielfeld geadded
-	 * Sonst -> Figur wird nach unten verschoben
+	 * Bewegt die aktuelle Figur nach unten.
 	 * 
-	 * @return Anzahl Linien, die beim adden gelöscht wurden 
-	 * 
-	 * @see Figure
-	 * @see Point_DTO
+	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public int down() {
 		if(this.figure.getSource().x == this.field_height - this.figure.getPointD() - 1) {
@@ -173,12 +144,7 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Wenn keine Figur existiert (zu Beginn) -> neue nächste Figur wird erstellt
-	 * aktuelle Figur wird auf nächste Figur gesetzt
-	 * nächste Figur wird zufällig neu erstellt
-	 * Wenn Figur in einem besetzten Feld erstellt werden -> Observers werden mit 1 benachrichtigt
-	 * 
-	 * @see int_Game_Controller
+	 * Erstellt eine neue Figur in der Warteschlange.
 	 */
 	private void createNewFigure() {
 		if(this.figure_next == null) {
@@ -201,9 +167,10 @@ public class Game extends Observable {
 	}
 	
 	/**
-	 * Es wird ein zufälliger Figurentyp zurückgegeben
+	 * Gibt eine zufällige Figur zurück.
 	 * 
-	 * @return ein zufälliger Figurentyp
+	 * @return
+	 * Eine zufällig generierte Figur.
 	 */
 	private Figure createRandomFigure() {
 		Random r = new Random();
@@ -222,13 +189,7 @@ public class Game extends Observable {
 	}
 	
 	/**
-	 * Startet das Spiel neu
-	 * Spielfeld wird geleert; Aktuelle Figur wird geleert; Nächste Figur wird geleert
-	 * Wenn TimeThread nicht am Leben ist -> Thread wird gestartet
-	 * Neue Figur wird erstellt
-	 * Verstrichene Zeit seit Beginn der Runde wird auf 0 gesetzt
-	 * 
-	 * @see TimeThread
+	 * Startet das Spiel neu.
 	 */
 	public void newGame() {
 		this.endGame();
@@ -240,9 +201,7 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Spielfeld wird geleert
-	 * Aktuelle Figur wird geleert
-	 * Nächste Figur wird geleert
+	 * Beendet das Spiel.
 	 */
 	public void endGame() {
 		for(int i = 0; i < this.field_width; i++) {
@@ -258,10 +217,12 @@ public class Game extends Observable {
 	 * Aktuelle Figur wird dem Spielfeld hinzugefügt
 	 * Felder an Position werden als besetzt markiert
 	 * 
-	 * @return Anzahl Linien, die beim Hinzufügen entfernt wurden
+	 * @return
+	 * Anzahl Linien, die beim Hinzufügen entfernt wurden
 	 * 
-	 * @see Point_DTO
-	 * @see Figure
+	 * @todo
+	 *   - Methode zu "putFigure" umbenennen
+	 *   - Das Überprüfen der Reihen in {@link #down()} durchführen.
 	 */
 	private int addFigure() {
 		for(int x = 0; x < this.figure.getField().length; x++) {
@@ -277,27 +238,32 @@ public class Game extends Observable {
 	}
 	
 	/**
-	 * Aktuelles Feld wird zurückgegeben
+	 * Gibt das Feld zurück.
 	 * 
-	 * @return Aktuelles Feld
+	 * @return
+	 * Das Feld.
+	 * 
+	 * @todo Zu "getField" umbenennen.
 	 */
 	public Point_DTO[][] reloadField() {
 		return this.field;
 	}
 	
 	/**
-	 * Nächste Figur wird zurückgegeben
+	 * Gibt die nächste Figur zurück.
 	 * 
-	 * @return Nächste Figur
+	 * @return
+	 * Die nächste Figur.
 	 */
 	public Point_DTO[][] reloadNextFigure() {
 		return this.figure_next.getField();
 	}
 
 	/**
-	 * Gibt die Breite des Spielfeldes zurück
+	 * Gibt die Breite des Spielfeldes zurück.
 	 * 
-	 * @return Breite des Spielfeldes
+	 * @return
+	 * Die Breite des Spielfeldes.
 	 */
 	public int getWidth() {
 		return this.field_width;
@@ -305,8 +271,10 @@ public class Game extends Observable {
 	
 	
 	/**
-	 * Gibt die Höhe des Spiel
+	 * Gibt die Höhe des Spielfelds zurück.
+	 * 
 	 * @return
+	 * Die Höhe des Spielfelds.
 	 */
 	public int getHeight() {
 		return this.field_height;
@@ -317,6 +285,8 @@ public class Game extends Observable {
 	 * Sorgt dafür, dass keine Punkte, die auf besetzt waren neu mit dem Wert frei erstellt werden
 	 * 
 	 * @param direction Richtung in welche die Figur verschoben wurde (1 = links, 0 = unten, -1 = rechts)
+	 * 
+	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	private void reloadFigure(int direction) {
 		for (int x = 0; x < this.figure.getField().length; x++) {
@@ -371,10 +341,7 @@ public class Game extends Observable {
 	}
 	
 	/**
-	 * Prüft, ob Linien voll sind
-	 * Wenn ja -> Linien werden entfernt und Feld von oberhalb wird nach unten verschoben
-	 * 
-	 * @return Anzahl volle Linien, die entfernt wurden
+	 * Überprüft, ob eine Reihe vollständig ist.
 	 */
 	private int checkFullRow() {
 		boolean full;
@@ -402,6 +369,8 @@ public class Game extends Observable {
 	/**
 	 * Zeit wird erhöht
 	 * Observers werden benachrichtigt
+	 * 
+	 * @todo Methode löschen.
 	 */
 	public void incTime() {
 		this.timeInt++;
@@ -413,6 +382,8 @@ public class Game extends Observable {
 	 * Zeit, die seit Beginn der Runde verstrichen ist, wird zurückgegeben
 	 * 
 	 * @return Zeit
+	 * 
+	 * @todo Methode löschen.
 	 */
 	public int getTime() {
 		return this.timeInt;

@@ -5,37 +5,30 @@ import java.util.Observer;
 
 import d_dto.Point_DTO;
 
-/**Dies ist das Interface des Game Models.
- * Über diese Klasse wird auf das Game_Model zugegriffen.
- * 
- * @see Game_Model
- * 
- * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
- * */
+/**
+ * Repräsentiert Statistiken über ein Spiel.
+ */
 public interface int_Game_Model {
 	/**
-	 * Methode, die das Feld neu lädt und anschliessend alle Observer benachrichtigt
+	 * Lädt das Feld neu.
 	 * 
 	 * @param field Feld, welches neu eingespeichert werden soll
 	 * @param inc Zahl um welche lines erhöht werden soll
-	 * 
-	 * @see Point_DTO
 	 */
 	public void reloadField(Point_DTO[][] field, int inc);
 	
 	/**
-	 * Methode, welche alle Variablen setzt (zum Beispiel bei Neustart des Spiels)
-	 * 
-	 * @param name Name des Spielers
+	 * Inialisiert ein Spiel.
 	 */
 	public void init(String name);
 	
 	/**
-	 * Gibt die Anzahl bestandene Levels als String zurück
+	 * Gibt die Anzahl bestandener Levels zurück.
 	 * 
-	 * @return Anzahl bestandene Levels als String
+	 * @return
+	 * Die Anzahl bestandener Levels.
+	 * 
+	 * @todo Als Zahl zurückgeben.
 	 */
 	public String getLevel();
 	
@@ -43,20 +36,26 @@ public interface int_Game_Model {
 	 * Gibt die verstrichene Zeit seit Rundenbeginn als String zurück
 	 * 
 	 * @return verstrichene Zeit seit Rundenbeginn als String
+	 * 
+	 * @todo Als Zahl zurückgeben.
 	 */
 	public String getTime();
 	
 	/**
-	 * Gibt den konfigiurierten Namen zurück
+	 * Gibt den Spielernamen zurück.
 	 * 
-	 * @return konfigurierter Name
+	 * @return
+	 * Der Name des Spielers.
 	 */
 	public String getName();
 	
 	/**
-	 * Gibt die Anzahl beseitigte Linien als String zurück
+	 * Gibt die Anzahl beseitigter Linien zurück.
 	 * 
-	 * @return Anzahl beseitigte Linien als String
+	 * @return
+	 * Die Anzahl der beseitigten Linien.
+	 * 
+	 * @todo Als Zahl zurückgeben.
 	 */
 	public String getLines();
 	
@@ -68,7 +67,7 @@ public interface int_Game_Model {
 	 * 
 	 * @return Punkt auf dem Spielfeld
 	 * 
-	 * @see Point_DTO
+	 * @todo Methode löschen.
 	 */
 	public Point_DTO getPoint(int x, int y);
 	
@@ -77,7 +76,7 @@ public interface int_Game_Model {
 	 * 
 	 * @param nextFigure Figur, die eingespeichert werden soll
 	 * 
-	 * @see Point_DTO
+	 * @todo zu "setNextFigure" umbenennen.
 	 */
 	public void reloadNextFigure(Point_DTO[][] nextFigure);
 	
@@ -89,7 +88,7 @@ public interface int_Game_Model {
 	 * 
 	 * @return Punkt der nächsten Figur
 	 * 
-	 * @see Point_DTO
+	 * @todo Methode löschen - stattdessen "getNextFigure" hinzufügen.
 	 */
 	public Point_DTO getPointNextFigure(int x, int y);
 	
@@ -97,6 +96,8 @@ public interface int_Game_Model {
 	 * Gibt die Grösse der nächsten Figur als Wertetupel zurück
 	 * 
 	 * @return Grösse der nächsten Figur als Wertetupel
+	 * 
+	 * @todo Methode löschen - stattdessen "getNextFigure" hinzufügen.
 	 */
 	public Point getNextFigureSize();
 	
@@ -107,6 +108,8 @@ public interface int_Game_Model {
 	 * 
 	 * @see Observer
 	 * @see Observable
+	 * 
+	 * @todo Methode löschen - gehört zu Observable.
 	 */
 	public void addObserver(Observer o);
 	
@@ -115,6 +118,8 @@ public interface int_Game_Model {
 	 * Informiert anschliessend alle überwachenden Klassen
 	 * 
 	 * @param time Neue Zeit, die gesetzt werden soll
+	 * 
+	 * @todo Methode löschen.
 	 */
 	public void setTime(int time);
 }

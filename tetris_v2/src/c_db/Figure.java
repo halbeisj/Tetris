@@ -5,75 +5,83 @@ import java.awt.Point;
 import d_dto.Point_DTO;
 
 /**
- * Vorlage für alle Figurtypen
+ * Repräsentiert eine Figur.
  * 
  * @author Julia Halbeisen
- * @author Dominik Heckendorn
- * @version 1.0
  */
 public class Figure {
 	/**
-	 * Punkte, welche die Figur darstellen in Abhängigkeit vom ursprünglichen Punkt
+	 * Das Feld, welches die Figur darstellt.
 	 */
 	protected Point_DTO[][] figure;
+	
 	/**
 	 * Linksester Punkt in Abhängigkeit vom ursprünglichen Punkt
+	 * 
+	 * @todo Löschen.
 	 */
 	protected int pointr;
+	
 	/**
 	 * Unterster Punkt in Abhängigkeit vom ursprünglichen Punkt
+	 * 
+	 * @todo Löschen.
 	 */
 	protected int pointd;
+	
 	/**
-	 * Ursprünglicher Punkt auf dem ganzen Feld
+	 * Der Punkt, welcher die Figur auf dem Spielfeld einnimmt.
+	 * 
+	 * @todo Zu "position" umbenennen.
 	 */
 	protected Point source;
 	
 	/**
-	 * Gibt die Figur, als 2d Array von Point_DTO zurück
+	 * Gibt das Feld, welches die Figur darstellt, zurück.
 	 * 
-	 * @return Figur als 2d Array von Point_DTO
-	 * 
-	 * @see Point_DTO
+	 * @return
+	 * Das Feld, welches die Figur darstellt.
 	 */
 	public Point_DTO[][] getField() {
 		return figure;
 	}
 
 	/**
-	 * Gibt den Abstand zwischen dem Source-Punkt und dem rechten Rand zurück
+	 * Gibt die Breite der Figur zurück.
 	 * 
-	 * @return Abstand zwischen Source-Punkt und rechtem Rand
+	 * @return
+	 * Die Breite der Figur.
+	 * 
+	 * @todo Umbenennen zu "getWidth".
 	 */
 	public int getPointR() {
 		return this.pointr;
 	}
 	
 	/**
-	 * Gibt den Abstand zwischen dem Source-Punkt und dem unteren Rand zurück
+	 * Gibt die Höhe der Figur zurück.
 	 * 
-	 * @return Abstand zwischen Source-Punkt und unterem Rand
+	 * @return
+	 * Die Höhe der Figur.
+	 * 
+	 * @todo Umbenennen zu "getHeight".
 	 */
 	public int getPointD() {
 		return this.pointd;
 	}
 	
 	/**
-	 * Gibt die Position des Source-Punktes auf dem Spielfeld zurück
-	 * 
-	 * @return Position des Source-Punktes auf dem Spielfeld
+	 * Gibt die Position der Figur auf dem Spielfeld zurück.
 	 */
 	public Point getSource() {
 		return this.source;
 	}
 
 	/**
-	 * Setzt die Position des Source-Punktes auf dem Spielfeld neu
-	 * 
-	 * @param point Punkt, auf welchen der Source-Punkt gesetzt wird
+	 * Setzt die Position der Figur auf dem Spielfeld.
 	 */
-	public void setSource(Point point) {
-		this.source = point;
+	public void setSource(Point value) {
+		this.source = value;
 	}
 	
 

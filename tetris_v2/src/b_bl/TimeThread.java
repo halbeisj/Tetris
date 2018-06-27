@@ -8,6 +8,8 @@ package b_bl;
  * @author Julia Halbeisen
  * @author Dominik Heckendorn
  * @version 1.0
+ * 
+ * @todo Klasse zu "StopwatchThread" umbenennen.
  */
 public class TimeThread implements Runnable {
 	
