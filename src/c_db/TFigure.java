@@ -15,12 +15,10 @@ public class TFigure extends Figure {
 	 */
 	public TFigure() {
 		this.figure = new Field[2][3];
-		this.figure[0][0] = new Field(null, Color.yellow, 2);
-		this.figure[0][1] = new Field(null, Color.yellow, 2);
-		this.figure[0][2] = new Field(null, Color.yellow, 2);
-		this.figure[1][0] = null;
-		this.figure[1][1] = new Field(null, Color.yellow, 2);
-		this.figure[1][2] = null;
+		this.figure[0][0] = new Field(Color.yellow, 2);
+		this.figure[0][1] = new Field(Color.yellow, 2);
+		this.figure[0][2] = new Field(Color.yellow, 2);
+		this.figure[1][1] = new Field(Color.yellow, 2);
 
 		this.pointr = 2;
 		this.pointd = 1;

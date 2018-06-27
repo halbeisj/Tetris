@@ -10,13 +10,6 @@ import java.awt.Point;
  * */
 public class Field {
 	/**
-	 * Punkt auf dem ganzen Feld (NICHT IN DER FIGUR!)
-	 * 
-	 * @todo Löschen.
-	 */
-	private Point point;
-	
-	/**
 	 * Die Farbe des Feldes.
 	 */
 	private Color color;
@@ -31,9 +24,6 @@ public class Field {
 	/**
 	 * Initialisiert ein neues Objekt der {@link Field} Klasse.
 	 * 
-	 * @param point
-	 * @todo Löschen.
-	 * 
 	 * @param color
 	 * Die Farbe des Feldes.
 	 * 
@@ -41,32 +31,9 @@ public class Field {
 	 * Der Status des Feldes.
 	 * @todo Zu Enum umwandeln.
 	 */
-	public Field(Point point, Color color, int status) {
-		this.point = point;
+	public Field(Color color, int status) {
 		this.color = color;
 		this.status = status;
-	}
-	
-	/**
-	 * Diese Methode gibt den Punkt zurück, für welchen die weiteren Einstellungen gelten.
-	 * 
-	 * @return Point, welcher konfiguriert wird
-	 * 
-	 * @todo Löschen.
-	 * */
-	public Point getPoint(){
-		return this.point;
-	}
-	
-	/**
-	 * Mit dieser Methode kann konfiguriert werden, für welchen Punkt die Einstellungen gelten.
-	 * 
-	 * @param Point, für welchen die Einstellungen gelten
-	 * 
-	 * @todo Löschen.
-	 * */
-	public void setPoint(Point point){
-		this.point = point;
 	}
 	
 	/**

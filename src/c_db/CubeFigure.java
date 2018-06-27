@@ -15,10 +15,10 @@ public class CubeFigure extends Figure {
 	 */
 	public CubeFigure() {
 		this.figure = new Field[2][2];
-		this.figure[0][0] = new Field(null, Color.green, 2);
-		this.figure[0][1] = new Field(null, Color.green, 2);
-		this.figure[1][1] = new Field(null, Color.green, 2);
-		this.figure[1][0] = new Field(null, Color.green, 2);
+		this.figure[0][0] = new Field(Color.green, 2);
+		this.figure[0][1] = new Field(Color.green, 2);
+		this.figure[1][1] = new Field(Color.green, 2);
+		this.figure[1][0] = new Field(Color.green, 2);
 
 		this.pointr = 1;
 		this.pointd = 1;

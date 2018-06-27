@@ -8,7 +8,7 @@ import java.util.Random;
 import a_gui.GameStatistics;
 import c_db.Figure;
 import c_db.ZFigure;
-import c_db.LineFigure;
+import c_db.IFigure;
 import c_db.JFigure;
 import c_db.LFigure;
 import c_db.CubeFigure;
@@ -177,14 +177,14 @@ public class Game extends Observable {
 		int figure_number = r.nextInt(7);
 		
 		switch (figure_number) {
-		case 0: return new LineFigure();
+		case 0: return new IFigure();
 		case 1: return new JFigure();
 		case 2: return new LFigure();
 		case 3: return new CubeFigure();
 		case 4: return new SFigure();
 		case 5: return new TFigure();
 		case 6: return new ZFigure();
-		default: return new LineFigure();
+		default: return new IFigure();
 		}
 	}
 	
@@ -206,7 +206,7 @@ public class Game extends Observable {
 	public void endGame() {
 		for(int i = 0; i < this.field_width; i++) {
 			for(int y = 0; y < this.field_height; y++) {
-				this.field[y][i] = new Field(new Point(y,i), Color.darkGray, 0);
+				this.field[y][i] = new Field(Color.darkGray, 0);
 			}
 		}
 		this.figure = null;
@@ -299,13 +299,13 @@ public class Game extends Observable {
 		if(direction == 1) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() != 1) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1] = new Field(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1] = new Field(Color.darkGray, 0);
 				}
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
+						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
 					}
 				}
 			}
@@ -313,13 +313,13 @@ public class Game extends Observable {
 		else if (direction == -1){
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1].getStatus() != 1) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1] = new Field(new Point(this.figure.getSource().x - x, this.figure.getSource().y + this.figure.getPointR() + direction), Color.darkGray, 0);
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1] = new Field(Color.darkGray, 0);
 				}	
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
+						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
 					}
 				}
 			}
@@ -327,13 +327,13 @@ public class Game extends Observable {
 		else if (direction == 0) {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
 				if(this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y].getStatus() != 1) {
-					this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y] = new Field(new Point(this.figure.getSource().x - 1, this.figure.getSource().y + y), Color.darkGray, 0);
+					this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
 				}
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(new Point(this.figure.getSource().x - x, this.figure.getSource().y + y + this.figure.getPointD()), Color.darkGray, 0);
+						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
 					}
 				}
 			}

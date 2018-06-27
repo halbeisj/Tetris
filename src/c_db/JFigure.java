@@ -16,10 +16,10 @@ public class JFigure extends Figure {
 	 */
 	public JFigure() {
 		this.figure = new Field[3][2];
-		this.figure[0][1] = new Field(null, Color.pink, 2);
-		this.figure[1][1] = new Field(null, Color.pink, 2);
-		this.figure[2][1] = new Field(null, Color.pink, 2);
-		this.figure[2][0] = new Field(null, Color.pink, 2);
+		this.figure[0][1] = new Field(Color.pink, 2);
+		this.figure[1][1] = new Field(Color.pink, 2);
+		this.figure[2][1] = new Field(Color.pink, 2);
+		this.figure[2][0] = new Field(Color.pink, 2);
 		this.figure[0][0] = null;
 		this.figure[1][0] = null;
 
