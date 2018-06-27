@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import b_bl.Game;
+import b_bl.GameActionType;
 import b_bl.Stopwatch;
 
 /**
@@ -118,22 +119,30 @@ public class GameController implements IGameController, Observer {
 	}
 
 	/**
-	 * Wenn mit 1 aufgerufen wird -> endGame() wird aufgerufen Wenn mit 2
-	 * aufgerufen wird -> Zeit wird von Game in Game_Model geladen
+	 * Aktualisiert das Spiel.
 	 * 
 	 * @param o
-	 *            Objekt, welches überwacht wird
-	 * @param arg
-	 *            Zahl, welche mitgegeben wird
+	 * Objekt, welches überwacht wird.
 	 * 
-	 * @todo Argument als Enum handeln.
+	 * @param arg
+	 * Zusätzliche Informationen.
 	 */
 	public void update(Observable o, Object arg) {
-		if ((int) arg == 1) {
-			this.view.deactivate();
-			this.endGame();
-		} else if ((int) arg == 2) {
-			this.model.setTime(this.game.getTime());
+		if (arg instanceof GameActionType)
+		{
+			GameActionType type = (GameActionType)arg;
+			
+			switch(type)
+			{
+				case Update:
+					this.model.setTime(this.game.getTime());
+					break;
+					
+				case Lost:
+					this.view.deactivate();
+					this.endGame();
+					break;
+			}
 		}
 	}
 }

@@ -156,7 +156,7 @@ public class Game extends Observable {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
 				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y].getStatus() == 1 && this.figure.getField()[x][y] != null) {
 					this.setChanged();
-					this.notifyObservers(1);
+					this.notifyObservers(GameActionType.Lost);
 					return;
 				}
 			}
@@ -375,7 +375,7 @@ public class Game extends Observable {
 	public void incTime() {
 		this.timeInt++;
 		this.setChanged();
-		this.notifyObservers(2);
+		this.notifyObservers(GameActionType.Update);
 	}
 	
 	/**
