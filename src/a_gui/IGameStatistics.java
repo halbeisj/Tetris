@@ -7,20 +7,16 @@ import d_dto.Field;
 
 /**
  * Repräsentiert Statistiken über ein Spiel.
+ * 
+ * @todo Methode zum Setzen des Namens erstellen
  */
 public interface IGameStatistics {
 	/**
 	 * Lädt das Feld neu.
 	 * 
 	 * @param field Feld, welches neu eingespeichert werden soll
-	 * @param inc Zahl um welche lines erhöht werden soll
 	 */
-	public void reloadField(Field[][] field, int inc);
-	
-	/**
-	 * Inialisiert ein Spiel.
-	 */
-	public void init(String name);
+	public void reloadField(Field[][] field);
 	
 	/**
 	 * Gibt die Anzahl bestandener Levels zurück.
@@ -48,6 +44,11 @@ public interface IGameStatistics {
 	 * Der Name des Spielers.
 	 */
 	public String getName();
+
+	/**
+	 * Setzt den Name des Spielers.
+	 */
+	public void setName(String value);
 	
 	/**
 	 * Gibt die Anzahl beseitigter Linien zurück.

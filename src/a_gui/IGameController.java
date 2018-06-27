@@ -32,19 +32,19 @@ public interface IGameController {
 	 * Beendet das Spiel.
 	 */
 	public void endGame();
+
+	/**
+	 * Setzt den Name des Spielers.
+	 */
+	public void setPlayerName(String name);
 	
 	/**
-	 * @todo Methode löschen.
+	 * Gibt die Breite des Spielfelds zurück.
 	 */
-	public void setName(String name);
+	public int getFieldWidth();
 	
 	/**
-	 * @todo Methode löschen.
+	 * Gibt die Höhe des Spielfelds zurück.
 	 */
-	public int getWidth();
-	
-	/**
-	 * @todo Methode löschen.
-	 */
-	public int getHeight();
+	public int getFieldHeight();
 }

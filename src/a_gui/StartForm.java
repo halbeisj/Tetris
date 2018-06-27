@@ -68,7 +68,7 @@ public class StartForm extends JFrame implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == this.startGame) {
-			this.controller.setName(this.guiname.getText());
+			this.controller.setPlayerName(this.guiname.getText());
 			this.controller.newGame();
 			this.dispose();
 		}

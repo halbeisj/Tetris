@@ -70,18 +70,18 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 		this.addKeyListener(this);
 		this.model = model;
 		this.controller = controller;
-		this.panelHolder = new JPanel[this.controller.getHeight() + 4][this.controller.getWidth() + 8];
+		this.panelHolder = new JPanel[this.controller.getFieldHeight() + 4][this.controller.getFieldWidth() + 8];
 		this.newGame = new JButton("New Game");
 		this.newGame.addActionListener(this);
 		this.endGame = new JButton("End Game");
 		this.endGame.addActionListener(this);
 
-		this.setBounds(100, 100, this.controller.getWidth() * 100 + 8 * 50, this.controller.getHeight() * 100 + 4 * 50);
-		this.setLayout(new GridLayout(this.controller.getHeight() + 4, this.controller.getWidth() + 8));
+		this.setBounds(100, 100, this.controller.getFieldWidth() * 100 + 8 * 50, this.controller.getFieldHeight() * 100 + 4 * 50);
+		this.setLayout(new GridLayout(this.controller.getFieldHeight() + 4, this.controller.getFieldWidth() + 8));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		for (int i = 0; i < this.controller.getHeight() + 4; i++) {
-			for (int y = 0; y < this.controller.getWidth() + 8; y++) {
+		for (int i = 0; i < this.controller.getFieldHeight() + 4; i++) {
+			for (int y = 0; y < this.controller.getFieldWidth() + 8; y++) {
 				this.panelHolder[i][y] = new JPanel();
 				this.panelHolder[i][y].setBackground(Color.darkGray);
 				this.panelHolder[i][y].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -97,16 +97,16 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 			this.panelHolder[i][1].setBorder(null);
 			this.panelHolder[i][2].setBackground(Color.gray);
 			this.panelHolder[i][2].setBorder(null);
-			this.panelHolder[i][this.controller.getWidth() + 3].setBackground(Color.gray);
-			this.panelHolder[i][this.controller.getWidth() + 3].setBorder(null);
-			this.panelHolder[i][this.controller.getWidth() + 4].setBackground(Color.gray);
-			this.panelHolder[i][this.controller.getWidth() + 4].setBorder(null);
-			this.panelHolder[i][this.controller.getWidth() + 5].setBackground(Color.gray);
-			this.panelHolder[i][this.controller.getWidth() + 5].setBorder(null);
-			this.panelHolder[i][this.controller.getWidth() + 6].setBackground(Color.gray);
-			this.panelHolder[i][this.controller.getWidth() + 6].setBorder(null);
-			this.panelHolder[i][this.controller.getWidth() + 7].setBackground(Color.gray);
-			this.panelHolder[i][this.controller.getWidth() + 7].setBorder(null);
+			this.panelHolder[i][this.controller.getFieldWidth() + 3].setBackground(Color.gray);
+			this.panelHolder[i][this.controller.getFieldWidth() + 3].setBorder(null);
+			this.panelHolder[i][this.controller.getFieldWidth() + 4].setBackground(Color.gray);
+			this.panelHolder[i][this.controller.getFieldWidth() + 4].setBorder(null);
+			this.panelHolder[i][this.controller.getFieldWidth() + 5].setBackground(Color.gray);
+			this.panelHolder[i][this.controller.getFieldWidth() + 5].setBorder(null);
+			this.panelHolder[i][this.controller.getFieldWidth() + 6].setBackground(Color.gray);
+			this.panelHolder[i][this.controller.getFieldWidth() + 6].setBorder(null);
+			this.panelHolder[i][this.controller.getFieldWidth() + 7].setBackground(Color.gray);
+			this.panelHolder[i][this.controller.getFieldWidth() + 7].setBorder(null);
 		}
 
 		for (int i = 0; i < this.panelHolder[0].length; i++) {
@@ -114,48 +114,48 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 			this.panelHolder[0][i].setBorder(null);
 			this.panelHolder[1][i].setBackground(Color.gray);
 			this.panelHolder[1][i].setBorder(null);
-			this.panelHolder[this.controller.getHeight() + 2][i].setBackground(Color.gray);
-			this.panelHolder[this.controller.getHeight() + 2][i].setBorder(null);
-			this.panelHolder[this.controller.getHeight() + 3][i].setBackground(Color.gray);
-			this.panelHolder[this.controller.getHeight() + 3][i].setBorder(null);
+			this.panelHolder[this.controller.getFieldHeight() + 2][i].setBackground(Color.gray);
+			this.panelHolder[this.controller.getFieldHeight() + 2][i].setBorder(null);
+			this.panelHolder[this.controller.getFieldHeight() + 3][i].setBackground(Color.gray);
+			this.panelHolder[this.controller.getFieldHeight() + 3][i].setBorder(null);
 		}
 
-		this.panelHolder[1][(int) (this.controller.getWidth() / 2 + 3.5)].add(new JLabel("Tetris"));
+		this.panelHolder[1][(int) (this.controller.getFieldWidth() / 2 + 3.5)].add(new JLabel("Tetris"));
 
 		this.panelHolder[5][1].add(new JLabel("Name:"));
 
-		this.panelHolder[2][this.controller.getWidth() + 4].add(new JLabel("Next"));
+		this.panelHolder[2][this.controller.getFieldWidth() + 4].add(new JLabel("Next"));
 
-		this.panelHolder[3][this.controller.getWidth() + 4]
+		this.panelHolder[3][this.controller.getFieldWidth() + 4]
 				.setBorder(BorderFactory.createMatteBorder(5, 5, 0, 0, Color.black));
-		this.panelHolder[4][this.controller.getWidth() + 4]
+		this.panelHolder[4][this.controller.getFieldWidth() + 4]
 				.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.black));
-		this.panelHolder[5][this.controller.getWidth() + 4]
+		this.panelHolder[5][this.controller.getFieldWidth() + 4]
 				.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, Color.black));
-		this.panelHolder[6][this.controller.getWidth() + 4]
+		this.panelHolder[6][this.controller.getFieldWidth() + 4]
 				.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 0, Color.black));
-		this.panelHolder[6][this.controller.getWidth() + 5]
+		this.panelHolder[6][this.controller.getFieldWidth() + 5]
 				.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 0, Color.black));
-		this.panelHolder[6][this.controller.getWidth() + 6]
+		this.panelHolder[6][this.controller.getFieldWidth() + 6]
 				.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 5, Color.black));
-		this.panelHolder[5][this.controller.getWidth() + 6]
+		this.panelHolder[5][this.controller.getFieldWidth() + 6]
 				.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.black));
-		this.panelHolder[4][this.controller.getWidth() + 6]
+		this.panelHolder[4][this.controller.getFieldWidth() + 6]
 				.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.black));
-		this.panelHolder[3][this.controller.getWidth() + 6]
+		this.panelHolder[3][this.controller.getFieldWidth() + 6]
 				.setBorder(BorderFactory.createMatteBorder(5, 0, 0, 5, Color.black));
-		this.panelHolder[3][this.controller.getWidth() + 5]
+		this.panelHolder[3][this.controller.getFieldWidth() + 5]
 				.setBorder(BorderFactory.createMatteBorder(5, 0, 0, 0, Color.black));
 
-		this.panelHolder[8][this.controller.getWidth() + 4].add(new JLabel("Time:"));
-		this.panelHolder[8][this.controller.getWidth() + 5].add(this.time);
-		this.panelHolder[9][this.controller.getWidth() + 4].add(new JLabel("Lines:"));
-		this.panelHolder[9][this.controller.getWidth() + 5].add(this.lines);
-		this.panelHolder[10][this.controller.getWidth() + 4].add(new JLabel("Level:"));
-		this.panelHolder[10][this.controller.getWidth() + 5].add(this.level);
+		this.panelHolder[8][this.controller.getFieldWidth() + 4].add(new JLabel("Time:"));
+		this.panelHolder[8][this.controller.getFieldWidth() + 5].add(this.time);
+		this.panelHolder[9][this.controller.getFieldWidth() + 4].add(new JLabel("Lines:"));
+		this.panelHolder[9][this.controller.getFieldWidth() + 5].add(this.lines);
+		this.panelHolder[10][this.controller.getFieldWidth() + 4].add(new JLabel("Level:"));
+		this.panelHolder[10][this.controller.getFieldWidth() + 5].add(this.level);
 
-		this.panelHolder[12][this.controller.getWidth() + 4].add(this.newGame);
-		this.panelHolder[14][this.controller.getWidth() + 4].add(this.endGame);
+		this.panelHolder[12][this.controller.getFieldWidth() + 4].add(this.newGame);
+		this.panelHolder[14][this.controller.getFieldWidth() + 4].add(this.endGame);
 	}
 
 	/**
@@ -179,8 +179,8 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 	 * Aktualisiert die View anhand des {@link #model}s.
 	 */
 	private void reloadModel() {
-		for (int x = 0; x < this.controller.getWidth(); x++) {
-			for (int y = 0; y < this.controller.getHeight(); y++) {
+		for (int x = 0; x < this.controller.getFieldWidth(); x++) {
+			for (int y = 0; y < this.controller.getFieldHeight(); y++) {
 				this.panelHolder[y + 2][x + 3].setBackground(this.model.getPoint(x, y).getColor());
 			}
 		}
@@ -193,14 +193,14 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 	private void reloadNextFigure() {
 		for (int x = 0; x < 3; x++) {
 			for (int y = 0; y < 4; y++) {
-				this.panelHolder[y + 3][this.controller.getWidth() + x + 4].setBackground(Color.darkGray);
+				this.panelHolder[y + 3][this.controller.getFieldWidth() + x + 4].setBackground(Color.darkGray);
 			}
 		}
 		for (int x = 0; x < this.model.getNextFigureSize().x; x++) {
 			for (int y = 0; y < this.model.getNextFigureSize().y; y++) {
 
 				if (this.model.getPointNextFigure(x, y) != null) {
-					this.panelHolder[y + 7 - this.model.getNextFigureSize().y][x + this.controller.getWidth() + 4]
+					this.panelHolder[y + 7 - this.model.getNextFigureSize().y][x + this.controller.getFieldWidth() + 4]
 							.setBackground(this.model.getPointNextFigure(x, y).getColor());
 				}
 			}
