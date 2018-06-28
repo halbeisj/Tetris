@@ -11,12 +11,6 @@ import d_dto.Field;
  * @todo Methode zum Setzen des Namens erstellen
  */
 public interface IGameStatistics {
-	/**
-	 * Lädt das Feld neu.
-	 * 
-	 * @param field Feld, welches neu eingespeichert werden soll
-	 */
-	public void reloadField(Field[][] field);
 	
 	/**
 	 * Gibt die Anzahl bestandener Levels zurück.
