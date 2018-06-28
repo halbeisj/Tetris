@@ -19,17 +19,17 @@ public class StartForm extends JFrame implements ActionListener{
 	/**
 	 * Knopf zum Starten des Spiels.
 	 */
-	private JButton startGame;
+	private JButton startGameButton;
 	
 	/**
 	 * Text, welcher oberhalb des Textfeldes angezeigt wird.
 	 */
-	private JLabel text;
+	private JLabel playerNameLabel;
 	
 	/**
 	 * Textfeld, in welchem der Name eingegeben wird.
 	 */
-	private JTextField guiname;
+	private JTextField playerNameTextBox;
 	
 	/**
 	 * Controller, an welchen die Befehle und Daten weitergegeben werden.
@@ -43,17 +43,17 @@ public class StartForm extends JFrame implements ActionListener{
 	 * Controller, an welchen die Befehle und Daten weitergegeben werden.
 	 */
 	public StartForm(IGameController controller) {
-		this.startGame = new JButton("Spiel starten");
-		this.text = new JLabel("Geben Sie bitte Ihren Namen ein!");
-		this.guiname = new JTextField("Name");
+		this.startGameButton = new JButton("Spiel starten");
+		this.playerNameLabel = new JLabel("Geben Sie bitte Ihren Namen ein!");
+		this.playerNameTextBox = new JTextField("Name");
 		this.controller = controller;
 		
-		this.startGame.addActionListener(this);
+		this.startGameButton.addActionListener(this);
 		this.setLayout(new BorderLayout());
 		
-		this.add(startGame, BorderLayout.SOUTH);
-		this.add(this.text, BorderLayout.NORTH);
-		this.add(this.guiname, BorderLayout.CENTER);
+		this.add(startGameButton, BorderLayout.SOUTH);
+		this.add(this.playerNameLabel, BorderLayout.NORTH);
+		this.add(this.playerNameTextBox, BorderLayout.CENTER);
 	
 		this.setBounds(100, 100, 700, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -67,8 +67,8 @@ public class StartForm extends JFrame implements ActionListener{
 	 * Die Event-Informationen.
 	 */
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == this.startGame) {
-			this.controller.setPlayerName(this.guiname.getText());
+		if(ae.getSource() == this.startGameButton) {
+			this.controller.setPlayerName(this.playerNameTextBox.getText());
 			this.controller.newGame();
 			this.dispose();
 		}

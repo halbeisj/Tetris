@@ -20,6 +20,8 @@ import d_dto.Field;
  * Repräsentiert ein Tetris-Spiel.
  * 
  * @author Julia Halbeisen
+ * TODO down, right, left in eine Methode
+ * TODO neuer Konstruktor mit höhe und breite des Felds
  */
 public class Game extends Observable {
 	
@@ -37,10 +39,8 @@ public class Game extends Observable {
 	
 	/**
 	 * Die nächste Figur.
-	 * 
-	 * @todo: Variable umbenennen.
 	 */
-	private Figure figure_next;
+	private Figure nextFigure;
 	
 	/**
 	 * Die höhe des Spielfeldes.
@@ -59,7 +59,7 @@ public class Game extends Observable {
 	/**
 	 * Verstrichene Zeit seit Beginn der Runde
 	 * 
-	 * @todo Löschen.
+	 * @todo Löschen und zu {@link GameStatistics} verschieben.
 	 */
 	private int timeInt = 0;
 	
@@ -85,15 +85,15 @@ public class Game extends Observable {
 	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public void left() {
-		if(this.figure.getSource().y > 0) {
+		if(this.figure.getPosition().y > 0) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y - 1].getStatus() == 1) {
+					if(this.figure.getField()[x][y] != null && this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y - 1].getState() == 1) {
 						return;
 					}
 				}
 			}
-			this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y - 1));
+			this.figure.setPosition(new Point(this.figure.getPosition().x, this.figure.getPosition().y - 1));
 			this.reloadFigure(1);
 		}
 		else {return;}
@@ -105,15 +105,15 @@ public class Game extends Observable {
 	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public void right() {
-		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width - 1) {
+		if(this.figure.getPosition().y + this.figure.getWidth() < this.field_width - 1) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
-					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + 1].getStatus() == 1) {
+					if(this.figure.getField()[x][y] != null && this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y + 1].getState() == 1) {
 						return;
 					}
 				}
 			}
-			this.figure.setSource(new Point(this.figure.getSource().x, this.figure.getSource().y + 1));
+			this.figure.setPosition(new Point(this.figure.getPosition().x, this.figure.getPosition().y + 1));
 			this.reloadFigure(-1);
 		}
 		else {return;}
@@ -125,20 +125,20 @@ public class Game extends Observable {
 	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public int down() {
-		if(this.figure.getSource().x == this.field_height - this.figure.getPointD() - 1) {
+		if(this.figure.getPosition().x == this.field_height - this.figure.getHeight() - 1) {
 			return this.putFigure();
 		}
 		else {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
-					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x + 1][this.figure.getSource().y + y].getStatus() == 1) {
+					if(this.figure.getField()[x][y] != null && this.field[this.figure.getPosition().x + x + 1][this.figure.getPosition().y + y].getState() == 1) {
 						return this.putFigure();
 					}
 				}
 			}
 		}
 		
-		this.figure.setSource(new Point(this.figure.getSource().x + 1, this.figure.getSource().y));
+		this.figure.setPosition(new Point(this.figure.getPosition().x + 1, this.figure.getPosition().y));
 		this.reloadFigure(0);
 		return 0;
 	}
@@ -147,22 +147,22 @@ public class Game extends Observable {
 	 * Erstellt eine neue Figur in der Warteschlange.
 	 */
 	private void createNewFigure() {
-		if(this.figure_next == null) {
-			this.figure_next = this.createRandomFigure();
-			this.figure_next.setSource(new Point(0, (int) (this.field_width / 2 + 0.5)));
+		if(this.nextFigure == null) {
+			this.nextFigure = this.createRandomFigure();
+			this.nextFigure.setPosition(new Point(0, (int) (this.field_width / 2 + 0.5)));
 		}
-		this.figure = this.figure_next;
+		this.figure = this.nextFigure;
 		for(int x = 0; x < this.figure.getField().length; x++) {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
-				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y].getStatus() == 1 && this.figure.getField()[x][y] != null) {
+				if(this.field[this.figure.getPosition().x + x][this.figure.getPosition().y].getState() == 1 && this.figure.getField()[x][y] != null) {
 					this.setChanged();
 					this.notifyObservers(GameActionType.Lost);
 					return;
 				}
 			}
 		}
-		this.figure_next = this.createRandomFigure();
-		this.figure_next.setSource(new Point(0, (int) (this.field_width / 2 + 0.5)));
+		this.nextFigure = this.createRandomFigure();
+		this.nextFigure.setPosition(new Point(0, (int) (this.field_width / 2 + 0.5)));
 		this.reloadFigure(2);
 	}
 	
@@ -171,6 +171,8 @@ public class Game extends Observable {
 	 * 
 	 * @return
 	 * Eine zufällig generierte Figur.
+	 * 
+	 * TODO in createNewFigure Methode
 	 */
 	private Figure createRandomFigure() {
 		Random r = new Random();
@@ -210,7 +212,7 @@ public class Game extends Observable {
 			}
 		}
 		this.figure = null;
-		this.figure_next = null;
+		this.nextFigure = null;
 	}
 	
 	/**
@@ -227,7 +229,7 @@ public class Game extends Observable {
 		for(int x = 0; x < this.figure.getField().length; x++) {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
 				if(this.figure.getField()[x][y] != null) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].setStatus(1);
+					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y].setState(1);
 				}
 			}
 		}
@@ -252,9 +254,11 @@ public class Game extends Observable {
 	 * 
 	 * @return
 	 * Die nächste Figur.
+	 * 
+	 * TODO löschen
 	 */
 	public Field[][] reloadNextFigure() {
-		return this.figure_next.getField();
+		return this.nextFigure.getField();
 	}
 
 	/**
@@ -290,48 +294,48 @@ public class Game extends Observable {
 		for (int x = 0; x < this.figure.getField().length; x++) {
 			for (int y = 0; y < this.figure.getField()[0].length; y++) {
 				if(this.figure.getField()[x][y] != null) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = this.figure.getField()[x][y];
+					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = this.figure.getField()[x][y];
 				}
 			}
 		}
 		if(direction == 1) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
-				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() != 1) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1] = new Field(Color.darkGray, 0);
+				if(this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + this.figure.getWidth() + 1].getState() != 1) {
+					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + this.figure.getWidth() + 1] = new Field(Color.darkGray, 0);
 				}
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
-					if(this.figure.getField()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
+					if(this.figure.getField()[x][y] == null && this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y].getState() != 1) {
+						this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = new Field(Color.darkGray, 0);
 					}
 				}
 			}
 		}
 		else if (direction == -1){
 			for(int x = 0; x < this.figure.getField().length; x++) {
-				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1].getStatus() != 1) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y - 1] = new Field(Color.darkGray, 0);
+				if(this.field[this.figure.getPosition().x + x][this.figure.getPosition().y - 1].getState() != 1) {
+					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y - 1] = new Field(Color.darkGray, 0);
 				}	
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
-					if(this.figure.getField()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
+					if(this.figure.getField()[x][y] == null && this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y].getState() != 1) {
+						this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = new Field(Color.darkGray, 0);
 					}
 				}
 			}
 		}
 		else if (direction == 0) {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
-				if(this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y].getStatus() != 1) {
-					this.field[this.figure.getSource().x - 1][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
+				if(this.field[this.figure.getPosition().x - 1][this.figure.getPosition().y + y].getState() != 1) {
+					this.field[this.figure.getPosition().x - 1][this.figure.getPosition().y + y] = new Field(Color.darkGray, 0);
 				}
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
-					if(this.figure.getField()[x][y] == null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y].getStatus() != 1) {
-						this.field[this.figure.getSource().x + x][this.figure.getSource().y + y] = new Field(Color.darkGray, 0);
+					if(this.figure.getField()[x][y] == null && this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y].getState() != 1) {
+						this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = new Field(Color.darkGray, 0);
 					}
 				}
 			}
@@ -340,6 +344,8 @@ public class Game extends Observable {
 	
 	/**
 	 * Überprüft, ob eine Reihe vollständig ist.
+	 * 
+	 * TODO in down Methode
 	 */
 	private int checkFullRow() {
 		boolean full;
@@ -347,7 +353,7 @@ public class Game extends Observable {
 		for(int y = 0; y < this.field_height; y++) {
 			full = true;
 			for(int x = 0; x < this.field_width; x++) {
-				if(this.field[y][x].getStatus() == 0) {
+				if(this.field[y][x].getState() == 0) {
 					full = false;
 					break;
 				}

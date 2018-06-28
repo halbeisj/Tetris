@@ -12,12 +12,16 @@ import b_bl.StopwatchThread;
  * zugegriffen.
  * 
  * @author Julia Halbeisen
+ * 
+ * TODO Remove {@link #model}
+ * TODO Remove {@link #view}
  */
 public class GameController implements IGameController, Observer {
 	/**
 	 * Ein Objekt, welches Statistiken über das Spiel beinhaltet
 	 */
 	private IGameStatistics model;
+	
 	/**
 	 * Das Game, aus welchem die Daten geladen und an das die Befehle
 	 * weitergegeben werden.
@@ -33,18 +37,18 @@ public class GameController implements IGameController, Observer {
 	/**
 	 * Die View, welche vor dem Spielstart angezeigt wird.
 	 */
-	private StartForm start_view;
+	private StartForm startForm;
 
 	/**
 	 * View, welche nach Beendigung des Spiels anzeigt.
 	 */
-	private GameOverForm end_view;
+	private GameOverForm gameOverForm;
 
 	/**
 	 * Initialisiert eine neue Instanz der {@link GameController} Klasse.
 	 */
 	public GameController() {
-		this.start_view = new StartForm(this);
+		this.startForm = new StartForm(this);
 		this.game = new Game();
 		this.model = new GameStatistics();
 		this.view = new GameForm(this, this.model);
@@ -75,6 +79,7 @@ public class GameController implements IGameController, Observer {
 
 	/**
 	 * Lädt das Feld neu aus dem Game in das Model.
+	 * TODO löschen
 	 */
 	private void reloadField() {
 		this.model.setNextFigure(this.game.reloadNextFigure());
@@ -94,14 +99,14 @@ public class GameController implements IGameController, Observer {
 	 * Beendet das Spiel.
 	 */
 	public void endGame() {
-		this.end_view = new GameOverForm(this);
+		this.gameOverForm = new GameOverForm(this);
 	}
 
 	/**
 	 * Setzt den Name des Spielers.
 	 */
 	public void setPlayerName(String name) {
-		this.model.setName(name);
+		this.model.setPlayerName(name);
 	}
 
 	/**

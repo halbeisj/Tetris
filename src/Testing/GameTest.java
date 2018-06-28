@@ -31,7 +31,7 @@ public class GameTest {
 		{
 			for (int j = 0; j < field[i].length; j++)
 			{
-				if (field[i][j].getStatus() != 0)
+				if (field[i][j].getState() != 0)
 				{
 					counter++;
 				}

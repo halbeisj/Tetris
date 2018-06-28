@@ -11,16 +11,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Diese Klasse wird aufgerufen, wenn man das Spiel beendet oder verloren hat.
- * Die Klasse besitzt einen exit Button und einen Button um das Spiel nochmals
- * neuzustarten.
+ * Repräsentiert ein "Game Over"-Fenster.
  * 
  * @author Julia Halbeisen
  */
 public class GameOverForm extends JFrame implements ActionListener {
-	private JButton repeatGame;
-	private JButton exit;
-	private JPanel south;
+	/**
+	 * Der Button um ein neues Spiel zu starten.
+	 */
+	private JButton newGameButton;
+	
+	/**
+	 * Der Button um das Spiel zu verlassen.
+	 */
+	private JButton exitButton;
+	
+	/**
+	 * DasPanel, welches die Buttons beinhaltet.
+	 */
+	private JPanel panel;
 
 	/**
 	 * Ein Objekt, um das Spiel zu steuern.
@@ -37,19 +46,19 @@ public class GameOverForm extends JFrame implements ActionListener {
 		this.controller = controller;
 
 		this.setLayout(new BorderLayout());
-		this.repeatGame = new JButton("Repeat Game");
-		this.exit = new JButton("Exit");
-		this.south = new JPanel();
-		this.south.setLayout(new GridLayout(1, 2));
+		this.newGameButton = new JButton("Repeat Game");
+		this.exitButton = new JButton("Exit");
+		this.panel = new JPanel();
+		this.panel.setLayout(new GridLayout(1, 2));
 
 		this.add(new JLabel("You failed!"), BorderLayout.NORTH);
-		this.add(this.south, BorderLayout.SOUTH);
+		this.add(this.panel, BorderLayout.SOUTH);
 
-		this.south.add(this.repeatGame);
-		this.south.add(this.exit);
+		this.panel.add(this.newGameButton);
+		this.panel.add(this.exitButton);
 
-		this.repeatGame.addActionListener(this);
-		this.exit.addActionListener(this);
+		this.newGameButton.addActionListener(this);
+		this.exitButton.addActionListener(this);
 
 		this.setBounds(100, 100, 700, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -61,9 +70,9 @@ public class GameOverForm extends JFrame implements ActionListener {
 	 * gedrückt wird -> Fenser wird ausgeblendet, Game wird neugestartet.
 	 */
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == this.exit) {
+		if (ae.getSource() == this.exitButton) {
 			System.exit(0);
-		} else if (ae.getSource() == this.repeatGame) {
+		} else if (ae.getSource() == this.newGameButton) {
 			this.dispose();
 			this.controller.newGame();
 		}

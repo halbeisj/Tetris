@@ -12,49 +12,42 @@ import d_dto.Field;
  */
 public class GameStatistics extends Observable implements IGameStatistics {
 	/**
-	 * Spielfeld, welches die verschiedenen Farben speichert
+	 * Spielfeld, welches die verschiedenen Farben speichert.
 	 */
 	private Field[][] field;
 
 	/**
-	 * Feld in welchem die nächste Figur dargestellt wird
+	 * Feld in welchem die nächste Figur dargestellt wird.
 	 */
 	private Field[][] nextFigure;
 
 	/**
-	 * Zeit, die seit Beginn der Runde verstrichen ist
+	 * Zeit, die seit Beginn der Runde verstrichen ist.
 	 */
 	private int time;
 
 	/**
-	 * Anzahl Linien, die schon entfernt wurden
+	 * Anzahl Linien, die schon entfernt wurden.
 	 */
-	private int lines;
+	private int lineCount;
 
 	/**
-	 * Anzahl Levels, die schon bestanden wurden
+	 * Anzahl Levels, die schon bestanden wurden.
 	 */
 	private int level;
 
 	/**
-	 * Name des Spielers
+	 * Name des Spielers.
 	 */
-	private String name;
+	private String playerName;
 
 	/**
 	 * Initialisiert eine neue Instanz der {@link GameStatistics} Klasse.
 	 */
 	public GameStatistics() {
-		this.name = "";
-		this.lines = 0;
-		this.level = 0;
-	}
-
-	/**
-	 * Setzt den Name des Spielers.
-	 */
-	public void setPlayerName(String value) {
-		this.name = value;
+		this.playerName = "";
+		this.lineCount = 0;
+		this.level = 1;
 	}
 
 	/**
@@ -82,8 +75,8 @@ public class GameStatistics extends Observable implements IGameStatistics {
 	 * @todo löschen und durch "update" ersetzen.
 	 */
 	private void incLine(int inc) {
-		this.lines = this.lines + inc;
-		if (inc != 0 && this.lines % 10 == 0) {
+		this.lineCount = this.lineCount + inc;
+		if (inc != 0 && this.lineCount % 10 == 0) {
 			this.incLevel();
 		}
 	}
@@ -114,7 +107,7 @@ public class GameStatistics extends Observable implements IGameStatistics {
 	 * @todo als int
 	 */
 	public String getLines() {
-		return Integer.toString(this.lines);
+		return Integer.toString(this.lineCount);
 	}
 
 	/**
@@ -129,15 +122,15 @@ public class GameStatistics extends Observable implements IGameStatistics {
 	/**
 	 * Gibt den Namen des Spielers zurück.
 	 */
-	public String getName() {
-		return this.name;
+	public String getPlayerName() {
+		return this.playerName;
 	}
 
 	/**
 	 * Setzt den Name des Spielers.
 	 */
-	public void setName(String value) {
-		this.name = value;
+	public void setPlayerName(String value) {
+		this.playerName = value;
 	}
 
 	/**

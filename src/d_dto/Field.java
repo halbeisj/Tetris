@@ -19,7 +19,7 @@ public class Field {
 	 * 
 	 * @todo Zu Enum umwandeln.
 	 */
-	private int status;
+	private int state;
 	
 	/**
 	 * Initialisiert ein neues Objekt der {@link Field} Klasse.
@@ -27,13 +27,13 @@ public class Field {
 	 * @param color
 	 * Die Farbe des Feldes.
 	 * 
-	 * @param status
+	 * @param state
 	 * Der Status des Feldes.
 	 * @todo Zu Enum umwandeln.
 	 */
-	public Field(Color color, int status) {
+	public Field(Color color, int state) {
 		this.color = color;
-		this.status = status;
+		this.state = state;
 	}
 	
 	/**
@@ -46,25 +46,23 @@ public class Field {
 	/**
 	 * Setzt die Farbe des Feldes.
 	 */
-	public void setColor(Color color){
-		this.color = color;
+	public void setColor(Color value){
+		this.color = value;
 	}
 	
 	/**
 	 * Gibt den Status des Feldes zurück.
 	 * @todo Zu Enum umwandeln.
 	 */
-	public int getStatus(){
-		return this.status;
+	public int getState(){
+		return this.state;
 	}
 	
 	/**
 	 * Setzt den Status des Feldes.
 	 * @todo Zu Enum umwandeln.
 	 */
-	public void setStatus(int status){
-		this.status = status;
+	public void setState(int value){
+		this.state = value;
 	}
-	
-
 }

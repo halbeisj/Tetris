@@ -41,12 +41,12 @@ public interface IGameStatistics {
 	 * @return
 	 * Der Name des Spielers.
 	 */
-	public String getName();
+	public String getPlayerName();
 
 	/**
 	 * Setzt den Name des Spielers.
 	 */
-	public void setName(String value);
+	public void setPlayerName(String value);
 	
 	/**
 	 * Gibt die Anzahl beseitigter Linien zurück.
