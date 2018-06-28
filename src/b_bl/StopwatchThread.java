@@ -11,6 +11,11 @@ package b_bl;
  * 
  */
 public class StopwatchThread implements Runnable {
+	
+	/**
+	 * Game in welchem die Sekundenzahl erhöht wird
+	 */
+	private Game game;
 
 	/**
 	 * Game wird konfiguriert
@@ -18,6 +23,7 @@ public class StopwatchThread implements Runnable {
 	 * @param game Game, welches konfiguriert werden soll
 	 */
 	public StopwatchThread(Game game) {
+		this.game = game;
 	}
 
 	/**
@@ -32,6 +38,7 @@ public class StopwatchThread implements Runnable {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
+			this.game.incTime();
 		}
 	}
 }
