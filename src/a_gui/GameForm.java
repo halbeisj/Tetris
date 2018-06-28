@@ -165,37 +165,25 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 		this.setVisible(true);
 		this.panelHolder[6][1].removeAll();
 		this.panelHolder[6][1].add(new JLabel(this.model.getName()));
-		this.reloadModel();
-	}
-
-	/**
-	 * Löscht das aktuelle Objekt.
-	 */
-	public void deactivate() {
-		this.dispose();
+		this.reload();
 	}
 
 	/**
 	 * Aktualisiert die View anhand des {@link #model}s.
 	 */
-	private void reloadModel() {
+	private void reload() {
 		for (int x = 0; x < this.controller.getFieldWidth(); x++) {
 			for (int y = 0; y < this.controller.getFieldHeight(); y++) {
 				this.panelHolder[y + 2][x + 3].setBackground(this.model.getPoint(x, y).getColor());
 			}
 		}
-		this.reloadNextFigure();
-	}
-
-	/**
-	 * Aktualisiert die nächste Figur anhand des {@link #model}s.
-	 */
-	private void reloadNextFigure() {
+		
 		for (int x = 0; x < 3; x++) {
 			for (int y = 0; y < 4; y++) {
 				this.panelHolder[y + 3][this.controller.getFieldWidth() + x + 4].setBackground(Color.darkGray);
 			}
 		}
+		
 		for (int x = 0; x < this.model.getNextFigureSize().x; x++) {
 			for (int y = 0; y < this.model.getNextFigureSize().y; y++) {
 
@@ -205,6 +193,17 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 				}
 			}
 		}
+		
+		this.lines.setText(this.model.getLines());
+		this.level.setText(this.model.getLevel());
+		this.time.setText(this.model.getTime());
+	}
+
+	/**
+	 * Löscht das aktuelle Objekt.
+	 */
+	public void deactivate() {
+		this.dispose();
 	}
 
 	/**
@@ -239,7 +238,6 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 		} else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.controller.left();
 		}
-
 	}
 
 	/**
@@ -249,15 +247,9 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 	}
 
 	/**
-	 * Aktualisiert die View anhand des {@link #model}s.
-	 * 
-	 * @todo {@link #update(Observable, Object)} {@link #reloadModel()} und {@link #reloadNextFigure()} zusammenführen.
+	 * Handelt ein Update eines überwachbaren Objekts.
 	 */
 	public void update(Observable arg0, Object arg1) {
-		this.reloadModel();
-		this.lines.setText(this.model.getLines());
-		this.level.setText(this.model.getLevel());
-		this.time.setText(this.model.getTime());
+		this.reload();
 	}
-
 }
