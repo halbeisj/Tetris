@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import b_bl.Game;
 import b_bl.GameActionType;
-import b_bl.Stopwatch;
+import b_bl.StopwatchThread;
 
 /**
  * Dies ist der Controller der Game Klasse. Über Ihn wird auf die Game Klasse

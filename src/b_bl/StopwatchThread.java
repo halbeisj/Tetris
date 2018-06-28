@@ -9,9 +9,8 @@ package b_bl;
  * @author Dominik Heckendorn
  * @version 1.0
  * 
- * @todo Klasse zu "StopwatchThread" umbenennen.
  */
-public class Stopwatch implements Runnable {
+public class StopwatchThread implements Runnable {
 	
 	/**
 	 * Game in welchem die Sekundenzahl erhöht wird
@@ -23,7 +22,7 @@ public class Stopwatch implements Runnable {
 	 * 
 	 * @param game Game, welches konfiguriert werden soll
 	 */
-	public Stopwatch(Game game) {
+	public StopwatchThread(Game game) {
 		this.game = game;
 	}
 

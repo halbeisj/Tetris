@@ -74,7 +74,7 @@ public class Game extends Observable {
 	 * Initialisiert eine neue Instanz der {@link Game} Klasse.
 	 */
 	public Game() {
-		this.timeThread = new Thread(new Stopwatch(this));
+		this.timeThread = new Thread(new StopwatchThread(this));
 		this.field = new Field[this.field_height][this.field_width];
 		this.endGame();		
 	}
