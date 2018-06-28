@@ -105,7 +105,7 @@ public class Game extends Observable {
 	 * @todo Methode löschen - durch "moveFigure" ersetzen.
 	 */
 	public void right() {
-		if(this.figure.getSource().y + this.figure.getPointR() < this.field_width - 1) {
+		if(this.figure.getSource().y + this.figure.getWidth() < this.field_width - 1) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x][this.figure.getSource().y + y + 1].getStatus() == 1) {
@@ -296,8 +296,8 @@ public class Game extends Observable {
 		}
 		if(direction == 1) {
 			for(int x = 0; x < this.figure.getField().length; x++) {
-				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1].getStatus() != 1) {
-					this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getPointR() + 1] = new Field(Color.darkGray, 0);
+				if(this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getWidth() + 1].getStatus() != 1) {
+					this.field[this.figure.getSource().x + x][this.figure.getSource().y + this.figure.getWidth() + 1] = new Field(Color.darkGray, 0);
 				}
 			}
 			for(int x = 0; x < this.figure.getField().length; x++) {
