@@ -7,8 +7,6 @@ import d_dto.Field;
 
 /**
  * Repräsentiert Statistiken über ein Spiel.
- * 
- * @todo Methode zum Setzen des Namens erstellen
  */
 public interface IGameStatistics {
 	/**
