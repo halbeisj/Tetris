@@ -75,7 +75,6 @@ public interface IGameStatistics {
 	 * 
 	 * @param nextFigure Figur, die eingespeichert werden soll
 	 * 
-	 * @todo zu "setNextFigure" umbenennen.
 	 */
 	public void setNextFigure(Field[][] nextFigure);
 	
