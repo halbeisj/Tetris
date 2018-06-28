@@ -3,6 +3,7 @@ package c_db;
 import java.awt.Color;
 
 import d_dto.Field;
+import d_dto.FieldState;
 
 /**
  * Repräsentiert eine Figur, welche ein "L" darstellt.
@@ -15,10 +16,10 @@ public class TFigure extends Figure {
 	 */
 	public TFigure() {
 		this.figure = new Field[2][3];
-		this.figure[0][0] = new Field(Color.yellow, 2);
-		this.figure[0][1] = new Field(Color.yellow, 2);
-		this.figure[0][2] = new Field(Color.yellow, 2);
-		this.figure[1][1] = new Field(Color.yellow, 2);
+		this.figure[0][0] = new Field(Color.yellow, FieldState.Temporary);
+		this.figure[0][1] = new Field(Color.yellow, FieldState.Temporary);
+		this.figure[0][2] = new Field(Color.yellow, FieldState.Temporary);
+		this.figure[1][1] = new Field(Color.yellow, FieldState.Temporary);
 
 		this.pointr = 3;
 		this.pointd = 2;

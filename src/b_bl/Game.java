@@ -16,6 +16,7 @@ import c_db.CubeFigure;
 import c_db.SFigure;
 import c_db.TFigure;
 import d_dto.Field;
+import d_dto.FieldState;
 
 /**
  * Repräsentiert ein Tetris-Spiel.
@@ -117,7 +118,7 @@ public class Game extends Observable {
 			for (int y = 0; y < this.getFigure().getHeight(); y++) {
 				for (int x = 0; x < this.getFigure().getWidth(); x++) {
 					if (this.getFigure().getField()[y][x] != null
-							&& this.getField()[newPosition.y + y][newPosition.x + x].getState() == 1) {
+							&& this.getField()[newPosition.y + y][newPosition.x + x].getState() == FieldState.Taken) {
 						if (moveDirection == MoveDirection.Down) {
 							this.putFigure();
 						}
@@ -132,7 +133,7 @@ public class Game extends Observable {
 					if (this.getFigure().getField()[y][x] != null) {
 						Field field = this.getField()[this.getFigure().getPosition().y + y][this.getFigure().getPosition().x + x];
 						field.setColor(Color.darkGray);
-						field.setState(0);
+						field.setState(FieldState.Free);
 					}
 				}
 			}
@@ -165,7 +166,7 @@ public class Game extends Observable {
 		this.figure = this.nextFigure;
 		for (int x = 0; x < this.figure.getWidth(); x++) {
 			for (int y = 0; y < this.figure.getHeight(); y++) {
-				if (this.field[this.figure.getPosition().y + y][this.figure.getPosition().x + x].getState() == 1
+				if (this.field[this.figure.getPosition().y + y][this.figure.getPosition().x + x].getState() == FieldState.Taken
 						&& this.figure.getField()[y][x] != null) {
 					this.setChanged();
 					this.notifyObservers(GameActionType.Lost);
@@ -189,7 +190,6 @@ public class Game extends Observable {
 	private Figure createRandomFigure() {
 		Random r = new Random();
 		int figure_number = r.nextInt(7);
-		figure_number = 3;
 
 		switch (figure_number) {
 		case 0:
@@ -229,7 +229,7 @@ public class Game extends Observable {
 	public void endGame() {
 		for (int i = 0; i < this.field_width; i++) {
 			for (int y = 0; y < this.field_height; y++) {
-				this.field[y][i] = new Field(Color.darkGray, 0);
+				this.field[y][i] = new Field(Color.darkGray, FieldState.Free);
 			}
 		}
 		this.figure = null;
@@ -248,7 +248,7 @@ public class Game extends Observable {
 		for (int y = 0; y < this.figure.getHeight(); y++) {
 			for (int x = 0; x < this.figure.getWidth(); x++) {
 				if (this.figure.getField()[y][x] != null) {
-					this.field[this.figure.getPosition().y + y][this.figure.getPosition().x + x].setState(1);
+					this.field[this.figure.getPosition().y + y][this.figure.getPosition().x + x].setState(FieldState.Taken);
 				}
 			}
 		}
@@ -321,16 +321,17 @@ public class Game extends Observable {
 		for (int y = 0; y < this.field_height; y++) {
 			full = true;
 			for (int x = 0; x < this.field_width; x++) {
-				if (this.field[y][x].getState() == 0) {
+				if (this.field[y][x].getState() == FieldState.Free) {
 					full = false;
 					break;
 				}
 			}
 			if (full) {
 				rows++;
-				for (int x = 0; x < this.field_width; x++) {
-					for (int y2 = 0; y2 < y; y2++) {
-						this.field[y - y2][x] = this.field[y - y2 - 1][x];
+				for (int x = 0; x < getWidth(); x++) {
+					for (int y2 = y; y2 > 0; y2--) {
+						this.field[y2][x].setState(this.field[y2 - 1][x].getState());
+						this.field[y2][x].setColor(this.field[y2 - 1][x].getColor());
 					}
 				}
 			}

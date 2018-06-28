@@ -16,10 +16,8 @@ public class Field {
 	
 	/**
 	 * Der Status des Feldes.
-	 * 
-	 * @todo Zu Enum umwandeln.
 	 */
-	private int state;
+	private FieldState state;
 	
 	/**
 	 * Initialisiert ein neues Objekt der {@link Field} Klasse.
@@ -29,9 +27,8 @@ public class Field {
 	 * 
 	 * @param state
 	 * Der Status des Feldes.
-	 * @todo Zu Enum umwandeln.
 	 */
-	public Field(Color color, int state) {
+	public Field(Color color, FieldState state) {
 		this.color = color;
 		this.state = state;
 	}
@@ -52,17 +49,15 @@ public class Field {
 	
 	/**
 	 * Gibt den Status des Feldes zurück.
-	 * @todo Zu Enum umwandeln.
 	 */
-	public int getState(){
+	public FieldState getState(){
 		return this.state;
 	}
 	
 	/**
 	 * Setzt den Status des Feldes.
-	 * @todo Zu Enum umwandeln.
 	 */
-	public void setState(int value){
+	public void setState(FieldState value){
 		this.state = value;
 	}
 }

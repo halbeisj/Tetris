@@ -2,6 +2,7 @@ package c_db;
 
 import java.awt.Color;
 import d_dto.Field;
+import d_dto.FieldState;
 
 /**
  * Repräsentiert eine Figur, welche ein "Z" darstellt.
@@ -14,10 +15,10 @@ public class ZFigure extends Figure{
 	 */
 	public ZFigure() {
 		this.figure = new Field[2][3];
-		this.figure[0][0] = new Field(Color.blue, 2);
-		this.figure[0][1] = new Field(Color.blue, 2);
-		this.figure[1][1] = new Field(Color.blue, 2);
-		this.figure[1][2] = new Field(Color.blue, 2);
+		this.figure[0][0] = new Field(Color.blue, FieldState.Temporary);
+		this.figure[0][1] = new Field(Color.blue, FieldState.Temporary);
+		this.figure[1][1] = new Field(Color.blue, FieldState.Temporary);
+		this.figure[1][2] = new Field(Color.blue, FieldState.Temporary);
 
 		this.pointr = 3;
 		this.pointd = 2;

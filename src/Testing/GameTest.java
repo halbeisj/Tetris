@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import b_bl.*;
 import d_dto.Field;
+import d_dto.FieldState;
 
 /**
  * Stellt Tests für das Programm zur Verfügung.
@@ -31,7 +32,7 @@ public class GameTest {
 		{
 			for (int j = 0; j < field[i].length; j++)
 			{
-				if (field[i][j].getState() != 0)
+				if (field[i][j].getState() != FieldState.Free)
 				{
 					counter++;
 				}
