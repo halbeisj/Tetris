@@ -79,7 +79,7 @@ public interface IGameStatistics {
 	 * 
 	 * @todo zu "setNextFigure" umbenennen.
 	 */
-	public void reloadNextFigure(Field[][] nextFigure);
+	public void setNextFigure(Field[][] nextFigure);
 	
 	/**
 	 * Gibt einen bestimmten Punkt der nächsten Figur zurück

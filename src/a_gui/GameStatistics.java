@@ -164,7 +164,7 @@ public class GameStatistics extends Observable implements IGameStatistics {
 	 * 
 	 * @todo löschen und durch "update" ersetzen.
 	 */
-	public void reloadNextFigure(Field[][] nextFigure) {
+	public void setNextFigure(Field[][] nextFigure) {
 		this.nextFigure = nextFigure;
 	}
 
