@@ -126,13 +126,13 @@ public class Game extends Observable {
 	 */
 	public int down() {
 		if(this.figure.getSource().x == this.field_height - this.figure.getPointD() - 1) {
-			return this.addFigure();
+			return this.putFigure();
 		}
 		else {
 			for(int x = 0; x < this.figure.getField().length; x++) {
 				for(int y = 0; y < this.figure.getField()[0].length; y++) {
 					if(this.figure.getField()[x][y] != null && this.field[this.figure.getSource().x + x + 1][this.figure.getSource().y + y].getStatus() == 1) {
-						return this.addFigure();
+						return this.putFigure();
 					}
 				}
 			}
@@ -221,10 +221,9 @@ public class Game extends Observable {
 	 * Anzahl Linien, die beim Hinzufügen entfernt wurden
 	 * 
 	 * @todo
-	 *   - Methode zu "putFigure" umbenennen
 	 *   - Das Überprüfen der Reihen in {@link #down()} durchführen.
 	 */
-	private int addFigure() {
+	private int putFigure() {
 		for(int x = 0; x < this.figure.getField().length; x++) {
 			for(int y = 0; y < this.figure.getField()[0].length; y++) {
 				if(this.figure.getField()[x][y] != null) {
