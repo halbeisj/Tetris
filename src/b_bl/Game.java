@@ -242,9 +242,8 @@ public class Game extends Observable {
 	 * @return
 	 * Das Feld.
 	 * 
-	 * @todo Zu "getField" umbenennen.
 	 */
-	public Field[][] reloadField() {
+	public Field[][] getField() {
 		return this.field;
 	}
 	

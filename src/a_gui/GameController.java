@@ -78,7 +78,7 @@ public class GameController implements IGameController, Observer {
 	 */
 	private void reloadField() {
 		this.model.setNextFigure(this.game.reloadNextFigure());
-		this.model.reloadField(this.game.reloadField());
+		this.model.reloadField(this.game.getField());
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class GameTest {
 	public void EmptyField() {
 		int counter = 0;
 		
-		Field[][] field = game.reloadField();
+		Field[][] field = game.getField();
 		
 		for (int i = 0; i < field.length; i++)
 		{
@@ -46,7 +46,7 @@ public class GameTest {
 	 */
 	@Test
 	public void FieldSize() {
-		Field[][] field = game.reloadField();
+		Field[][] field = game.getField();
 
 		assertEquals(field.length, game.getHeight());
 		
