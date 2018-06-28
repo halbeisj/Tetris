@@ -12,6 +12,11 @@ public enum GameActionType {
 	Update,
 	
 	/**
+	 * Kennzeichnet, dass eine Figur bewegt wurde.
+	 */
+	MoveFigure,
+	
+	/**
 	 * Kennzeichnet, dass der Spieler verloren hat.
 	 */
 	Lost

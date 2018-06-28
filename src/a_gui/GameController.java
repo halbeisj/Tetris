@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import b_bl.Game;
 import b_bl.GameActionType;
+import b_bl.MoveDirection;
 import b_bl.StopwatchThread;
 
 /**
@@ -54,27 +55,28 @@ public class GameController implements IGameController, Observer {
 		this.view = new GameForm(this, this.model);
 		this.model.addObserver(this.view);
 		this.game.addObserver(this);
+		this.game.addObserver(this.view);
 	}
 
 	/**
 	 * Verschiebt Figur in Game nach links.
 	 */
 	public void left() {
-		this.game.left();
+		game.moveFigure(MoveDirection.Left);
 	}
 
 	/**
 	 * Verschiebt Figur in Game nach rechts.
 	 */
 	public void right() {
-		this.game.right();
+		game.moveFigure(MoveDirection.Right);
 	}
 
 	/**
 	 * Verschiebt Figur in Game nach unten.
 	 */
 	public void down() {
-		this.game.down();
+		game.moveFigure(MoveDirection.Down);
 	}
 
 	/**
@@ -133,21 +135,5 @@ public class GameController implements IGameController, Observer {
 	 * Zusätzliche Informationen.
 	 */
 	public void update(Observable o, Object arg) {
-		if (arg instanceof GameActionType)
-		{
-			GameActionType type = (GameActionType)arg;
-			
-			switch(type)
-			{
-				case Update:
-					this.model.setTime(this.game.getTime());
-					break;
-					
-				case Lost:
-					this.view.deactivate();
-					this.endGame();
-					break;
-			}
-		}
 	}
 }

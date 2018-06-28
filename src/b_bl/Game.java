@@ -2,6 +2,7 @@ package b_bl;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Random;
 
@@ -80,74 +81,77 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Bewegt die aktuelle Figur nach links.
+	 * Bewegt die Figur in die gewünschte Richtung.
 	 * 
-	 * @todo Methode löschen - durch "moveFigure" ersetzen.
+	 * @param moveDirection
+	 *            Die Richtung, in die die Figur sich bewegen soll.
 	 */
-	public void left() {
-		if (this.figure.getPosition().y > 0) {
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if (this.figure.getField()[x][y] != null
-							&& this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y - 1]
-									.getState() == 1) {
+	public void moveFigure(MoveDirection moveDirection) {
+		Point newPosition = new Point(getFigure().getPosition());
+
+		switch (moveDirection) {
+			case None:
+				break;
+			case Left:
+				newPosition.translate(-1, 0);
+				break;
+	
+			case Right:
+				newPosition.translate(1, 0);
+				break;
+	
+			case Down:
+				newPosition.translate(0, 1);
+				break;
+		}
+		
+		if ((moveDirection == MoveDirection.Down && newPosition.y + getFigure().getHeight() > getHeight())){
+			this.putFigure();
+		}
+		else if (
+				newPosition.y + getFigure().getHeight() > getHeight() ||
+				newPosition.x + getFigure().getWidth() > getWidth() ||
+				newPosition.x < 0) {
+		}
+		else {
+			for (int y = 0; y < this.getFigure().getHeight(); y++) {
+				for (int x = 0; x < this.getFigure().getWidth(); x++) {
+					if (this.getFigure().getField()[y][x] != null
+							&& this.getField()[newPosition.y + y][newPosition.x + x].getState() == 1) {
+						if (moveDirection == MoveDirection.Down) {
+							this.putFigure();
+						}
+						
 						return;
 					}
 				}
 			}
-			this.figure.setPosition(new Point(this.figure.getPosition().x, this.figure.getPosition().y - 1));
-			this.reloadFigure(1);
-		} else {
-			return;
-		}
-	}
-
-	/**
-	 * Bewegt die aktuelle Figur nach rechts.
-	 * 
-	 * @todo Methode löschen - durch "moveFigure" ersetzen.
-	 */
-	public void right() {
-		if (this.figure.getPosition().y + this.figure.getWidth() < this.field_width - 1) {
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if (this.figure.getField()[x][y] != null
-							&& this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y + 1]
-									.getState() == 1) {
-						return;
+		
+			for (int y = 0; y < this.getFigure().getHeight(); y++) {
+				for (int x = 0; x < this.getFigure().getWidth(); x++) {
+					if (this.getFigure().getField()[y][x] != null) {
+						Field field = this.getField()[this.getFigure().getPosition().y + y][this.getFigure().getPosition().x + x];
+						field.setColor(Color.darkGray);
+						field.setState(0);
 					}
 				}
 			}
-			this.figure.setPosition(new Point(this.figure.getPosition().x, this.figure.getPosition().y + 1));
-			this.reloadFigure(-1);
-		} else {
-			return;
-		}
-	}
-
-	/**
-	 * Bewegt die aktuelle Figur nach unten.
-	 * 
-	 * @todo Methode löschen - durch "moveFigure" ersetzen.
-	 */
-	public int down() {
-		if (this.figure.getPosition().x == this.field_height - this.figure.getHeight() - 1) {
-			return this.putFigure();
-		} else {
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if (this.figure.getField()[x][y] != null
-							&& this.field[this.figure.getPosition().x + x + 1][this.figure.getPosition().y + y]
-									.getState() == 1) {
-						return this.putFigure();
+			
+			getFigure().setPosition(newPosition);
+			
+			for (int y = 0; y < this.getFigure().getHeight(); y++) {
+				for (int x = 0; x < this.getFigure().getWidth(); x++) {
+					if (this.getFigure().getField()[y][x] != null) {
+						Field field = this.getField()[this.getFigure().getPosition().y + y][this.getFigure().getPosition().x + x];
+						field.setColor(getFigure().getField()[y][x].getColor());
+						field.setState(getFigure().getField()[y][x].getState());
 					}
 				}
 			}
+			
+			this.setChanged();
+			this.notifyObservers(GameActionType.MoveFigure);
 		}
-
-		this.figure.setPosition(new Point(this.figure.getPosition().x + 1, this.figure.getPosition().y));
-		this.reloadFigure(0);
-		return 0;
 	}
 
 	/**
@@ -156,22 +160,23 @@ public class Game extends Observable {
 	private void createNewFigure() {
 		if (this.nextFigure == null) {
 			this.nextFigure = this.createRandomFigure();
-			this.nextFigure.setPosition(new Point(0, (int) (this.field_width / 2 + 0.5)));
+			this.nextFigure.setPosition(new Point((int)(this.field_width / 2 + 0.5), 0));
 		}
 		this.figure = this.nextFigure;
-		for (int x = 0; x < this.figure.getField().length; x++) {
-			for (int y = 0; y < this.figure.getField()[0].length; y++) {
-				if (this.field[this.figure.getPosition().x + x][this.figure.getPosition().y].getState() == 1
-						&& this.figure.getField()[x][y] != null) {
+		for (int x = 0; x < this.figure.getWidth(); x++) {
+			for (int y = 0; y < this.figure.getHeight(); y++) {
+				if (this.field[this.figure.getPosition().y + y][this.figure.getPosition().x + x].getState() == 1
+						&& this.figure.getField()[y][x] != null) {
 					this.setChanged();
 					this.notifyObservers(GameActionType.Lost);
 					return;
 				}
 			}
 		}
+		
 		this.nextFigure = this.createRandomFigure();
-		this.nextFigure.setPosition(new Point(0, (int) (this.field_width / 2 + 0.5)));
-		this.reloadFigure(2);
+		this.nextFigure.setPosition(new Point((int) (this.field_width / 2 + 0.5), 0));
+		this.moveFigure(MoveDirection.None);
 	}
 
 	/**
@@ -184,6 +189,7 @@ public class Game extends Observable {
 	private Figure createRandomFigure() {
 		Random r = new Random();
 		int figure_number = r.nextInt(7);
+		figure_number = 3;
 
 		switch (figure_number) {
 		case 0:
@@ -239,10 +245,10 @@ public class Game extends Observable {
 	 * @todo - Das Überprüfen der Reihen in {@link #down()} durchführen.
 	 */
 	private int putFigure() {
-		for (int x = 0; x < this.figure.getField().length; x++) {
-			for (int y = 0; y < this.figure.getField()[0].length; y++) {
-				if (this.figure.getField()[x][y] != null) {
-					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y].setState(1);
+		for (int y = 0; y < this.figure.getHeight(); y++) {
+			for (int x = 0; x < this.figure.getWidth(); x++) {
+				if (this.figure.getField()[y][x] != null) {
+					this.field[this.figure.getPosition().y + y][this.figure.getPosition().x + x].setState(1);
 				}
 			}
 		}
@@ -291,78 +297,17 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Lädt die Figur auf dem Feld neu, wenn sie verschoben wurde Sorgt dafür,
-	 * dass keine Punkte, die auf besetzt waren neu mit dem Wert frei erstellt
-	 * werden
-	 * 
-	 * @param direction
-	 *            Richtung in welche die Figur verschoben wurde (1 = links, 0 =
-	 *            unten, -1 = rechts)
-	 * 
-	 * @todo Methode löschen - durch "moveFigure" ersetzen.
+	 * Gibt die Figur zurück.
 	 */
-	private void reloadFigure(int direction) {
-		for (int x = 0; x < this.figure.getField().length; x++) {
-			for (int y = 0; y < this.figure.getField()[0].length; y++) {
-				if (this.figure.getField()[x][y] != null) {
-					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y
-							+ y] = this.figure.getField()[x][y];
-				}
-			}
-		}
-		if (direction == 1) {
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				if (this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + this.figure.getWidth()
-						+ 1].getState() != 1) {
-					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + this.figure.getWidth()
-							+ 1] = new Field(Color.darkGray, 0);
-				}
-			}
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if (this.figure.getField()[x][y] == null
-							&& this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y]
-									.getState() != 1) {
-						this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = new Field(
-								Color.darkGray, 0);
-					}
-				}
-			}
-		} else if (direction == -1) {
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				if (this.field[this.figure.getPosition().x + x][this.figure.getPosition().y - 1].getState() != 1) {
-					this.field[this.figure.getPosition().x + x][this.figure.getPosition().y - 1] = new Field(
-							Color.darkGray, 0);
-				}
-			}
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if (this.figure.getField()[x][y] == null
-							&& this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y]
-									.getState() != 1) {
-						this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = new Field(
-								Color.darkGray, 0);
-					}
-				}
-			}
-		} else if (direction == 0) {
-			for (int y = 0; y < this.figure.getField()[0].length; y++) {
-				if (this.field[this.figure.getPosition().x - 1][this.figure.getPosition().y + y].getState() != 1) {
-					this.field[this.figure.getPosition().x - 1][this.figure.getPosition().y + y] = new Field(
-							Color.darkGray, 0);
-				}
-			}
-			for (int x = 0; x < this.figure.getField().length; x++) {
-				for (int y = 0; y < this.figure.getField()[0].length; y++) {
-					if (this.figure.getField()[x][y] == null
-							&& this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y]
-									.getState() != 1) {
-						this.field[this.figure.getPosition().x + x][this.figure.getPosition().y + y] = new Field(
-								Color.darkGray, 0);
-					}
-				}
-			}
-		}
+	public Figure getFigure() {
+		return figure;
+	}
+	
+	/**
+	 * Gibt die nächste Figur zurück.
+	 */
+	public Figure getNextFigure() {
+		return nextFigure;
 	}
 
 	/**

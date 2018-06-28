@@ -146,7 +146,7 @@ public class GameStatistics extends Observable implements IGameStatistics {
 	 * @todo Durch GetField ersetzen.
 	 */
 	public Field getPoint(int x, int y) {
-		return this.field[y][x];
+		return this.field[x][y];
 	}
 
 	/**

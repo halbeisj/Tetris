@@ -2,6 +2,7 @@ package a_gui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import b_bl.Game;
+import b_bl.GameActionType;
 
 /**
  * Repräsentiert ein {@link JFrame}, in dem ein Spiel dargestellt werden kann. 
@@ -176,31 +180,6 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 	 * TODO update
 	 */
 	private void reload() {
-		for (int x = 0; x < this.controller.getFieldWidth(); x++) {
-			for (int y = 0; y < this.controller.getFieldHeight(); y++) {
-				this.playground[y + 2][x + 3].setBackground(this.model.getPoint(x, y).getColor());
-			}
-		}
-		
-		for (int x = 0; x < 3; x++) {
-			for (int y = 0; y < 4; y++) {
-				this.playground[y + 3][this.controller.getFieldWidth() + x + 4].setBackground(Color.darkGray);
-			}
-		}
-		
-		for (int x = 0; x < this.model.getNextFigureSize().x; x++) {
-			for (int y = 0; y < this.model.getNextFigureSize().y; y++) {
-
-				if (this.model.getPointNextFigure(x, y) != null) {
-					this.playground[y + 7 - this.model.getNextFigureSize().y][x + this.controller.getFieldWidth() + 4]
-							.setBackground(this.model.getPointNextFigure(x, y).getColor());
-				}
-			}
-		}
-		
-		this.linesLabel.setText(this.model.getLines());
-		this.levelLabel.setText(this.model.getLevel());
-		this.timeLabel.setText(this.model.getTime());
 	}
 
 	/**
@@ -253,7 +232,54 @@ public class GameForm extends JFrame implements IGameForm, ActionListener, KeyLi
 	/**
 	 * Handelt ein Update eines überwachbaren Objekts.
 	 */
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable o, Object arg) {
+		if (o instanceof Game && arg instanceof GameActionType)
+		{
+			Game game = (Game)o;
+			GameActionType type = (GameActionType)arg;
+			
+			switch(type)
+			{
+				case Update:
+					this.model.setTime(game.getTime());
+					break;
+					
+				case MoveFigure:
+					for (int x = 0; x < this.controller.getFieldWidth(); x++) {
+						for (int y = 0; y < this.controller.getFieldHeight(); y++) {
+							this.playground[y + 2][x + 3].setBackground(game.getField()[y][x].getColor());
+						}
+					}
+					
+					for (int x = 0; x < 3; x++) {
+						for (int y = 0; y < 4; y++) {
+							this.playground[y + 3][this.controller.getFieldWidth() + x + 4].setBackground(Color.darkGray);
+						}
+					}
+					
+					Point nextFigureSize = new Point(game.getNextFigure().getWidth(), game.getNextFigure().getHeight());
+					
+					for (int x = 0; x < nextFigureSize.x; x++) {
+						for (int y = 0; y < nextFigureSize.y; y++) {
+
+							if (game.getNextFigure().getField()[y][x] != null) {
+								this.playground[y + 7 - nextFigureSize.y][x + this.controller.getFieldWidth() + 4]
+										.setBackground(game.getNextFigure().getField()[y][x].getColor());
+							}
+						}
+					}
+					
+					this.linesLabel.setText(this.model.getLines());
+					this.levelLabel.setText(this.model.getLevel());
+					this.timeLabel.setText(this.model.getTime());
+					break;
+					
+				case Lost:
+					this.deactivate();
+					this.controller.endGame();
+					break;
+			}
+		}
 		this.reload();
 	}
 }
