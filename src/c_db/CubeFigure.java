@@ -20,7 +20,7 @@ public class CubeFigure extends Figure {
 		this.figure[1][1] = new Field(Color.green, 2);
 		this.figure[1][0] = new Field(Color.green, 2);
 
-
+		this.pointr = 1;
 		this.pointd = 1;
 	}
 }

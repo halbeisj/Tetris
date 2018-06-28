@@ -23,7 +23,7 @@ public class JFigure extends Figure {
 		this.figure[0][0] = null;
 		this.figure[1][0] = null;
 
-		
+		this.pointr = 2;
 		this.pointd = 3;
 	}
 }

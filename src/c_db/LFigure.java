@@ -22,7 +22,7 @@ public class LFigure extends Figure {
 		this.figure[0][1] = null;
 		this.figure[1][1] = null;
 
-		
+		this.pointr = 1;
 		this.pointd = 2;
 	}
 }

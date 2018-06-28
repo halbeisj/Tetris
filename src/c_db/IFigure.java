@@ -20,7 +20,7 @@ public class IFigure extends Figure {
 		this.figure[2][0] = new Field(Color.white, 2);
 		this.figure[3][0] = new Field(Color.white, 2);
 
-		
+		this.pointr = 0;
 		this.pointd = 3;
 	}
 

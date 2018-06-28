@@ -22,7 +22,7 @@ public class SFigure extends Figure {
 		this.figure[1][1] = new Field(Color.red, 2);
 		this.figure[1][2] = null;
 
-		
+		this.pointr = 2;
 		this.pointd = 1;
 	}
 }

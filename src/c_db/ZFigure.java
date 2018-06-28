@@ -19,7 +19,7 @@ public class ZFigure extends Figure{
 		this.figure[1][1] = new Field(Color.blue, 2);
 		this.figure[1][2] = new Field(Color.blue, 2);
 
-		
+		this.pointr = 2;
 		this.pointd = 1;
 	}
 }

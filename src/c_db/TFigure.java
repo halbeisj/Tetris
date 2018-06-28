@@ -20,7 +20,7 @@ public class TFigure extends Figure {
 		this.figure[0][2] = new Field(Color.yellow, 2);
 		this.figure[1][1] = new Field(Color.yellow, 2);
 
-		
+		this.pointr = 2;
 		this.pointd = 1;
 	}
 }
