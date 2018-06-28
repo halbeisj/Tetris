@@ -58,6 +58,22 @@ public class GameStatistics extends Observable implements IGameStatistics {
 	}
 
 	/**
+	 * Methode, die das Feld neu lädt und anschliessend alle Observer
+	 * benachrichtigt
+	 * 
+	 * @param field
+	 *            Feld, welches neu eingespeichert werden soll
+	 * 
+	 * @todo Löschen.
+	 */
+	public void reloadField(Field[][] field) {
+		this.field = field;
+
+		this.setChanged();
+		this.notifyObservers();
+	}
+
+	/**
 	 * Methode, die die Anzahl an beseitigten Linien um den Mitgabewert erhöht
 	 * 
 	 * @param inc
